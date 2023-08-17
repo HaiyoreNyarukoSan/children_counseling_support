@@ -71,9 +71,9 @@ WSGI_APPLICATION = "children_counseling_support.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydatabase',
+        'NAME': 'children_counseling_support',
         'USER': 'root',
         'PASSWORD': 'test1234',
         'HOST': '127.0.0.1',

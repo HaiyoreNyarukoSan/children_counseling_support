@@ -9,10 +9,10 @@
     <meta name="robots" content="all,follow">
     <!-- Price Slider Stylesheets -->
     <link rel="stylesheet" href="/static/vendor/nouislider/nouislider.css">
-    <!-- Google fonts - Playfair Display-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=REM:ital,wght@1,700&display=swap" rel="stylesheet">
     <!-- swiper-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
     <!-- Magnigic Popup-->
@@ -329,60 +329,40 @@
             <li class="breadcrumb-item active">Host view</li>
         </ol>
         <div class="d-flex justify-content-between align-items-end mb-5">
-            <h1 class="hero-heading mb-0">Your nearest bookings</h1><a class="btn btn-link text-muted" href="#">Past
-            bookings</a>
+            <h1 class="hero-heading mb-0" style="font-family: Jua">Check out our counselors!!</h1>
         </div>
         <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
-            <div class="mr-3">
-                <p class="mb-3 mb-lg-0">You have <strong>12 bookings</strong> in your property</p>
-            </div>
-            <div class="text-center">
-                <label class="form-label mr-2" for="form_sort">Sort by</label>
-                <select class="selectpicker mr-3 mb-3 mb-lg-0" name="sort" id="form_sort" data-style="btn-selectpicker"
-                        title="">
-                    <option value="sortBy_0">Newest</option>
-                    <option value="sortBy_1">Oldest</option>
-                    <option value="sortBy_2">Paid</option>
-                </select><a class="btn btn-outline-secondary" href="#"><i class="fa fa-download mr-2"></i>Download
-                CSV</a>
-            </div>
+
+
         </div>
         <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4"
                                                href="user-booking-detail.html">
             <div class="row">
                 <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
                     <div class="d-flex align-items-center mb-3">
-                        <h2 class="h5 mb-0">Meredith Goodwin</h2><img class="avatar avatar-sm avatar-border-white ml-3"
-                                                                      src="img/avatar/avatar-0.jpg" alt="Jack London">
+                        <h2 class="h5 mb-0" style="font-family: Jua">김가현</h2><img
+                            class="avatar avatar-sm avatar-border-white ml-3"
+                            src="/static/image/User_01.png" alt="Jack London">
                     </div>
-                    <p class="text-sm text-muted">Double Room</p><span
-                        class="badge badge-pill p-2 badge-secondary-light">February 16, 2019 - February 19, 2019</span>
+                    <span class="badge badge-pill p-2 badge-secondary-light" style="font-family: Jua">오전(9~13시)</span>
+                    <span class="badge badge-pill p-2 badge-primary-light" style="font-family: Jua">오후(13~17시)</span>
+                    <span class="badge badge-pill p-2 badge-success-light" style="font-family: Jua">저녁(17~21시)</span>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                            <h6 class="label-heading">Rate type</h6>
-                            <p class="text-sm font-weight-bold">Bed & Breakfast</p>
-                            <h6 class="label-heading">Nights </h6>
-                            <p class="text-sm font-weight-bold mb-0">3</p>
+                            <h6 class="label-heading" style="font-family: Jua">소개</h6>
+                            <p class="text-sm font-weight-bold" style="font-family: Jua">내 마음에 무엇이 있나, 함께 들여다볼까요?</p>
+
                         </div>
                         <div class="col-6 col-md-4 col-lg-3 py-3">
-                            <h6 class="label-heading">Occupancy</h6>
-                            <p class="text-sm font-weight-bold">1 pax</p>
-                            <h6 class="label-heading">Charge</h6>
-                            <p class="text-sm font-weight-bold mb-0">$244.42</p>
+                            <h6 class="label-heading" style="font-family: Jua">상담 과목</h6>
+                            <p class="text-sm font-weight-bold" style="font-family: Jua">우울,불안,가족</p>
                         </div>
                         <div class="col-6 col-md-4 col-lg-3 py-3">
-                            <h6 class="label-heading">Booked Date</h6>
-                            <p class="text-sm font-weight-bold">February 16, 2019 </p>
-                            <h6 class="label-heading">Arrival Time</h6>
-                            <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
-                        </div>
-                        <div class="col-12 col-lg-3 align-self-center"><span
-                                class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i
-                                class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br
-                                class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i
-                                class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
+                            <h6 class="label-heading" style="font-family: Jua">주요 자격 및 경력</h6>
+                            <p class="text-sm font-weight-bold" style="font-family: Jua">상담심리 및 미술치료 경력, 미술심리상담 1급,
+                                미술심리상담 2급</p>
                         </div>
                     </div>
                 </div>
@@ -394,7 +374,7 @@
                         <h2 class="h5 mb-0">Weeks Garrett</h2><img class="avatar avatar-sm avatar-border-white ml-3"
                                                                    src="img/avatar/avatar-1.jpg" alt="Jack London">
                     </div>
-                    <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-primary-light">March 14, 2019 - March 17, 2019</span>
+                    <span class="badge badge-pill p-2 badge-primary-light">March 14, 2019 - March 17, 2019</span>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
@@ -432,7 +412,7 @@
                         <h2 class="h5 mb-0">Fisher Bauer</h2><img class="avatar avatar-sm avatar-border-white ml-3"
                                                                   src="img/avatar/avatar-2.jpg" alt="Jack London">
                     </div>
-                    <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-danger-light">March 10, 2019 - March 13, 2019</span>
+                    <span class="badge badge-pill p-2 badge-danger-light">March 10, 2019 - March 13, 2019</span>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
@@ -470,7 +450,7 @@
                         <h2 class="h5 mb-0">Aguilar Webb</h2><img class="avatar avatar-sm avatar-border-white ml-3"
                                                                   src="img/avatar/avatar-3.jpg" alt="Jack London">
                     </div>
-                    <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-success-light">April 09, 2019 - April 13, 2019</span>
+                    <span class="badge badge-pill p-2 badge-success-light">April 09, 2019 - April 13, 2019</span>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
@@ -508,8 +488,7 @@
                         <h2 class="h5 mb-0">Melton Simon</h2><img class="avatar avatar-sm avatar-border-white ml-3"
                                                                   src="img/avatar/avatar-4.jpg" alt="Jack London">
                     </div>
-                    <p class="text-sm text-muted">Double Room</p><span
-                        class="badge badge-pill p-2 badge-secondary-light">March 24, 2019 - March 28, 2019</span>
+                    <span class="badge badge-pill p-2 badge-secondary-light">March 24, 2019 - March 28, 2019</span>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">

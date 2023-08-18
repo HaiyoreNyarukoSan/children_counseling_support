@@ -19,5 +19,11 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name='Main.html'), name='home'),
+    path("Patient-Login/", TemplateView.as_view(template_name='Patient-Login.html'), name='Patient-Login'),
+    path("Counselor-Login/", TemplateView.as_view(template_name='Counselor-Login.html'), name='Counselor-Login'),
+    path("Patient-signup/", TemplateView.as_view(template_name='Patient-signup.html'), name='Patient-signup'),
+    path("Counselor-signup/", TemplateView.as_view(template_name='Counselor-signup.html'), name='Counselor-signup'),
+    path("Counselor-list/", TemplateView.as_view(template_name='Counselor-list.html'), name='Counselor-list'),
+    path("Counselor-detail/", TemplateView.as_view(template_name='Counselor-detail.html'), name='Counselor-detail'),
     path("admin/", admin.site.urls),
 ]

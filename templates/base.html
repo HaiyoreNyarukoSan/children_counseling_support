@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <style>
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+    </style>
+
+    <style>
+        .custom-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            position: relative;
+            top: -50px;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Directory Theme by Bootstrapious</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Price Slider Stylesheets -->
+    <link rel="stylesheet" href="/static/vendor/nouislider/nouislider.css">
+    <!-- Google fonts - Playfair Display-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=REM:ital,wght@1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/vendor/nouislider/nouislider.css">
+    <!-- Google fonts - Playfair Display-->
+    <!-- swiper-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+    <!-- Magnigic Popup-->
+    <link rel="stylesheet" href="/static/vendor/magnific-popup/magnific-popup.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    {% block html_header %}
+    {% endblock %}
+</head>
+<body>
+<header class="header">
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="index.html"><img
+                    src="/static/image/Header-Logo.png" alt="" class="logo-image"></a>
+                <form class="form-inline d-none d-sm-flex" action="#" id="search">
+                    <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
+                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span
+                                class="sr-only">What are you looking for?</span></label>
+                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search"
+                               placeholder="Search" aria-label="Search">
+                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
+                    </div>
+                </form>
+            </div>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <!-- Navbar Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
+                    <div class="input-label-absolute input-label-absolute-left input-reset w-100">
+                        <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span
+                                class="sr-only">What are you looking for?</span></label>
+                        <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200"
+                               id="searchcollapsed_search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"> </i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle active" id="homeDropdownMenuLink"
+                                                     href="index.html" data-toggle="dropdown" aria-haspopup="true"
+                                                     aria-expanded="false" style="font-family: Jua">
+                        메인페이지</a>
+                        <div class="dropdown-menu" aria-labelledby="homeDropdownMenuLink"><a class="dropdown-item"
+                                                                                             href="index.html">Rooms</a><a
+                                class="dropdown-item" href="index-2.html">Restaurants</a><a class="dropdown-item"
+                                                                                            href="index-3.html">Travel</a><a
+                                class="dropdown-item" href="index-4.html">Real Estate <span
+                                class="badge badge-info-light ml-1 mt-n1">New</span></a></div>
+                    </li>
+                    <!-- Megamenu-->
+
+                    <!-- /Megamenu end-->
+                    <li class="nav-item"><a class="nav-link" href="contact.html" style="font-family: Jua">미술치료</a>
+                    </li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle " id="docsDropdownMenuLink"
+                                                     href="index.html" data-toggle="dropdown" aria-haspopup="true"
+                                                     aria-expanded="false" style="font-family: Jua">
+                        상담사</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsDropdownMenuLink">
+                            <a class="dropdown-item"
+                               href="docs/docs-introduction.html" style="font-family: Jua">일반상담사 </a><a
+                                class="dropdown-item" href="docs/docs-directory-structure.html"
+                                style="font-family: Jua">미술치료상담사 </a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="Patient-Login.html"
+                                            style="font-family: Jua">일반로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Counselor-Login.html"
+                                            style="font-family: Jua">상담로그인</a></li>
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary"
+                                                                                             href="user-add-0.html"
+                                                                                             style="font-family: Jua">회원가입</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /Navbar -->
+</header>
+
+{% block html_body %}
+{% endblock %}
+</body>
+</html>

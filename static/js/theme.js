@@ -134,7 +134,7 @@ $(function () {
             nextEl: '#homeNext',
             prevEl: '#homePrev',
         },
-    });    
+    });
 
     // =====================================================
     //      Items slider
@@ -145,7 +145,7 @@ $(function () {
         spaceBetween: 20,
         loop: true,
         roundLengths: true,
-        breakpoints: { 
+        breakpoints: {
             1200: {
                 slidesPerView: 3
             },
@@ -164,7 +164,6 @@ $(function () {
             dynamicBullets: true
         },
     });
-
 
 
     var itemsSliderFull = new Swiper('.items-slider-full', {
@@ -199,7 +198,7 @@ $(function () {
     });
 
     var guidesSlider = new Swiper('.guides-slider', {
-        slidesPerView: 5,
+        slidesPerView: 3,
         spaceBetween: 15,
         loop: true,
         roundLengths: true,

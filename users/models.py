@@ -6,17 +6,21 @@ GENDER_CHOICES = [
     ('F', '여성'),
 ]
 
+PATIENT_GROUP = 'patient'
+COUNSELOR_GROUP = 'counselor'
+
 
 # Create your models here.
 class User(AbstractUser):
     u_birthday = models.DateField("생년월일", null=True)
-    u_gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    u_gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     u_contact = models.IntegerField(null=True)
 
 
 class Patient(models.Model):
     p_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    p_gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    p_name = models.CharField(max_length=100)
+    p_gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     p_birthday = models.DateField("생년월일", null=True)
 
 

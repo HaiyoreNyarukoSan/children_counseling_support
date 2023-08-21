@@ -22,8 +22,8 @@ from children_counseling_support import settings
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name='Main.html'), name='home'),
-    path("Patient-Login/", TemplateView.as_view(template_name='Patient-Login.html'), name='Patient-Login'),
-    path("Counselor-Login/", TemplateView.as_view(template_name='Counselor-Login.html'), name='Counselor-Login'),
+    path("Patient-Login/", TemplateView.as_view(template_name='users/Patient-Login.html'), name='Patient-Login'),
+    path("Counselor-Login/", TemplateView.as_view(template_name='users/Counselor-Login.html'), name='Counselor-Login'),
     path("Patient-signup/", TemplateView.as_view(template_name='Patient-signup.html'), name='Patient-signup'),
     path("Counselor-signup/", TemplateView.as_view(template_name='Counselor-signup.html'), name='Counselor-signup'),
     path("Counselor-list/", TemplateView.as_view(template_name='Counselor-list.html'), name='Counselor-list'),
@@ -35,6 +35,7 @@ urlpatterns = [
     path("Art-list", views.a_create, name='Art-list'),
     path("admin/", admin.site.urls),
     path("board/", include('board.urls')),
+    path("users/", include("users.urls")),
 ]
 
 if settings.DEBUG:

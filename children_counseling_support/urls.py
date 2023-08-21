@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
-
+from board import views
 from children_counseling_support import settings
 
 urlpatterns = [
@@ -30,8 +30,11 @@ urlpatterns = [
     path("Counselor-detail/", TemplateView.as_view(template_name='Counselor-detail.html'), name='Counselor-detail'),
     path("User_security/", TemplateView.as_view(template_name='User_security.html'), name='User_security'),
     path("ChatBot/", TemplateView.as_view(template_name='ChatBot.html'), name='ChatBot'),
-    path("Picture-list", TemplateView.as_view(template_name='Picture-list.html'), name='Picture-list'),
+    path("My-Page/", TemplateView.as_view(template_name='My-Page.html'), name='My-Page'),
+    path("Picture-list", views.a_list, name='Picture-list'),
+    path("Art-list", views.a_create, name='Art-list'),
     path("admin/", admin.site.urls),
+    path("board/", include('board.urls')),
 ]
 
 if settings.DEBUG:

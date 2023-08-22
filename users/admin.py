@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from board.models import Article
-from users.models import User, Patient
+from users.models import User, Patient, Counselor
 
 
 # Register your models here.
@@ -18,4 +17,9 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Counselor)
+class CounselorAdmin(admin.ModelAdmin):
     pass

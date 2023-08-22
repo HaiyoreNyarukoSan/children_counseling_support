@@ -57,35 +57,45 @@
                                placeholder="nickname" autocomplete="off" required
                                data-msg="Please enter your email">
                     </div>
-                    <label for="num_forms">자식분의 숫자를 입력해주세요:</label>
-                    <input type="number" id="num_forms" name="num_forms" min="1" value="1">
-                    <button id="generate_forms">확인</button>
+                    <label for="num_forms">자식분의 정보를 입력해주세요</label>
                     <div id="formset_container">
                         {% for form in formset %}
                         {% with forloop.counter as form_index %}
-                        <strong class="form-control">{{ form_index }}번째 자식분</strong>
-                        {% for field in form %}
-                        {% if field.field.widget.input_type != "hidden" %}
-                        <div class="form-group">
+                        <div class="form-group" style="border: 1px solid black; padding: 10px;">
+                            {% for field in form %}
+                            {% if field.field.widget.input_type != "hidden" %}
                             <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
                                 {{ field.label }}
                             </label>
                             {{ field }} {{ field.errors }}
+                            {% else %}
+                            {{ field }} {{ field.errors }}
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% else %}
-                        {{ field }} {{ field.errors }}
-                        {% endif %}
-                        {% endfor %}
                         {% endwith %}
                         {% endfor %}
                         {{ formset.management_form }}
                     </div>
+                    <button class="btn btn-secondary" id="generate_forms" type="button">추가</button>
+                    <button class="btn btn-secondary" id="delete_forms" type="button">삭제</button>
 
                     <button class="btn btn-lg btn-block btn-primary" type="submit" style="font-family: Jua">회원 가입
                     </button>
                 </form>
                 <div id="empty_form" style="display:none;">
-                    {{ empty_form }}
+                    <div class="form-group" style="border: 1px solid black; padding: 10px;">
+                        {% for field in empty_form %}
+                        {% if field.field.widget.input_type != "hidden" %}
+                        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+                            {{ field.label }}
+                        </label>
+                        {{ field }} {{ field.errors }}
+                        {% else %}
+                        {{ field }} {{ field.errors }}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,6 +15,11 @@ def login_counselor_view(request):
     return login_view(request, COUNSELOR_GROUP)
 
 
+def save_user_to_group(user, group_name):
+    group, _ = Group.objects.get_or_create(name=group_name)
+    user.groups.add(group)
+
+
 def login_view(request, group_name):
     if request.user.is_authenticated:
         return redirect('')
@@ -33,7 +38,8 @@ def login_view(request, group_name):
         context = {
             "form": form,
         }
-        return render(request, 'users/login.html', context)
+        template_name = f"users/{'Counselor' if group_name == COUNSELOR_GROUP else 'Patient'}-Login.html"
+        return render(request, template_name, context)
     else:
         form = LoginForm()
         context = {
@@ -53,13 +59,14 @@ def signup_patient(request):
         )
         if form.is_valid() and formset.is_valid():
             saved_user = form.save()
+            save_user_to_group(saved_user, PATIENT_GROUP)
             saved_formset = formset.save(commit=False)
             for saved_patient in saved_formset:
                 saved_patient.p_user = saved_user
                 saved_patient.save()
             return redirect('users:login-patient')
         else:
-            form.add_error(None, '입력하신 사용자는 존재하지 않습니다')
+            form.add_error(None, '입력하신 정보는 올바르지 않습니다')
     else:
         form = SignUpForm()
         formset = PatientFormSet(
@@ -67,7 +74,7 @@ def signup_patient(request):
             prefix='patientForm'
         )
     empty_form = formset.empty_form
-    empty_form.prefix = '__prefix__'
+    empty_form.prefix = 'patientForm-__prefix__'
     context = {
         "form": form,
         "formset": formset,
@@ -82,11 +89,13 @@ def signup_counselor(request):
         form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES)
         if form.is_valid() and form_counselor.is_valid():
             saved_user = form.save()
+            save_user_to_group(saved_user, COUNSELOR_GROUP)
             saved_counselor = form_counselor.save(commit=False)
             saved_counselor.c_user = saved_user
+            saved_counselor.save()
             return redirect('users:login-counselor')
         else:
-            form.add_error(None, '입력하신 상담사 사용자는 존재하지 않습니다')
+            form.add_error(None, '입력하신 정보는 올바르지 않습니다')
     else:
         form = SignUpForm()
         form_counselor = CounselorSignUpForm()

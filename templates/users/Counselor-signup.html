@@ -41,65 +41,33 @@
                     <h2 style="font-family: Jua">상담사회원가입</h2>
 
                 </div>
-                <form class="form-validate">
+                <form class="form-validate" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
                     <div class="form-group">
-                        <label class="form-label" for="loginUsername" style="font-family: Jua"> 아이디</label>
-                        <input class="form-control" name="loginUsername" id="loginUsername" type="email"
-                               placeholder="ID" autocomplete="off" required
-                               data-msg="Please enter your email">
+                        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+                            {{ field.label }}
+                        </label>
+                        {{ field }} {{field.errors}}
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="loginPassword" style="font-family: Jua"> 비밀번호</label>
-                        <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password"
-                               type="password" required data-msg="Please enter your password">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label class="form-label" for="loginPassword2" style="font-family: Jua"> 비밀번호 재확인</label>
-                        <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password"
-                               type="password" required data-msg="Please enter your password">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="loginUsername" style="font-family: Jua">* 자격증 (필수)</label>
-                        <input class="form-control" name="loginUsername" id="loginUsername" type="email"
-                               placeholder="certificate" autocomplete="off" required
-                               data-msg="Please enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="loginUsername" style="font-family: Jua">* 소개글 (필수)</label>
-                        <input class="form-control" name="loginUsername" id="loginUsername" type="email"
-                               placeholder="Introduction" autocomplete="off" required
-                               data-msg="Please enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="loginUsername" style="font-family: Jua"> 이메일</label>
-                        <input class="form-control" name="loginUsername" id="loginUsername" type="email"
-                               placeholder="name@address.com" autocomplete="off" required
-                               data-msg="Please enter your email">
-                    </div>
+                    {% endfor %}
                     <div class="form-group">
                         <label class="form-label" for="loginUsername" style="font-family: Jua"> 닉네임</label>
-                        <input class="form-control" name="loginUsername" id="loginUsername" type="email"
+                        <input class="form-control" name="loginUsername" id="loginUsername" type="text"
                                placeholder="nickname" autocomplete="off" required
                                data-msg="Please enter your email">
                     </div>
-                    <div class="form-group mb-4">
-                        <label class="form-label" for="loginPassword2" style="font-family: Jua">전화번호</label>
-                        <input class="form-control" name="loginPassword2" id="loginPassword2"
-                               placeholder="000-0000-0000"
-                               type="password" required data-msg="Please enter your password">
-                    </div>
+                    <label>상담사분의 정보를 입력해주세요</label>
+                    {% for field in form_counselor %}
                     <div class="form-group">
-                        <label class="form-label" for="loginUsername" style="font-family: Jua"> 성별</label>
-                        <input type="radio" id="male" name="gender" value="male">
-                        <label for="male" style="font-family: Jua">남자</label>
-                        <input type="radio" id="male" name="gender" value="male">
-                        <label for="male" style="font-family: Jua">여자</label>
+                        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+                            {{ field.label }}
+                        </label>
+                        {{ field }} {{field.errors}}
                     </div>
-
-
+                    {% endfor %}
                     <button class="btn btn-lg btn-block btn-primary" type="submit" style="font-family: Jua">회원 가입
                     </button>
-
                 </form>
 
             </div>

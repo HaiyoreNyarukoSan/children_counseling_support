@@ -17,9 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
+from .views import login_patient_view, login_counselor_view, signup_patient, signup_counselor, logout_view
 
 app_name = "users"
 
 urlpatterns = [
-    path("", views.articles, name='articles'),
+    path('login/patient', login_patient_view, name="login-patient"),
+    path('login/counselor', login_counselor_view, name="login-counselor"),
+    path('signup/patient', signup_patient, name="signup-patient"),
+    path('signup/counselor', signup_counselor, name="signup-counselor"),
+    path('logout', logout_view, name="logout"),
+    # path('signup/', signup, name="signup"),
 ]

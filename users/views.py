@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
@@ -32,7 +32,8 @@ def login_view(request, group_name):
             group, _ = Group.objects.get_or_create(name=group_name)
             if group in user.groups.all():
                 login(request, user)
-                return redirect('board:articles')
+                # return redirect('board:articles')
+                return redirect('My-Page')
             else:
                 form.add_error(None, '입력하신 사용자는 존재하지 않습니다')
         context = {
@@ -104,3 +105,8 @@ def signup_counselor(request):
         "form_counselor": form_counselor,
     }
     return render(request, "users/Counselor-signup.html", context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('My-Page')

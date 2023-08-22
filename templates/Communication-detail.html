@@ -5,47 +5,85 @@
 </head>
 <body style="padding-top: 72px;">
 {% block html_body %}
-    <section class="position-relative py-6"><img class="custom-image " src="/static/image/Art-photo.jpg" alt="">
-    </section>
-    <section class="py-2">
+    {% csrf_token %}
+    <br><br> <br>
+    <section class="py-5">
         <div class="container">
-            <div class="row mb-5">
-                <!-- blog item-->
-                {% for article in articles %}
-                    {% csrf_token %}
-                    <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-                        <div class="card shadow border-0 h-100"><a href="post.html">
-                            <img src="{{ article.a_tree_image.url }}" alt="{{ article.a_title }}">
-                        </a>
-                            <div class="card-body">
-                                <h5 class="my-2"><a class="text-dark" href="post.html"
-                                                    style="font-family: Jua">{{ article.a_title }} </a>
-                                </h5>
-                                <p class="text-gray-500 text-sm my-3" style="font-family: Jua"><i
-                                        class="far fa-clock mr-2"></i>January 16, 2016</p>
-                                <p class="my-2 text-muted text-sm" style="font-family: Jua">{{ article.a_content }}</p>
-                                <a
-                                        class="btn btn-link pl-0"
-                                        href="post.html"
-                                        style="font-family: Jua">더보기<i
-                                        class="fa fa-long-arrow-alt-right ml-2"></i></a>
+            <div class="row">
+
+                <div class="col-lg-9 pl-lg-5">
+                    <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
+                         style="max-width: 4rem;">
+                    <h1 class="hero-heading mb-0" style="font-family: Jua">소통하면서 친해져요!</h1>
+                    <div class="text-block">
+
+
+                    </div>
+                    {% for communication in communications %}
+                        <div class="text-block">
+                            <h4 class="mb-5" style="font-family: Jua">제목</h4>
+                            <p class="text-muted" style="font-family: Jua">{{ communication_form.com_title }}</p>
+
+                        </div>
+                    {% endfor %}
+                    {% for communication in communications %}
+                        <div class="text-block">
+                            <h4 class="mb-5" style="font-family: Jua">내용</h4>
+                            <p class="text-muted" style="font-family: Jua">{{ communication_form.com_content }}</p>
+                        </div>
+                    {% endfor %}
+                    <div class="text-block">
+                        <p class="subtitle text-sm text-primary" style="font-family: Jua">댓글</p>
+                        <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
+                        {% for comment in comments %}
+                            <div class="media d-block d-sm-flex review">
+                                <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
+                                                                              src="img/avatar/avatar-8.jpg"
+                                                                              alt=""><span
+                                        class="text-uppercase text-muted text-sm">Dec 2018</span></div>
+                                <div class="media-body">
+                                    <h6 class="mt-2 mb-1">{{ comment_form.c_commenter }}</h6>
+                                    <p class="text-muted text-sm">  {{ comment_form.c_content }} </p>
+                                </div>
                             </div>
+                        {% endfor %}
+                        <div class="py-5">
+                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
+                                    data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
+                                    style="font-family: Jua">댓글 작성
+                            </button>
+                            {% if request.user.is_authenticated %}
+                                <div class="collapse mt-4" id="leaveReview">
+                                    <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
+                                    <form class="form" id="contact-form" method="POST" action="">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="name" style="font-family: Jua">이름
+                                                        *</label>
+                                                    {{ comment_form.c_commenter }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="review" style="font-family: Jua">리뷰 *</label>
+                                            {{ comment_form.c_content }}
+                                        </div>
+                                        <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
+                                        </button>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <p class="subtitle text-sm text-primary" style="font-family: Jua">댓글을 달려면 <a
+                                        href="{% url 'login' %}">로그인</a>해주세요.</p>
+                            {% endif %}
                         </div>
                     </div>
-                {% endfor %}
-
-
+                </div>
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Blog pagination">
-                <ul class="pagination justify-content-between mb-5">
-                    <li class="page-item"><a class="page-link text-sm rounded" href="#"> <i
-                            class="fa fa-chevron-left mr-1"></i>Older posts</a></li>
-                    <li class="page-item disabled"><a class="page-link text-sm rounded" href="#" tabindex="-1">Newer
-                        posts
-                        <i class="fa fa-chevron-right ml-1"></i></a></li>
-                </ul>
-            </nav>
         </div>
     </section>
     <!-- Footer-->
@@ -63,13 +101,16 @@
                                                             title="twitter"><i class="fab fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="facebook"><i class="fab fa-facebook"></i></a></li>
+                                                            title="facebook"><i class="fab fa-facebook"></i></a>
+                            </li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="instagram"><i class="fab fa-instagram"></i></a></li>
+                                                            title="instagram"><i class="fab fa-instagram"></i></a>
+                            </li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="pinterest"><i class="fab fa-pinterest"></i></a></li>
+                                                            title="pinterest"><i class="fab fa-pinterest"></i></a>
+                            </li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
                                                             title="vimeo"><i class="fab fa-vimeo"></i></a></li>
@@ -121,9 +162,11 @@
                     <div class="col-md-6">
                         <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
                             <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="..."></li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="...">
+                            </li>
                             <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="..."></li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="...">
+                            </li>
                         </ul>
                     </div>
                 </div>

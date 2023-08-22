@@ -22,10 +22,6 @@ from children_counseling_support import settings
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name='Main.html'), name='home'),
-    path("Patient-Login/", TemplateView.as_view(template_name='users/Patient-Login.html'), name='Patient-Login'),
-    path("Counselor-Login/", TemplateView.as_view(template_name='users/Counselor-Login.html'), name='Counselor-Login'),
-    path("Patient-signup/", TemplateView.as_view(template_name='Patient-signup.html'), name='Patient-signup'),
-    path("Counselor-signup/", TemplateView.as_view(template_name='Counselor-signup.html'), name='Counselor-signup'),
     path("Counselor-list/", TemplateView.as_view(template_name='Counselor-list.html'), name='Counselor-list'),
     path("Counselor-detail/", TemplateView.as_view(template_name='Counselor-detail.html'), name='Counselor-detail'),
     path("User_security/", TemplateView.as_view(template_name='User_security.html'), name='User_security'),

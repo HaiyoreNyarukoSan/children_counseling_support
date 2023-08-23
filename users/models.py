@@ -12,6 +12,7 @@ COUNSELOR_GROUP = 'counselor'
 
 # Create your models here.
 class User(AbstractUser):
+    u_nickname = models.CharField(max_length=15, null=True)
     u_birthday = models.DateField("생년월일", null=True)
     u_gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     u_contact = models.IntegerField(null=True)

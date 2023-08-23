@@ -2,7 +2,7 @@ from datetime import date
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.forms import modelformset_factory, NumberInput
+from django.forms import modelformset_factory
 
 from users.models import User, Patient, Counselor
 
@@ -37,6 +37,7 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = '아이디'
+        self.fields['u_nickname'].label = '별명'
         self.fields['last_name'].label = '성'
         self.fields['first_name'].label = '이름'
         self.fields['password2'].label = '비밀번호'
@@ -47,6 +48,13 @@ class SignUpForm(UserCreationForm):
             # 'autocomplete': 'off',
             'required': True,
             'title': '아이디를 입력하세요',
+        })
+        self.fields['u_nickname'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Nickname',
+            # 'autocomplete': 'off',
+            'required': True,
+            'title': '별명을 입력하세요'
         })
         self.fields['last_name'].widget.attrs.update({
             'class': 'form-control',
@@ -89,8 +97,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username', 'last_name', 'first_name', 'u_gender', 'password1', 'password2', 'u_birthday', 'u_gender',
-            'u_contact', 'email')
+            'username', 'u_nickname', 'last_name', 'first_name', 'u_gender', 'password1', 'password2', 'u_birthday',
+            'u_gender', 'u_contact', 'email')
 
         labels = {
             'u_birthday': '생년월일',

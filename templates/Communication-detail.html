@@ -5,45 +5,39 @@
 </head>
 <body style="padding-top: 72px;">
 {% block html_body %}
-    {% csrf_token %}
     <br><br> <br>
     <section class="py-5">
         <div class="container">
             <div class="row">
-
                 <div class="col-lg-9 pl-lg-5">
                     <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
                          style="max-width: 4rem;">
                     <h1 class="hero-heading mb-0" style="font-family: Jua">소통하면서 친해져요!</h1>
                     <div class="text-block">
-
+                    </div>
+                    <div class="text-block">
+                        <h4 class="mb-5" style="font-family: Jua">제목</h4>
+                        <p class="text-muted" style="font-family: Jua">{{ communication.com_title }}</p>
 
                     </div>
-                    {% for communication in communications %}
-                        <div class="text-block">
-                            <h4 class="mb-5" style="font-family: Jua">제목</h4>
-                            <p class="text-muted" style="font-family: Jua">{{ communication_form.com_title }}</p>
-
-                        </div>
-                    {% endfor %}
-                    {% for communication in communications %}
-                        <div class="text-block">
-                            <h4 class="mb-5" style="font-family: Jua">내용</h4>
-                            <p class="text-muted" style="font-family: Jua">{{ communication_form.com_content }}</p>
-                        </div>
-                    {% endfor %}
                     <div class="text-block">
-                        <p class="subtitle text-sm text-primary" style="font-family: Jua">댓글</p>
+                        <h4 class="mb-5" style="font-family: Jua">내용</h4>
+                        <p class="text-muted" style="font-family: Jua">{{ communication.com_content }}</p>
+                    </div>
+
+                    <div class="text-block">
                         <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
                         {% for comment in comments %}
                             <div class="media d-block d-sm-flex review">
-                                <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
-                                                                              src="img/avatar/avatar-8.jpg"
-                                                                              alt=""><span
-                                        class="text-uppercase text-muted text-sm">Dec 2018</span></div>
+                                <div class="text-md-center mr-4 mr-xl-5">
+                                    <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
+                                         alt="">
+                                    <span class="text-uppercase text-muted text-sm">Dec 2018</span>
+                                </div>
                                 <div class="media-body">
-                                    <h6 class="mt-2 mb-1">{{ comment_form.c_commenter }}</h6>
-                                    <p class="text-muted text-sm">  {{ comment_form.c_content }} </p>
+                                    {#                                    <h6 class="mt-2 mb-1">{{ comment.cc_commenter.username }}</h6>#}
+                                    <p class="text-muted text-sm"
+                                       style="font-family: Jua">{{ comment }}</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -52,34 +46,28 @@
                                     data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
                                     style="font-family: Jua">댓글 작성
                             </button>
-                            {% if request.user.is_authenticated %}
-                                <div class="collapse mt-4" id="leaveReview">
-                                    <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
-                                    <form class="form" id="contact-form" method="POST" action="">
-                                        {% csrf_token %}
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="name" style="font-family: Jua">이름
-                                                        *</label>
-                                                    {{ comment_form.c_commenter }}
-                                                </div>
+                            <div class="collapse mt-4" id="leaveReview">
+                                <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
+                                <form class="form" id="contact-form" method="POST"
+                                      action="{% url 'Communication-detail' id=communication.id %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="name" style="font-family: Jua">이름
+                                                    *</label>
+                                                {#                                                {{ c_comment_form.cc_commenter }}#}
                                             </div>
-
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="form-label" for="review" style="font-family: Jua">리뷰 *</label>
-                                            {{ comment_form.c_content }}
-                                        </div>
-                                        <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
-                                        </button>
-                                    </form>
-                                </div>
-                            {% else %}
-                                <p class="subtitle text-sm text-primary" style="font-family: Jua">댓글을 달려면 <a
-                                        href="{% url 'login' %}">로그인</a>해주세요.</p>
-                            {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="review" style="font-family: Jua">댓글 *</label>
+                                        {{ c_comment_form.cc_content }}
+                                    </div>
+                                    <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from django import forms
 
-from board.models import Article, Communication, Comment
+from board.models import Article, Communication, Comment, C_Comment
 
 
 class ArticleForm(forms.ModelForm):
@@ -135,32 +135,21 @@ class CommunicationForm(forms.ModelForm):
         }
 
 
-class CommentForm(forms.ModelForm):
-    c_commenter = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    c_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+class C_CommentForm(forms.ModelForm):
+    cc_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
 
     class Meta:
-        model = Comment
-        fields = ['c_commenter', 'c_content']
+        model = C_Comment
+        fields = ['cc_content']
 
         labels = {
-            'c_commenter': '작성자',
-            'c_content': '글 내용'
+
+            'cc_content': '글 내용'
         }
 
     widgets = {
-        'c_commenter': forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'type': 'text',
-                'name': 'name',
-                'id': 'name',
-                'placeholder': '작성자를 입력하세요',
-                'required': 'required'
-            }
-        ),
 
-        'c_content': forms.Textarea(
+        'cc_content': forms.Textarea(
             attrs={
                 'class': 'form-control',
                 'rows': '4',
@@ -170,4 +159,5 @@ class CommentForm(forms.ModelForm):
                 'required': 'required'
             }
         )
+
     }

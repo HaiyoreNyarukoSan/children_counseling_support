@@ -47,3 +47,12 @@ class Communication(models.Model):
 
     def __str__(self):
         return self.com_title
+
+
+class C_Comment(models.Model):  # 소통게시판의 댓글모델
+    cc_commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    cc_content = models.CharField(max_length=200)
+    communication = models.ForeignKey(Communication, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.cc_content

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from board.models import Article, Comment
+from board.models import Article, Comment, C_Comment
 
 
 # Register your models here.
@@ -10,6 +10,6 @@ class ArticlesAdmin(admin.ModelAdmin):
     list_display = ["a_title", "a_tree_image", "a_man_image", "a_woman_image", "a_house_image"]
 
 
-@admin.register(Comment)
+@admin.register(C_Comment)
 class CommentAdmin(admin.ModelAdmin):
     pass

@@ -13,12 +13,10 @@
     </div>
     <section>
         <div class="container">
-
-            <div class="row">
-                <div class="col-xl-8 col-lg-10 mx-auto">
-                    <div class="row">
-                        {% for article in articles %}
-                            {% csrf_token %}
+            {% for article in articles %}
+                <div class="row">
+                    <div class="col-xl-8 col-lg-10 mx-auto">
+                        <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <figure class="figure">
                                     <img class="figure-img img-fluid w-100"
@@ -28,7 +26,7 @@
                             <div class="col-sm-6 mb-3">
                                 <figure class="figure">
                                     <img class="figure-img img-fluid w-100"
-                                         src="{{ article.a_men_image.url }}" alt="{{ article.a_title }}">
+                                         src="{{ article.a_man_image.url }}" alt="{{ article.a_title }}">
                                 </figure>
                             </div>
                             <div class="col-sm-6 mb-3">
@@ -43,15 +41,14 @@
                                          src="{{ article.a_house_image.url }}" alt="{{ article.a_title }}">
                                 </figure>
                             </div>
-                        {% endfor %}
-                    </div>
-                    <div class="text-content">
-                        <h2 style="font-family: Jua">{{ article.a_title }}</h2>
-                        <p style="font-family: Jua">{{ article.a_content }}</p>
+                        </div>
+                        <div class="text-content">
+                            <h2 style="font-family: Jua">{{ article.a_title }}</h2>
+                            <p style="font-family: Jua">{{ article.a_content }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            {% endfor %}
         </div>
     </section>
 

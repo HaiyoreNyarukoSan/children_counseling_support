@@ -30,5 +30,5 @@ urlpatterns = [
     path('signup/patient', signup_patient, name="signup-patient"),
     path('signup/counselor', signup_counselor, name="signup-counselor"),
     path('logout', logout_view, name="logout"),
-    # path('signup/', signup, name="signup"),
+    path('change', lambda i: i, name="change"),
 ]

@@ -6,9 +6,6 @@ GENDER_CHOICES = [
     ('F', '여성'),
 ]
 
-PATIENT_GROUP = 'patient'
-COUNSELOR_GROUP = 'counselor'
-
 
 # Create your models here.
 class User(AbstractUser):

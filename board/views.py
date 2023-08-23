@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -5,9 +6,10 @@ from django.urls import reverse
 
 from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm
 from board.models import Article, Communication, Comment, C_Comment, CounselorReview
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from users.models import Counselor, Patient
+from users.permissions import patient_group
 
 
 # 파일 업로드 게시판
@@ -27,12 +29,19 @@ def a_list(request):
     return render(request, 'Picture-list.html', context)
 
 
+@login_required(login_url='users:login-patient', redirect_field_name='board:a_create')
+@permission_required('board.view_article')
 def a_detail(request, id):
-    articles = Article.objects.filter(pk=id)
-    context = {'articles': articles}
+    user = request.user
+    article = Article.objects.get(pk=id)
+    if patient_group in user.groups.all() and not article.a_patient in user.patient_set.all():
+        raise PermissionDenied
+    context = {'article': article}
     return render(request, 'Picture-detail.html', context)
 
 
+@login_required(login_url='users:login-patient', redirect_field_name='board:a_create')
+@permission_required('board.add_article')
 def a_create(request):
     if request.method == 'POST':
         article_form = ArticleForm(data=request.POST, files=request.FILES)
@@ -54,6 +63,8 @@ def a_create(request):
 
 
 # 소통게시판
+@login_required(login_url='users:login-patient', redirect_field_name='board:c_list')
+@permission_required('board.view_communication')
 def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')
@@ -71,24 +82,21 @@ def c_list(request):
     return render(request, 'Communication-List.html', context)
 
 
+@login_required(login_url='users:login-patient', redirect_field_name='board:c_detail')
+@permission_required(['board.add_communication', 'board.change_communication'])
 def c_detail(request, id):
     # 특정 id에 해당하는 Communication 객체 가져오기
     communication = get_object_or_404(Communication, pk=id)
     comments = C_Comment.objects.filter(communication=communication)
     print(comments)
     if request.method == 'POST':
-        if request.user.is_authenticated:  # 로그인한 사용자만 댓글을 작성할 수 있도록
-            c_comment_form = C_CommentForm(request.POST)
-            if c_comment_form.is_valid():
-                new_comment = c_comment_form.save(commit=False)
-                new_comment.cc_commenter = request.user
-                new_comment.communication = communication
-                new_comment.save()
-            return redirect('board:c_detail', id=id)
-        else:
-            # 로그인되지 않은 사용자에게 어떻게 처리할지 결정하세요
-            # 예를 들어 로그인 페이지로 리다이렉션하거나 에러 메시지를 표시할 수 있 습니다.
-            pass
+        c_comment_form = C_CommentForm(request.POST)
+        if c_comment_form.is_valid():
+            new_comment = c_comment_form.save(commit=False)
+            new_comment.cc_commenter = request.user
+            new_comment.communication = communication
+            new_comment.save()
+        return redirect('board:c_detail', id=id)
     else:
         # GET 요청일 때 CommentForm을 초기화
         c_comment_form = C_CommentForm()
@@ -98,6 +106,8 @@ def c_detail(request, id):
     return render(request, 'Communication-detail.html', context)
 
 
+@login_required(login_url='users:login-patient', redirect_field_name='board:a_create')
+@permission_required(['board.add_communication', 'board.change_communication'])
 def c_create(request):
     if request.method == 'POST':
         communication_form = CommunicationForm(request.POST)
@@ -114,6 +124,7 @@ def c_create(request):
 
 
 # 상담사 게시판
+@login_required(login_url='users:choose_your_type', redirect_field_name='board:cs_list')
 def cs_list(request):
     counselors = Counselor.objects.all().order_by('-id')
 
@@ -130,13 +141,16 @@ def cs_list(request):
     return render(request, 'Counselor-list.html', context)
 
 
-@login_required
+@login_required(login_url='users:login-patient', redirect_field_name='board:cs_list')
 def cs_detail(request, id):
+    if not request.user.is_authenticated:
+        return redirect('home')  # 로그인 페이지 URL로 변경하세요.
     counselor = Counselor.objects.get(pk=id)
-    patient = Patient.objects.get(pk=id)
+    # TODO : 수정 필요
+    patient = Patient.objects.first()
     reviews = counselor.counselorreview_set.all()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.has_perm('board.add_counselorreview'):
         reviewform = CounselorReviewForm(request.POST)
         if reviewform.is_valid():
             patient = Patient.objects.filter(p_user=request.user).first()

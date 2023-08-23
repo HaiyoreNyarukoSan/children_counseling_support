@@ -6,7 +6,6 @@
             width: 40px;
             height: 40px;
             object-fit: contain;
-
         }
     </style>
 
@@ -68,13 +67,15 @@
     {% block html_header %}
     {% endblock %}
 </head>
-<body>
+<body style="padding-top: 72px;">
 <header class="header">
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-            <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="{% url 'home' %}"><img
-                    src="/static/image/Header-Logo.png" alt="" class="logo-image"></a>
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand py-1" href="{% url 'home' %}">
+                    <img src="/static/image/Header-Logo.png" alt="" class="logo-image">
+                </a>
                 <form class="form-inline d-none d-sm-flex" action="#" id="search">
                     <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
                         <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span
@@ -115,19 +116,23 @@
                                             style="font-family: Jua">소통 게시판</a>
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
-                            <a class="btn btn-primary" href="{% url 'users:logout' %}" style="font-family: Jua">로그아웃</a>
-                        </li>
-                        </li>
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                        <a class="btn btn-primary" href="{% url 'users:logout' %}" style="font-family: Jua">로그아웃</a>
+                    </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'users:login-patient' %}"
-                                                style="font-family: Jua">회원 로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'users:login-counselor' %}"
-                                                style="font-family: Jua">상담사 로그인</a></li>
-                        <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
-                            <a class="btn btn-primary" href="{% url 'users:choose_your_type' %}"
-                               style="font-family: Jua">회원가입</a>
-                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle " id="docsSignupDropdownMenuLink" href="index.html"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: Jua">회원가입</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsSignupDropdownMenuLink">
+                            <a class="nav-link" href="{% url 'users:signup-patient' %}" style="font-family: Jua">회원
+                                회원가입</a>
+                            <a class="nav-link" href="{% url 'users:signup-counselor' %}" style="font-family: Jua">상담사
+                                회원가입</a>
+                        </div>
+                    </li>
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                        <a class="btn btn-primary" href="{% url 'users:choose_your_type' %}" style="font-family: Jua">로그인</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>

@@ -1,63 +1,46 @@
 {% extends 'users/Base-User.html' %}
 {% block html_main_content %}
-<div class="container-fluid px-3">
-    <div class="row min-vh-100 d-flex justify-content-center align-items-center">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-                <div class="mb-5">
-                    {% block html_user_logo %}
-                    {% endblock %}
-                    <h2 style="font-family: Jua">Welcome back</h2>
-                </div>
-                <form class="form-validate" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label class="form-label" for="{{ form.username.auto_id }}" style="font-family: Jua">
-                            {{ form.username.label }}
-                        </label>
-                        {{ form.username }}
-                    </div>
-                    <div class="form-group mb-4">
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="{{ form.password.auto_id }}" style="font-family: Jua">
-                                    {{ form.password.label }}
-                                </label>
-                            </div>
-                            <div class="col-auto"><a class="form-text small" href="#">비밀번호를
-                                잊어버렸나요</a></div>
-                        </div>
-                        {{ form.password }}
-                    </div>
-                    <!--                    <div class="form-group mb-4">-->
-                    <!--                        <div class="custom-control custom-checkbox">-->
-                    <!--                            <input class="custom-control-input" id="loginRemember" type="checkbox">-->
-                    <!--                            <label class="custom-control-label text-muted" for="loginRemember">-->
-                    <!--                                <span class="text-sm" style="font-family: Jua">아이디를 기억할까요?</span>-->
-                    <!--                            </label>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!-- Submit-->
-                    <button class="btn btn-lg btn-block btn-primary" style="font-family: Jua">로그인</button>
-                </form>
-                <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
-                {% block html_other_login %}
-                {% endblock %}
-                <hr class="my-4">
-                <p class="text-center">
-                    <small class="text-muted text-center" style="font-family: Jua">
-                        아직 계정이 없으신가요?
-                        {% block html_signup %}
-                        {% endblock %}
-                    </small>
-                </p>
-                <a class="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html">
-
-                </a>
-            </div>
-        </div>
-    </div>
+<div class="mb-5">
+    {% block html_user_logo %}
+    {% endblock %}
+    <h2 style="font-family: Jua">Welcome back</h2>
 </div>
+<form class="form-validate" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="form-label" for="{{ form.username.auto_id }}" style="font-family: Jua">
+            {{ form.username.label }}
+        </label>
+        {{ form.username }}
+    </div>
+    <div class="form-group mb-4">
+        <div class="row">
+            <div class="col">
+                <label class="form-label" for="{{ form.password.auto_id }}" style="font-family: Jua">
+                    {{ form.password.label }}
+                </label>
+            </div>
+            <div class="col-auto"><a class="form-text small" href="#">비밀번호를
+                잊어버렸나요</a></div>
+        </div>
+        {{ form.password }}
+    </div>
+    <button class="btn btn-lg btn-block btn-primary" style="font-family: Jua">로그인</button>
+</form>
+<hr class="my-3 hr-text letter-spacing-2" data-content="OR">
+{% block html_other_login %}
+{% endblock %}
+<hr class="my-4">
+<p class="text-center">
+    <small class="text-muted text-center" style="font-family: Jua">
+        아직 계정이 없으신가요?
+        {% block html_signup %}
+        {% endblock %}
+    </small>
+</p>
+<a class="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html">
+
+</a>
 {% endblock %}
 {% block html_additional_js %}
 {% endblock %}

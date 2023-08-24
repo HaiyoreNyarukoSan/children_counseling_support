@@ -107,7 +107,7 @@ def cs_detail(request, id):
     if request.method == 'POST':
         reviewform = CounselorReviewForm(request.POST)
         if reviewform.is_valid():
-            patient = get_object_or_404(Patient, p_user=request.user)
+            patient = Patient.objects.filter(p_user=request.user).first()
             content = reviewform.cleaned_data['r_content']
             # rating = reviewform.cleaned_data['r_rating']
 

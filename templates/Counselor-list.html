@@ -20,196 +20,50 @@
 
 
             </div>
-            <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4"
-                                                   href="user-booking-detail.html">
-                <div class="row">
-                    <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <h2 class="h5 mb-0" style="font-family: Jua">김가현</h2><img
-                                class="avatar avatar-sm avatar-border-white ml-3"
-                                src="/static/image/User_01.png" alt="Jack London">
+            {% for counselor in counselors %}
+                {% csrf_token %}
+                <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4"
+                                                       href="{% url 'Counselor-detail' counselor.id %}">
+                    <div class="row">
+                        <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <h2 class="h5 mb-0" style="font-family: Jua">
+                                    {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}</h2>
+                                <img
+                                        class="avatar avatar-sm avatar-border-white ml-3"
+                                        src="/static/image/User_01.png" alt="Jack London">
+                            </div>
+                            <span class="badge badge-pill p-2 badge-secondary-light"
+                                  style="font-family: Jua">오전(9~13시)</span>
+                            <span class="badge badge-pill p-2 badge-primary-light"
+                                  style="font-family: Jua">오후(13~17시)</span>
+                            <span class="badge badge-pill p-2 badge-success-light"
+                                  style="font-family: Jua">저녁(17~21시)</span>
                         </div>
-                        <span class="badge badge-pill p-2 badge-secondary-light"
-                              style="font-family: Jua">오전(9~13시)</span>
-                        <span class="badge badge-pill p-2 badge-primary-light"
-                              style="font-family: Jua">오후(13~17시)</span>
-                        <span class="badge badge-pill p-2 badge-success-light"
-                              style="font-family: Jua">저녁(17~21시)</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                                <h6 class="label-heading" style="font-family: Jua">소개</h6>
-                                <p class="text-sm font-weight-bold" style="font-family: Jua">내 마음에 무엇이 있나, 함께
-                                    들여다볼까요?</p>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                                    <h6 class="label-heading" style="font-family: Jua">이력서 및 소개</h6>
+                                    <p class="text-sm font-weight-bold"
+                                       style="font-family: Jua">{{ counselor.c_resume }}</p>
 
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading" style="font-family: Jua">상담 과목</h6>
-                                <p class="text-sm font-weight-bold" style="font-family: Jua">우울,불안,가족</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading" style="font-family: Jua">주요 자격 및 경력</h6>
-                                <p class="text-sm font-weight-bold" style="font-family: Jua">상담심리 및 미술치료 경력, 미술심리상담 1급,
-                                    미술심리상담 2급</p>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3 py-3">
+                                    <h6 class="label-heading" style="font-family: Jua">전문 분야</h6>
+                                    <p class="text-sm font-weight-bold"
+                                       style="font-family: Jua">{{ counselor.c_department }}</p>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3 py-3">
+                                    <h6 class="label-heading" style="font-family: Jua">자격증</h6>
+                                    <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
+                                         style="max-width: 50%; height: auto;">
+                                </div>
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
-            </a><a class="list-group-item list-group-item-action p-4" href="user-booking-detail.html">
-                <div class="row">
-                    <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <h2 class="h5 mb-0">Weeks Garrett</h2><img class="avatar avatar-sm avatar-border-white ml-3"
-                                                                       src="img/avatar/avatar-1.jpg" alt="Jack London">
-                        </div>
-                        <span class="badge badge-pill p-2 badge-primary-light">March 14, 2019 - March 17, 2019</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                                <h6 class="label-heading">Rate type</h6>
-                                <p class="text-sm font-weight-bold">Bed & Breakfast</p>
-                                <h6 class="label-heading">Nights </h6>
-                                <p class="text-sm font-weight-bold mb-0">3</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Occupancy</h6>
-                                <p class="text-sm font-weight-bold">3 pax</p>
-                                <h6 class="label-heading">Charge</h6>
-                                <p class="text-sm font-weight-bold mb-0">$495.73</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Booked Date</h6>
-                                <p class="text-sm font-weight-bold">March 14, 2019 </p>
-                                <h6 class="label-heading">Arrival Time</h6>
-                                <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
-                            </div>
-                            <div class="col-12 col-lg-3 align-self-center"><span
-                                    class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br
-                                    class="d-none d-lg-block"><span class="text-muted text-sm text-uppercase"><i
-                                    class="fa fa-times fa-fw mr-2"> </i>Confirmed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a><a class="list-group-item list-group-item-action p-4" href="user-booking-detail.html">
-                <div class="row">
-                    <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <h2 class="h5 mb-0">Fisher Bauer</h2><img class="avatar avatar-sm avatar-border-white ml-3"
-                                                                      src="img/avatar/avatar-2.jpg" alt="Jack London">
-                        </div>
-                        <span class="badge badge-pill p-2 badge-danger-light">March 10, 2019 - March 13, 2019</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                                <h6 class="label-heading">Rate type</h6>
-                                <p class="text-sm font-weight-bold">Bed & Breakfast</p>
-                                <h6 class="label-heading">Nights </h6>
-                                <p class="text-sm font-weight-bold mb-0">3</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Occupancy</h6>
-                                <p class="text-sm font-weight-bold">2 pax</p>
-                                <h6 class="label-heading">Charge</h6>
-                                <p class="text-sm font-weight-bold mb-0">$938.48</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Booked Date</h6>
-                                <p class="text-sm font-weight-bold">March 10, 2019 </p>
-                                <h6 class="label-heading">Arrival Time</h6>
-                                <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
-                            </div>
-                            <div class="col-12 col-lg-3 align-self-center"><span
-                                    class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br
-                                    class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a><a class="list-group-item list-group-item-action p-4" href="user-booking-detail.html">
-                <div class="row">
-                    <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <h2 class="h5 mb-0">Aguilar Webb</h2><img class="avatar avatar-sm avatar-border-white ml-3"
-                                                                      src="img/avatar/avatar-3.jpg" alt="Jack London">
-                        </div>
-                        <span class="badge badge-pill p-2 badge-success-light">April 09, 2019 - April 13, 2019</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                                <h6 class="label-heading">Rate type</h6>
-                                <p class="text-sm font-weight-bold">Bed & Breakfast</p>
-                                <h6 class="label-heading">Nights </h6>
-                                <p class="text-sm font-weight-bold mb-0">4</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Occupancy</h6>
-                                <p class="text-sm font-weight-bold">3 pax</p>
-                                <h6 class="label-heading">Charge</h6>
-                                <p class="text-sm font-weight-bold mb-0">$955.07</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Booked Date</h6>
-                                <p class="text-sm font-weight-bold">April 09, 2019 </p>
-                                <h6 class="label-heading">Arrival Time</h6>
-                                <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
-                            </div>
-                            <div class="col-12 col-lg-3 align-self-center"><span
-                                    class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br
-                                    class="d-none d-lg-block"><span class="text-muted text-sm text-uppercase"><i
-                                    class="fa fa-times fa-fw mr-2"> </i>Confirmed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a><a class="list-group-item list-group-item-action p-4" href="user-booking-detail.html">
-                <div class="row">
-                    <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3">
-                            <h2 class="h5 mb-0">Melton Simon</h2><img class="avatar avatar-sm avatar-border-white ml-3"
-                                                                      src="img/avatar/avatar-4.jpg" alt="Jack London">
-                        </div>
-                        <span class="badge badge-pill p-2 badge-secondary-light">March 24, 2019 - March 28, 2019</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="row">
-                            <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                                <h6 class="label-heading">Rate type</h6>
-                                <p class="text-sm font-weight-bold">Bed & Breakfast</p>
-                                <h6 class="label-heading">Nights </h6>
-                                <p class="text-sm font-weight-bold mb-0">4</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Occupancy</h6>
-                                <p class="text-sm font-weight-bold">3 pax</p>
-                                <h6 class="label-heading">Charge</h6>
-                                <p class="text-sm font-weight-bold mb-0">$882.25</p>
-                            </div>
-                            <div class="col-6 col-md-4 col-lg-3 py-3">
-                                <h6 class="label-heading">Booked Date</h6>
-                                <p class="text-sm font-weight-bold">March 24, 2019 </p>
-                                <h6 class="label-heading">Arrival Time</h6>
-                                <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
-                            </div>
-                            <div class="col-12 col-lg-3 align-self-center"><span
-                                    class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br
-                                    class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i
-                                    class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            </div>
+            {% endfor %}
             <!-- Pagination -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-template d-flex justify-content-center">

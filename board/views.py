@@ -2,11 +2,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from board.forms import ArticleForm, CommunicationForm, C_CommentForm
-from board.models import Article, Communication, Comment, C_Comment
+from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm
+from board.models import Article, Communication, Comment, C_Comment, CounselorReview
 from django.contrib.auth.decorators import login_required
 
+from users.models import Counselor, Patient
 
+
+# 파일 업로드 게시판
 def a_list(request):
     articles = Article.objects.all().order_by('-id')
     context = {'articles': articles}
@@ -39,6 +42,7 @@ def a_create(request):
     return render(request, 'Picture-create.html', {'article_form': article_form})
 
 
+# 소통게시판
 def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')
@@ -86,3 +90,36 @@ def c_create(request):
         communication_form = CommunicationForm()
 
     return render(request, 'Communication-Create.html', {'communication_form': communication_form})
+
+
+# 상담사 게시판
+def cs_list(request):
+    counselors = Counselor.objects.all().order_by('-id')
+    context = {'counselors': counselors}
+    return render(request, 'Counselor-list.html', context)
+
+
+@login_required
+def cs_detail(request, id):
+    counselor = Counselor.objects.get(pk=id)
+    reviews = counselor.counselorreview_set.all()
+
+    if request.method == 'POST':
+        reviewform = CounselorReviewForm(request.POST)
+        if reviewform.is_valid():
+            patient = get_object_or_404(Patient, p_user=request.user)
+            content = reviewform.cleaned_data['r_content']
+            # rating = reviewform.cleaned_data['r_rating']
+
+            CounselorReview.objects.create(
+                r_patient=patient,
+                r_counselor=counselor,
+                r_content=content,
+                # r_rating=rating
+            )
+            return redirect('board:cs_detail', id=id)
+    else:
+        reviewform = CounselorReviewForm()
+
+    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform}
+    return render(request, 'Counselor-detail.html', context)

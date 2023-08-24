@@ -32,7 +32,8 @@ class Comment(models.Model):
 class CounselorReview(models.Model):
     r_patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     r_counselor = models.ForeignKey(Counselor, on_delete=models.CASCADE)
-    r_rating = models.FloatField()
+    r_content = models.CharField(max_length=200)
+    r_rating = models.FloatField(default=0.0)
 
     def __str__(self):
         return f'{self.r_patient} rated {self.r_counselor} {self.r_rating}'

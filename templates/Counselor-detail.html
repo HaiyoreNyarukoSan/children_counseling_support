@@ -15,7 +15,9 @@
                                                                                           href="#"><img
                                 class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png"
                                 alt=""></a>
-                            <h5 style="font-family: Jua">김가현</h5>
+                            <h5 style="font-family: Jua">
+                                {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}
+                            </h5>
                             <p class="text-muted text-sm mb-0" style="font-family: Jua">미술심리 상담사 </p>
                         </div>
                         <div class="card-body p-4">
@@ -35,168 +37,62 @@
                                 </div>
                             </div>
                             <hr>
-                            <h6 style="font-family: Jua">상담 선호 주제</h6>
-                            <ul class="card-text text-muted">
-                                <li style="font-family: Jua">우울,불안</li>
-                                <li style="font-family: Jua">스트레스</li>
-                                <li style="font-family: Jua">짜증</li>
-                            </ul>
-                            <hr>
                             <button class="btn btn-primary" type="submit" style="font-family: Jua">1대1 상담하기</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9 pl-lg-5">
-                    <h1 class="hero-heading mb-0" style="font-family: Jua">Hello, I'm Jack!</h1>
+                    <h1 class="hero-heading mb-0" style="font-family: Jua">안녕하세요 여러분</h1>
                     <div class="text-block">
                         <p><span class="badge badge-secondary-light">소개</span></p>
-                        <p class="text-muted" style="font-family: Jua">내 마음에 무엇이 있나, 함께 들여다볼까요? </p>
+                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
+
+                    </div>
+                    <div class="text-block">
+                        <h4 class="mb-5" style="font-family: Jua">전문분야</h4>
+                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
 
                     </div>
                     <div class="text-block">
                         <h4 class="mb-5" style="font-family: Jua">주요 자격 및 경력</h4>
-                        <p class="text-muted" style="font-family: Jua">상담심리 및 미술치료 경력, 미술심리상담 1급,
-                            미술심리상담 2급</p>
-
+                        <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
+                             style="max-width: 50%; height: auto;">
                     </div>
                     <div class="text-block">
-                        <h4 class="mb-5" style="font-family: Jua">상담사 이야기</h4>
-                        <p class="text-muted" style="font-family: Jua">저는 스페인에서 미술치료사 생활을 시작하여
-                            다양한 언어와 방식으로 사람들과 소통해왔습니다.그래서 말과 언어라는 한계를 넘어 각자가 가지고 있는 어려움을 함께
-                            들여다보고 극복해 나가는 과정이 비록 쉽지는 않지만, 불가능한 것 또한 아니라는 사실을 다년간의 경험을 배워왔습니다.</p>
-                    </div>
-                    <div class="text-block">
-                        <p class="subtitle text-sm text-primary" style="font-family: Jua">리뷰 </p>
-                        <h5 class="mb-4" style="font-family: Jua">리뷰 목록 </h5>
-                        <div class="media d-block d-sm-flex review">
-                            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
-                                                                          src="img/avatar/avatar-8.jpg"
-                                                                          alt="Padmé Amidala"><span
-                                    class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-                            <div class="media-body">
-                                <h6 class="mt-2 mb-1">Padmé Amidala</h6>
-                                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i>
+                        <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
+                        {% for review in reviews %}
+                            <div class="media d-block d-sm-flex review">
+                                <div class="text-md-center mr-4 mr-xl-5">
+                                    <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
+                                         alt="">
+                                    <span class="text-uppercase text-muted text-sm">Dec 2018</span>
                                 </div>
-                                <p class="text-muted text-sm">One morning, when Gregor Samsa woke from troubled
-                                    dreams, he
-                                    found himself transformed in his bed into a horrible vermin. He lay on his
-                                    armour-like
-                                    back, and if he lifted his head a little he could see his brown belly, slightly
-                                    domed
-                                    and divided by arches into stiff sections </p>
-                            </div>
-                        </div>
-                        <div class="media d-block d-sm-flex review">
-                            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
-                                                                          src="img/avatar/avatar-2.jpg"
-                                                                          alt="Luke Skywalker"><span
-                                    class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-                            <div class="media-body">
-                                <h6 class="mt-2 mb-1">Luke Skywalker</h6>
-                                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-gray-200"></i>
+                                <div class="media-body">
+                                    <h6 class="mt-2 mb-1"></h6>
+                                    <p class="text-muted text-sm"
+                                       style="font-family: Jua">{{ review.r_content }}</p>
                                 </div>
-                                <p class="text-muted text-sm">The bedding was hardly able to cover it and seemed
-                                    ready to
-                                    slide off any moment. His many legs, pitifully thin compared with the size of
-                                    the rest
-                                    of him, waved about helplessly as he looked. &quot;What's happened to me?&quot;
-                                    he
-                                    thought. It wasn't a dream. </p>
                             </div>
-                        </div>
-                        <div class="media d-block d-sm-flex review">
-                            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
-                                                                          src="img/avatar/avatar-3.jpg"
-                                                                          alt="Princess Leia"><span
-                                    class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-                            <div class="media-body">
-                                <h6 class="mt-2 mb-1">Princess Leia</h6>
-                                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-gray-200"></i><i
-                                        class="fa fa-xs fa-star text-gray-200"></i>
-                                </div>
-                                <p class="text-muted text-sm">His room, a proper human room although a little too
-                                    small, lay
-                                    peacefully between its four familiar walls. A collection of textile samples lay
-                                    spread
-                                    out on the table. </p>
-                            </div>
-                        </div>
-                        <div class="media d-block d-sm-flex review">
-                            <div class="text-md-center mr-4 mr-xl-5"><img class="d-block avatar avatar-xl p-2 mb-2"
-                                                                          src="img/avatar/avatar-4.jpg"
-                                                                          alt="Jabba Hut"><span
-                                    class="text-uppercase text-muted text-sm">Dec 2018</span></div>
-                            <div class="media-body">
-                                <h6 class="mt-2 mb-1">Jabba Hut</h6>
-                                <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i>
-                                </div>
-                                <p class="text-muted text-sm">Samsa was a travelling salesman - and above it there
-                                    hung a
-                                    picture that he had recently cut out of an illustrated magazine and housed in a
-                                    nice,
-                                    gilded frame. </p>
-                            </div>
-                        </div>
+                        {% endfor %}
                         <div class="py-5">
                             <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
                                     data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
-                                    style="font-family: Jua">리뷰 작성
+                                    style="font-family: Jua">댓글 작성
                             </button>
                             <div class="collapse mt-4" id="leaveReview">
-                                <h5 class="mb-4" style="font-family: Jua">리뷰작성</h5>
-                                <form class="form" id="contact-form" method="get" action="#">
+                                <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
+                                <form class="form" id="contact-form" method="POST"
+                                      action="{% url 'Counselor-detail' id=counselor.id %}">
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="form-label" for="name" style="font-family: Jua">이름
-                                                    *</label>
-                                                <input class="form-control" type="text" name="name" id="name"
-                                                       placeholder="Enter your name" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-label" for="rating">별점 *</label>
-                                                <select class="custom-select focus-shadow-0" name="rating"
-                                                        id="rating">
-                                                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)
-                                                    </option>
-                                                    <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)
-                                                    </option>
-                                                    <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)
-                                                    </option>
-                                                    <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)
-                                                    </option>
-                                                    <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)
-                                                    </option>
-                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="email" style="font-family: Jua">이메일 *</label>
-                                        <input class="form-control" type="email" name="email" id="email"
-                                               placeholder="Enter your  email" required="required">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="review" style="font-family: Jua">리뷰 *</label>
-                                        <textarea class="form-control" rows="4" name="review" id="review"
-                                                  placeholder="Enter your review" required="required"></textarea>
+                                        <label class="form-label" for="review" style="font-family: Jua">댓글 *</label>
+                                        {{ reviewform.r_content }}
                                     </div>
                                     <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
                                     </button>

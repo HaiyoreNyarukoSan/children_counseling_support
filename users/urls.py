@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
 
 from . import views
 from .views import login_patient_view, login_counselor_view, signup_patient, signup_counselor, logout_view
@@ -24,6 +25,8 @@ app_name = "users"
 urlpatterns = [
     path('login/patient', login_patient_view, name="login-patient"),
     path('login/counselor', login_counselor_view, name="login-counselor"),
+    path('signup/choose_your_type', TemplateView.as_view(template_name='users/Choose-Your-Type.html'),
+         name="choose_your_type"),
     path('signup/patient', signup_patient, name="signup-patient"),
     path('signup/counselor', signup_counselor, name="signup-counselor"),
     path('logout', logout_view, name="logout"),

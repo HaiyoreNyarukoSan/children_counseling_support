@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <style>
@@ -31,7 +31,6 @@
             max-height: 100%;
         }
     </style>
-
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -127,21 +126,26 @@
                                 style="font-family: Jua">미술치료상담사 </a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="Patient-Login.html"
-                                            style="font-family: Jua">일반로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Counselor-Login.html"
-                                            style="font-family: Jua">상담로그인</a></li>
-                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary"
-                                                                                             href="user-add-0.html"
-                                                                                             style="font-family: Jua">회원가입</a>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                        <a class="btn btn-primary" href="{% url 'users:logout' %}" style="font-family: Jua">로그아웃</a>
                     </li>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:login-patient' %}"
+                                            style="font-family: Jua">회원 로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:login-counselor' %}"
+                                            style="font-family: Jua">상담사 로그인</a></li>
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                        <a class="btn btn-primary" href="{% url 'users:choose_your_type' %}" style="font-family: Jua">회원가입</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     <!-- /Navbar -->
 </header>
-
 {% block html_body %}
 {% endblock %}
 </body>

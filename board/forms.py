@@ -1,11 +1,11 @@
 from django import forms
 
-from board.models import Article
+from board.models import Article, Communication, Comment, C_Comment, CounselorReview
 
 
 class ArticleForm(forms.ModelForm):
     a_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    a_content = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    a_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
 
     a_tree_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={
         'class': 'btn btn-outline-primary btn-sm',
@@ -95,3 +95,100 @@ class ArticleForm(forms.ModelForm):
         }), required=False, label='')
 
     }
+
+
+class CommunicationForm(forms.ModelForm):
+    com_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    com_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Communication
+        fields = ['com_title', 'com_content']
+
+        labels = {
+            'com_title': '글 제목',
+            'com_content': '글 내용'
+        }
+
+        widgets = {
+            'com_title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'text',
+                    'name': 'name',
+                    'id': 'name',
+                    'placeholder': '제목을 입력하세요',
+                    'required': 'required'
+                }
+            ),
+
+            'com_content': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': '4',
+                    'name': 'message',
+                    'id': 'message',
+                    'placeholder': '내용을 입력하세요',
+                    'required': 'required'
+                }
+            )
+        }
+
+
+class C_CommentForm(forms.ModelForm):
+    cc_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = C_Comment
+        fields = ['cc_content']
+
+        labels = {
+
+            'cc_content': '글 내용'
+        }
+
+    widgets = {
+
+        'cc_content': forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'rows': '4',
+                'name': 'review',
+                'id': 'review',
+                'placeholder': '내용을 입력하세요',
+                'required': 'required'
+            }
+        )
+
+    }
+
+
+class CounselorReviewForm(forms.ModelForm):
+    r_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = CounselorReview
+        fields = ['r_content']
+
+        labels = {
+            'r_content': '글 내용'
+        }
+
+    widgets = {
+
+        'r_content': forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'rows': '4',
+                'name': 'review',
+                'id': 'review',
+                'placeholder': '내용을 입력하세요',
+                'required': 'required'
+            }
+        )
+
+    }
+
+# class CounselorForm(forms.ModelForm):
+#     a_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+#     a_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))

@@ -32,7 +32,28 @@ class Comment(models.Model):
 class CounselorReview(models.Model):
     r_patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     r_counselor = models.ForeignKey(Counselor, on_delete=models.CASCADE)
-    r_rating = models.FloatField()
+    r_content = models.CharField(max_length=200)
+    r_rating = models.FloatField(default=0.0)
 
     def __str__(self):
         return f'{self.r_patient} rated {self.r_counselor} {self.r_rating}'
+
+
+class Communication(models.Model):
+    com_patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    com_title = models.CharField(max_length=200)
+    com_content = models.CharField(max_length=200)
+    # 글 작성일
+    com_published_date = models.DateTimeField('date published', auto_now_add=True)
+
+    def __str__(self):
+        return self.com_title
+
+
+class C_Comment(models.Model):  # 소통게시판의 댓글모델
+    cc_commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    cc_content = models.CharField(max_length=200)
+    communication = models.ForeignKey(Communication, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.cc_content

@@ -5,105 +5,73 @@
 </head>
 <body style="padding-top: 72px;">
 {% block html_body %}
-    <br><br>
-    <section class="py-5">
+    <!-- Hero Section-->
+    <section class="hero py-6 py-lg-7 text-white "><img class="bg-image"
+                                                        src="/static/image/Art-photo.jpg"
+                                                        alt="How can we help you today?">
+
+    </section>
+
+
+    <section class="py-6 bg-gray-100">
         <div class="container">
+            <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
+                 style="max-width: 4rem;">
+            <h2 class="h4 mb-5" style="font-family: Jua">사진업로드</h2>
             <div class="row">
-                <div class="col-lg-3 mr-lg-auto">
-                    <div class="card border-0 shadow mb-6 mb-lg-0">
-                        <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block"
-                                                                                          href="#"><img
-                                class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png"
-                                alt=""></a>
-                            <h5 style="font-family: Jua">
-                                {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}
-                            </h5>
-                            <p class="text-muted text-sm mb-0" style="font-family: Jua">미술심리 상담사 </p>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="media align-items-center mb-3">
-
-                                <div class="media-body">
-                                    <h6 style="font-family: Jua">상담 선호 시간</h6>
-                                </div>
-                            </div>
-                            <div class="media align-items-center mb-3">
-
-                                <div class="media-body">
-                                    <p><span class="badge badge-secondary-light"
-                                             style="font-family: Jua">오후(13~17시)</span>
-                                    </p>
-
-                                </div>
-                            </div>
-                            <hr>
-                            <button class="btn btn-primary" type="submit" style="font-family: Jua">1대1 상담하기</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 pl-lg-5">
-                    <h1 class="hero-heading mb-0" style="font-family: Jua">안녕하세요 여러분</h1>
-                    <div class="text-block">
-                        <p><span class="badge badge-secondary-light">소개</span></p>
-                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
-
-                    </div>
-                    <div class="text-block">
-                        <h4 class="mb-5" style="font-family: Jua">전문분야</h4>
-                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
-
-                    </div>
-                    <div class="text-block">
-                        <h4 class="mb-5" style="font-family: Jua">주요 자격 및 경력</h4>
-                        <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
-                             style="max-width: 50%; height: auto;">
-                    </div>
-                    <div class="text-block">
-                        <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
-                        {% for review in reviews %}
-                            <div class="media d-block d-sm-flex review">
-                                <div class="text-md-center mr-4 mr-xl-5">
-                                    <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
-                                         alt="">
-                                    <span class="text-uppercase text-muted text-sm">Dec 2018</span>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="mt-2 mb-1"></h6>
-                                    <p class="text-muted text-sm"
-                                       style="font-family: Jua">{{ review.r_content }}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        <div class="py-5">
-                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
-                                    data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
-                                    style="font-family: Jua">댓글 작성
-                            </button>
-                            <div class="collapse mt-4" id="leaveReview">
-                                <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
-                                <form class="form" id="contact-form" method="POST"
-                                      action="{% url 'Counselor-detail' id=counselor.id %}">
-                                    {% csrf_token %}
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="col-md-7 mb-5 mb-md-0">
+                    <form class="form" id="contact-form" method="POST" action="{% url 'Picture-create' %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="review" style="font-family: Jua">댓글 *</label>
-                                        {{ reviewform.r_content }}
+
+                                        <label class="form-label" for="{{ article_form.a_title.id_for_label }}"
+                                               style="font-family: Jua">제목 *</label>
+                                        {{ article_form.a_title }}
                                     </div>
-                                    <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
-                                    </button>
-                                </form>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="message" style="font-family: Jua">내용
+                                    *</label>
+                                {{ article_form.a_content }}
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        {{ article_form.a_tree_image }}
+                                        <div class="preview" id="preview1"></div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{ article_form.a_man_image }}
+                                        <div class="preview" id="preview2"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        {{ article_form.a_woman_image }}
+                                        <div class="preview" id="preview3"></div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{ article_form.a_house_image }}
+                                        <div class="preview" id="preview4"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <input class="btn btn-outline-primary" type="submit" value="업로드"
+                                       style="font-family: Jua">
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Footer-->
     <footer class="position-relative z-index-10 d-print-none">
         <!-- Main block - menus, subscribe form-->
@@ -119,16 +87,13 @@
                                                             title="twitter"><i class="fab fa-twitter"></i></a></li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="facebook"><i class="fab fa-facebook"></i></a>
-                            </li>
+                                                            title="facebook"><i class="fab fa-facebook"></i></a></li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
+                                                            title="instagram"><i class="fab fa-instagram"></i></a></li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
-                                                            title="pinterest"><i class="fab fa-pinterest"></i></a>
-                            </li>
+                                                            title="pinterest"><i class="fab fa-pinterest"></i></a></li>
                             <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
                                                             target="_blank"
                                                             title="vimeo"><i class="fab fa-vimeo"></i></a></li>
@@ -180,11 +145,9 @@
                     <div class="col-md-6">
                         <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
                             <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="...">
-                            </li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="..."></li>
                             <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="...">
-                            </li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="..."></li>
                         </ul>
                     </div>
                 </div>
@@ -219,22 +182,75 @@
 
     </script>
     <!-- jQuery-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Magnific Popup - Lightbox for the gallery-->
-    <script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <!-- Smooth scroll-->
-    <script src="/static/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+    <script src="vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
     <!-- Bootstrap Select-->
-    <script src="/static/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
     <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-    <script src="/static/vendor/object-fit-images/ofi.min.js"></script>
+    <script src="vendor/object-fit-images/ofi.min.js"></script>
     <!-- Swiper Carousel                       -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
     <script>var basePath = ''</script>
     <!-- Main Theme JS file    -->
-    <script src="/static/js/theme.js"></script>
+    <script src="js/theme.js"></script>
+    <!-- Map-->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+    <!-- Available tile layers-->
+    <script src="js/map-layers.js"></script>
+    <script src="js/map-detail.js"></script>
+    <script>
+        createDetailMap({
+            mapId: 'detailMap',
+            mapCenter: [40.732346, -74.0014247],
+            markerShow: true,
+            markerPosition: [40.732346, -74.0014247],
+            markerPath: 'img/marker.svg',
+        })
+    </script>
+    <script>
+        function showPreview(event, previewId) {
+            const input = event.target;
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+
+                    const preview = document.getElementById(previewId);
+                    preview.innerHTML = "";
+                    preview.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById("{{ article_form.a_tree_image.id_for_label }}").addEventListener("change", function (event) {
+            showPreview(event, "preview1");
+        });
+
+        document.getElementById("{{ article_form.a_man_image.id_for_label }}").addEventListener("change", function (event) {
+            showPreview(event, "preview2");
+        });
+
+        document.getElementById("{{ article_form.a_woman_image.id_for_label }}").addEventListener("change", function (event) {
+            showPreview(event, "preview3");
+        });
+
+        document.getElementById("{{ article_form.a_house_image.id_for_label }}").addEventListener("change", function (event) {
+            showPreview(event, "preview4");
+        });
+    </script>
 {% endblock %}
 </body>
 </html>

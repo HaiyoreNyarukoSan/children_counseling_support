@@ -18,7 +18,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
-from .views import login_patient_view, login_counselor_view, signup_patient, signup_counselor, logout_view
+from .views import login_patient_view, login_counselor_view, signup_patient, signup_counselor, logout_view, change
 
 app_name = "users"
 
@@ -30,5 +30,5 @@ urlpatterns = [
     path('signup/patient', signup_patient, name="signup-patient"),
     path('signup/counselor', signup_counselor, name="signup-counselor"),
     path('logout', logout_view, name="logout"),
-    path('change', lambda i: i, name="change"),
+    path('change', change, name="change"),
 ]

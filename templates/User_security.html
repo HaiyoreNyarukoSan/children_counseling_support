@@ -1,255 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% extends 'base.html' %}
-</head>
-<body style="padding-top: 72px;">
+{% extends 'base.html' %}
 {% block html_body %}
-    <br><br>
-    <section class="py-5">
-        <div class="container">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb pl-0  justify-content-start">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
-                <li class="breadcrumb-item active">Login &amp; security</li>
-            </ol>
-            <h1 class="hero-heading mb-0" style="font-family: Jua">회원정보 수정 및 탈퇴하기</h1>
-            <p class="text-muted mb-5" style="font-family: Jua">
-                여기에서 로그인 및 보안과 설정을 관리하세요.</p>
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="text-block">
-                        <h3 class="mb-4" style="font-family: Jua">수정하기</h3>
-                        <div class="row">
-                            <div class="col-sm-8">
+<section class="py-5">
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
+            <li class="breadcrumb-item active">Login &amp; security</li>
+        </ol>
+        <h1 class="hero-heading mb-0" style="font-family: Jua">회원정보 수정 및 탈퇴하기</h1>
+        <p class="text-muted mb-5" style="font-family: Jua">
+            여기에서 로그인 및 보안과 설정을 관리하세요.</p>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="text-block">
+                    <h3 class="mb-4" style="font-family: Jua">수정하기</h3>
+                    <div class="row">
+                        <div class="col-sm-8">
 
 
-                            </div>
-                            <div class="col text-right">
-                                <button class="btn btn-link pl-0 text-primary collapsed" type="button"
-                                        data-toggle="collapse" data-target="#updatePassword" aria-expanded="false"
-                                        aria-controls="updatePassword" style="font-family: Jua">수정하기
-                                </button>
-                            </div>
                         </div>
-                        <div class="collapse" id="updatePassword">
-                            <div class="row mt-4">
-                                <div class="form-group col-12">
-                                    <label class="form-label" for="password-current" style="font-family: Jua">현재
-                                        비밀번호</label>
-                                    <input class="form-control" type="password" name="password-current"
-                                           id="password-current">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password-new" style="font-family: Jua">새 비밀번호</label>
-                                    <input class="form-control" type="password" name="password-new" id="password-new">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password-confirm" style="font-family: Jua">비밀번호
-                                        재확인</label>
-                                    <input class="form-control" type="password" name="password-confirm"
-                                           id="password-confirm">
-                                </div>
-                            </div>
-                            <button class="btn btn-outline-primary" style="font-family: Jua">수정하기</button>
+                        <div class="col text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button"
+                                    data-toggle="collapse" data-target="#updatePassword" aria-expanded="false"
+                                    aria-controls="updatePassword" style="font-family: Jua">수정하기
+                            </button>
                         </div>
                     </div>
-                    <div class="text-block">
-                        <h3 class="mb-4" style="font-family: Jua">탈퇴하기</h3>
-                        <div class="row">
-                            <div class="col-sm-8">
-
-
+                    <div class="collapse" id="updatePassword">
+                        <div class="row mt-4">
+                            <div class="form-group col-12">
+                                <label class="form-label" for="password-current" style="font-family: Jua">현재
+                                    비밀번호</label>
+                                <input class="form-control" type="password" name="password-current"
+                                       id="password-current">
                             </div>
-                            <div class="col text-right">
-                                <button class="btn btn-link pl-0 text-primary collapsed" type="button"
-                                        data-toggle="collapse" data-target="#deleteAccount" aria-expanded="false"
-                                        aria-controls="deleteAccount" style="font-family: Jua">탈퇴하기
-                                </button>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="password-new" style="font-family: Jua">새 비밀번호</label>
+                                <input class="form-control" type="password" name="password-new" id="password-new">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="password-confirm" style="font-family: Jua">비밀번호
+                                    재확인</label>
+                                <input class="form-control" type="password" name="password-confirm"
+                                       id="password-confirm">
                             </div>
                         </div>
-                        <div class="collapse" id="deleteAccount">
-                            <div class="row mt-4">
-                                <div class="form-group col-12">
-                                    <label class="form-label" for="password-current" style="font-family: Jua">현재
-                                        비밀번호</label>
-                                    <input class="form-control" type="password" name="password-current"
-                                           id="password-current">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password-new" style="font-family: Jua">새 비밀번호</label>
-                                    <input class="form-control" type="password" name="password-new" id="password-new">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="password-confirm" style="font-family: Jua">비밀번호
-                                        재확인</label>
-                                    <input class="form-control" type="password" name="password-confirm"
-                                           id="password-confirm">
-                                </div>
-                            </div>
-                            <button class="btn btn-outline-primary" style="font-family: Jua">탈퇴하기</button>
-                        </div>
+                        <button class="btn btn-outline-primary" style="font-family: Jua">수정하기</button>
                     </div>
-
-
                 </div>
-                <div class="col-md-6 col-lg-4 ml-lg-auto">
-                    <div class="card border-0 shadow">
-                        <div class="card-header bg-primary-light py-4 border-0">
-                            <div class="media align-items-center">
-                                <div class="media-body">
-                                    <h4 class="h6 subtitle text-sm text-primary" style="font-family: Jua">귀하의 계정을 더 안전하게
-                                        만드십시오</h4>
-                                </div>
-                                <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
-                                    <use xlink:href="#shield-security-1"></use>
-                                </svg>
+                <div class="text-block">
+                    <h3 class="mb-4" style="font-family: Jua">탈퇴하기</h3>
+                    <div class="row">
+                        <div class="col-sm-8">
+
+
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-link pl-0 text-primary collapsed" type="button"
+                                    data-toggle="collapse" data-target="#deleteAccount" aria-expanded="false"
+                                    aria-controls="deleteAccount" style="font-family: Jua">탈퇴하기
+                            </button>
+                        </div>
+                    </div>
+                    <div class="collapse" id="deleteAccount">
+                        <div class="row mt-4">
+                            <div class="form-group col-12">
+                                <label class="form-label" for="password-current" style="font-family: Jua">현재
+                                    비밀번호</label>
+                                <input class="form-control" type="password" name="password-current"
+                                       id="password-current">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="password-new" style="font-family: Jua">새 비밀번호</label>
+                                <input class="form-control" type="password" name="password-new" id="password-new">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="password-confirm" style="font-family: Jua">비밀번호
+                                    재확인</label>
+                                <input class="form-control" type="password" name="password-confirm"
+                                       id="password-confirm">
                             </div>
                         </div>
-                        <div class="card-body p-4">
-                            <h6 class="card-text" style="font-family: Jua">귀하의 계정 보안: </h6>
-                            <p class="card-text mb-4"><span class="badge badge-info-light"
-                                                            style="font-family: Jua">Medium</span></p>
-                            <p class="text-muted card-text" style="font-family: Jua">We’re always working on ways to
-                                increase safety in our
-                                community. </p>
-                            <p class="text-muted card-text" style="font-family: Jua">That’s why we look at every account
-                                to
-                                make sure it’s as secure
-                                as possible.</p>
+                        <button class="btn btn-outline-primary" style="font-family: Jua">탈퇴하기</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6 col-lg-4 ml-lg-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-primary-light py-4 border-0">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <h4 class="h6 subtitle text-sm text-primary" style="font-family: Jua">귀하의 계정을 더 안전하게
+                                    만드십시오</h4>
+                            </div>
+                            <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
+                                <use xlink:href="#shield-security-1"></use>
+                            </svg>
                         </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h6 class="card-text" style="font-family: Jua">귀하의 계정 보안: </h6>
+                        <p class="card-text mb-4"><span class="badge badge-info-light"
+                                                        style="font-family: Jua">Medium</span></p>
+                        <p class="text-muted card-text" style="font-family: Jua">We’re always working on ways to
+                            increase safety in our
+                            community. </p>
+                        <p class="text-muted card-text" style="font-family: Jua">That’s why we look at every account
+                            to
+                            make sure it’s as secure
+                            as possible.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Footer-->
-    <footer class="position-relative z-index-10 d-print-none">
-        <!-- Main block - menus, subscribe form-->
-        <div class="py-6 bg-gray-200 text-muted">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="facebook"><i class="fab fa-facebook"></i></a></li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="instagram"><i class="fab fa-instagram"></i></a></li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="pinterest"><i class="fab fa-pinterest"></i></a></li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="vimeo"><i class="fab fa-vimeo"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                        <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
-                        <ul class="list-unstyled">
-                            <li><a class="text-muted" href="index.html">Rooms </a></li>
-                            <li><a class="text-muted" href="category-rooms.html">Map on top </a></li>
-                            <li><a class="text-muted" href="category-2-rooms.html">Side map </a></li>
-                            <li><a class="text-muted" href="category-3-rooms.html">No map </a></li>
-                            <li><a class="text-muted" href="detail-rooms.html">Room detail </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                        <h6 class="text-uppercase text-dark mb-3">Pages</h6>
-                        <ul class="list-unstyled">
-                            <li><a class="text-muted" href="compare.html">Comparison </a></li>
-                            <li><a class="text-muted" href="team.html">Team </a></li>
-                            <li><a class="text-muted" href="contact.html">Contact </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <h6 class="text-uppercase text-dark mb-3">Daily Offers & Discounts</h6>
-                        <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
-                            temporibus.</p>
-                        <form action="#" id="newsletter-form">
-                            <div class="input-group mb-3">
-                                <input class="form-control bg-transparent border-dark border-right-0" type="email"
-                                       placeholder="Your Email Address" aria-label="Your Email Address">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-dark border-left-0" type="submit"><i
-                                            class="fa fa-paper-plane text-lg"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Copyright section of the footer-->
-        <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-center text-md-left">
-                        <p class="text-sm mb-md-0">&copy; 2020, Your company. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
-                            <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="..."></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- JavaScript files-->
-    <script>
-        // ------------------------------------------------------- //
-        //   Inject SVG Sprite -
-        //   see more here
-        //   https://css-tricks.com/ajaxing-svg-sprite/
-        // ------------------------------------------------------ //
-        function injectSvgSprite(path) {
-
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", path, true);
-            ajax.send();
-            ajax.onload = function (e) {
-                var div = document.createElement("div");
-                div.className = 'd-none';
-                div.innerHTML = ajax.responseText;
-                document.body.insertBefore(div, document.body.childNodes[0]);
-            }
-        }
-
-        // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-        // use your own URL in production, please :)
-        // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-        //- injectSvgSprite('${path}icons/orion-svg-sprite.svg');
-        injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
-
-    </script>
-    <!-- jQuery-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Magnific Popup - Lightbox for the gallery-->
-    <script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth scroll-->
-    <script src="/static/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-    <!-- Bootstrap Select-->
-    <script src="/static/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-    <script src="/static/vendor/object-fit-images/ofi.min.js"></script>
-    <!-- Swiper Carousel                       -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-    <script>var basePath = ''</script>
-    <!-- Main Theme JS file    -->
-    <script src="/static/js/theme.js"></script>
+    </div>
+</section>
 {% endblock %}
-</body>
-</html>

@@ -1,287 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% extends 'base.html' %}
-</head>
-<body style="padding-top: 72px;">
+{% extends 'base.html' %}
 {% block html_body %}
-    <section class="py-5">
-        <div class="container">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb pl-0  justify-content-start">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="user-messages.html">Inbox</a></li>
-                <li class="breadcrumb-item active">Your messages with Anna</li>
-            </ol>
-            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4">
-                <h1 class="mb-3 mb-md-0 hero-heading mb-0" style="font-family: Jua">Your messages with Anna</h1>
+<section class="py-5">
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="user-messages.html">Inbox</a></li>
+            <li class="breadcrumb-item active">Your messages with Anna</li>
+        </ol>
+        <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4">
+            <h1 class="mb-3 mb-md-0 hero-heading mb-0" style="font-family: Jua">Your messages with Anna</h1>
 
-            </div>
-            <div class="card border-0 shadow mb-4">
-                <div class="card-body p-4">
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <div class="media-body">
-                                <h6><a class="text-reset" href="detail-rooms.html" style="font-family: Jua">김가현</a>
-                                </h6>
-                                <p class="text-muted text-sm mb-0" style="font-family: Jua">미술치료 상담사</p>
-                                <div class="mt-n1"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-gray-200"></i>
-                                </div>
+        </div>
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body p-4">
+                <div class="text-block pb-3">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h6><a class="text-reset" href="detail-rooms.html" style="font-family: Jua">김가현</a>
+                            </h6>
+                            <p class="text-muted text-sm mb-0" style="font-family: Jua">미술치료 상담사</p>
+                            <div class="mt-n1"><i class="fa fa-xs fa-star text-primary"></i><i
+                                    class="fa fa-xs fa-star text-primary"></i><i
+                                    class="fa fa-xs fa-star text-primary"></i><i
+                                    class="fa fa-xs fa-star text-primary"></i><i
+                                    class="fa fa-xs fa-star text-gray-200"></i>
                             </div>
-                            <a href="detail-rooms.html"><img class="ml-3 rounded"
-                                                             src="img/photo/photo-1512917774080-9991f1c4c750.jpg"
-                                                             alt=""
-                                                             width="100"></a>
                         </div>
-                    </div>
-                    <div class="text-block pt-3 pb-0">
-
+                        <a href="detail-rooms.html"><img class="ml-3 rounded"
+                                                         src="img/photo/photo-1512917774080-9991f1c4c750.jpg"
+                                                         alt=""
+                                                         width="100"></a>
                     </div>
                 </div>
-            </div>
-            <!-- Chat Box-->
-            <div class="px-4 py-5">
-                <div class="row">
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="/static/image/User_01.png" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">One morning, when Gregor Samsa woke from troubled dreams, he
-                                    found
-                                    himself transformed in his bed into a horrible vermin. He lay on his armour-like
-                                    back,
-                                    and if he lifted his head a little he could see his brown belly, slightly domed
-                                    and
-                                    divided by arches into stiff sections</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">The bedding was hardly able to cover it and
-                                    seemed ready
-                                    to slide off any moment. His many legs, pitifully thin compared with the size of
-                                    the
-                                    rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot;
-                                    he
-                                    thought. It wasn't a dream.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
-                    </div>
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="img/avatar/avatar-1.jpg" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">His room, a proper human room although a little too small,
-                                    lay
-                                    peacefully between its four familiar walls. A collection of textile samples lay
-                                    spread
-                                    out on the table.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">Samsa was a travelling salesman - and above it
-                                    there hung
-                                    a picture that he had recently cut out of an illustrated magazine and housed in
-                                    a nice,
-                                    gilded frame.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
-                    </div>
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="img/avatar/avatar-1.jpg" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">He must have tried it a hundred times, shut his eyes so that
-                                    he
-                                    wouldn't have to look at the floundering legs, and only stopped when he began to
-                                    feel a
-                                    mild, dull pain there that he had never felt before.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">One morning, when Gregor Samsa woke from troubled
-                                    dreams,
-                                    he found himself transformed in his bed into a horrible vermin. He lay on his
-                                    armour-like back, and if he lifted his head a little he could see his brown
-                                    belly,
-                                    slightly domed and divided by arches into stiff sections</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
-                    </div>
+                <div class="text-block pt-3 pb-0">
+
                 </div>
             </div>
-            <!-- Typing area-->
-            <form class="bg-light rounded shadow-sm" action="#">
-                <div class="input-group">
+        </div>
+        <!-- Chat Box-->
+        <div class="px-4 py-5">
+            <div class="row">
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="/static/image/User_01.png" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">One morning, when Gregor Samsa woke from troubled dreams, he
+                                found
+                                himself transformed in his bed into a horrible vermin. He lay on his armour-like
+                                back,
+                                and if he lifted his head a little he could see his brown belly, slightly domed
+                                and
+                                divided by arches into stiff sections</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">The bedding was hardly able to cover it and
+                                seemed ready
+                                to slide off any moment. His many legs, pitifully thin compared with the size of
+                                the
+                                rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot;
+                                he
+                                thought. It wasn't a dream.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="img/avatar/avatar-1.jpg" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">His room, a proper human room although a little too small,
+                                lay
+                                peacefully between its four familiar walls. A collection of textile samples lay
+                                spread
+                                out on the table.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">Samsa was a travelling salesman - and above it
+                                there hung
+                                a picture that he had recently cut out of an illustrated magazine and housed in
+                                a nice,
+                                gilded frame.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="img/avatar/avatar-1.jpg" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">He must have tried it a hundred times, shut his eyes so that
+                                he
+                                wouldn't have to look at the floundering legs, and only stopped when he began to
+                                feel a
+                                mild, dull pain there that he had never felt before.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">One morning, when Gregor Samsa woke from troubled
+                                dreams,
+                                he found himself transformed in his bed into a horrible vermin. He lay on his
+                                armour-like back, and if he lifted his head a little he could see his brown
+                                belly,
+                                slightly domed and divided by arches into stiff sections</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
+            </div>
+        </div>
+        <!-- Typing area-->
+        <form class="bg-light rounded shadow-sm" action="#">
+            <div class="input-group">
                 <textarea class="form-control border-0 p-4 bg-light text-sm" placeholder="메세지 입력하세요."
                           aria-describedby="button-sendMessage"></textarea>
-                    <div class="input-group-append">
-                        <button class="btn btn-link" id="button-sendMessage" type="submit"><i
-                                class="fa fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-    <!-- Footer-->
-    <footer class="position-relative z-index-10 d-print-none">
-        <!-- Main block - menus, subscribe form-->
-        <div class="py-6 bg-gray-200 text-muted">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="facebook"><i class="fab fa-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="pinterest"><i class="fab fa-pinterest"></i></a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                            target="_blank"
-                                                            title="vimeo"><i class="fab fa-vimeo"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                        <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
-                        <ul class="list-unstyled">
-                            <li><a class="text-muted" href="index.html">Rooms </a></li>
-                            <li><a class="text-muted" href="category-rooms.html">Map on top </a></li>
-                            <li><a class="text-muted" href="category-2-rooms.html">Side map </a></li>
-                            <li><a class="text-muted" href="category-3-rooms.html">No map </a></li>
-                            <li><a class="text-muted" href="detail-rooms.html">Room detail </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                        <h6 class="text-uppercase text-dark mb-3">Pages</h6>
-                        <ul class="list-unstyled">
-                            <li><a class="text-muted" href="compare.html">Comparison </a></li>
-                            <li><a class="text-muted" href="team.html">Team </a></li>
-                            <li><a class="text-muted" href="contact.html">Contact </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <h6 class="text-uppercase text-dark mb-3">Daily Offers & Discounts</h6>
-                        <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
-                            temporibus.</p>
-                        <form action="#" id="newsletter-form">
-                            <div class="input-group mb-3">
-                                <input class="form-control bg-transparent border-dark border-right-0" type="email"
-                                       placeholder="Your Email Address" aria-label="Your Email Address">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-dark border-left-0" type="submit"><i
-                                            class="fa fa-paper-plane text-lg"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="input-group-append">
+                    <button class="btn btn-link" id="button-sendMessage" type="submit"><i
+                            class="fa fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
-        </div>
-        <!-- Copyright section of the footer-->
-        <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-center text-md-left">
-                        <p class="text-sm mb-md-0">&copy; 2020, Your company. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
-                            <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="...">
-                            </li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
-                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="...">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- JavaScript files-->
-    <script>
-        // ------------------------------------------------------- //
-        //   Inject SVG Sprite -
-        //   see more here
-        //   https://css-tricks.com/ajaxing-svg-sprite/
-        // ------------------------------------------------------ //
-        function injectSvgSprite(path) {
-
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", path, true);
-            ajax.send();
-            ajax.onload = function (e) {
-                var div = document.createElement("div");
-                div.className = 'd-none';
-                div.innerHTML = ajax.responseText;
-                document.body.insertBefore(div, document.body.childNodes[0]);
-            }
-        }
-
-        // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-        // use your own URL in production, please :)
-        // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-        //- injectSvgSprite('${path}icons/orion-svg-sprite.svg');
-        injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
-
-    </script>
-    <!-- jQuery-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Magnific Popup - Lightbox for the gallery-->
-    <script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth scroll-->
-    <script src="/static/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-    <!-- Bootstrap Select-->
-    <script src="/static/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-    <script src="/static/vendor/object-fit-images/ofi.min.js"></script>
-    <!-- Swiper Carousel                       -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-    <script>var basePath = ''</script>
-    <!-- Main Theme JS file    -->
-    <script src="/static/js/theme.js"></script>
+        </form>
+    </div>
+</section>
 {% endblock %}
-</body>
-</html>

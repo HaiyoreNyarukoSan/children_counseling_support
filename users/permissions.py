@@ -7,8 +7,15 @@ _PATIENT_GROUP = 'patient'
 _COUNSELOR_GROUP = 'counselor'
 _t_str = {'a': 'add', 'v': 'view', 'd': 'delete', 'c': 'change'}
 
-patient_group, _ = Group.objects.get_or_create(name=_PATIENT_GROUP)
-counselor_group, _ = Group.objects.get_or_create(name=_COUNSELOR_GROUP)
+
+class UserGroups:
+    @property
+    def patient_group(self):
+        return Group.objects.get_or_create(name=_PATIENT_GROUP)[0]
+
+    @property
+    def counselor_group(self):
+        return Group.objects.get_or_create(name=_COUNSELOR_GROUP)[0]
 
 
 def add_iff_not_exists(group, permissions):
@@ -29,29 +36,24 @@ def get_permissions(content_type, permission_types):
     ]
 
 
-# model types
-article_type = ContentType.objects.get(app_label='board', model='article')
-comment_type = ContentType.objects.get(app_label='board', model='comment')
-communication_type = ContentType.objects.get(app_label='board', model='communication')
-counselorreview_type = ContentType.objects.get(app_label='board', model='counselorreview')
-
-# patient permissions
-patient_permissions = []
-patient_permissions.extend(get_permissions(article_type, 'avdc'))
-patient_permissions.extend(get_permissions(comment_type, 'avdc'))
-patient_permissions.extend(get_permissions(communication_type, 'avdc'))
-patient_permissions.extend(get_permissions(counselorreview_type, 'avdc'))
-
-# counselor permissions
-counselor_permissions = []
-counselor_permissions.extend(get_permissions(article_type, 'v'))
-counselor_permissions.extend(get_permissions(comment_type, 'avdc'))
-counselor_permissions.extend(get_permissions(counselorreview_type, 'v'))
-
-
 def set_permission(**kwargs):
-    add_iff_not_exists(patient_group, patient_permissions)
-    add_iff_not_exists(counselor_group, counselor_permissions)
+    article_type = ContentType.objects.get(app_label='board', model='article')
+    comment_type = ContentType.objects.get(app_label='board', model='comment')
+    communication_type = ContentType.objects.get(app_label='board', model='communication')
+    counselorreview_type = ContentType.objects.get(app_label='board', model='counselorreview')
+
+    patient_permissions = []
+    patient_permissions.extend(get_permissions(article_type, 'avdc'))
+    patient_permissions.extend(get_permissions(comment_type, 'avdc'))
+    patient_permissions.extend(get_permissions(communication_type, 'avdc'))
+    patient_permissions.extend(get_permissions(counselorreview_type, 'avdc'))
+    counselor_permissions = []
+    counselor_permissions.extend(get_permissions(article_type, 'v'))
+    counselor_permissions.extend(get_permissions(comment_type, 'avdc'))
+    counselor_permissions.extend(get_permissions(counselorreview_type, 'v'))
+
+    add_iff_not_exists(UserGroups.patient_group, patient_permissions)
+    add_iff_not_exists(UserGroups.counselor_group, counselor_permissions)
 
 # yourapp.models 대신 실제 앱의 models 모듈 참조를 사용하세요
 # post_migrate.connect(set_permission, sender=users.models)

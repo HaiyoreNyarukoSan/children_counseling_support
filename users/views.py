@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from users.forms import LoginForm, SignUpForm, CounselorSignUpForm, ChangeForm, patient_form_set, patient_new_form_set
 from users.models import Patient, Counselor
-from users.permissions import counselor_group, patient_group
+from users.permissions import UserGroups
 
 
 def save_user_to_group(user, group):
@@ -14,11 +14,11 @@ def save_user_to_group(user, group):
 
 # Create your views here.
 def login_patient_view(request):
-    return login_view(request, patient_group)
+    return login_view(request, UserGroups.patient_group)
 
 
 def login_counselor_view(request):
-    return login_view(request, counselor_group)
+    return login_view(request, UserGroups.counselor_group)
 
 
 def login_view(request, group):

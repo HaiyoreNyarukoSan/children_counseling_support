@@ -21,7 +21,7 @@ from board import views
 from children_counseling_support import settings
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name='Main.html'), name='home'),
+    path("", views.main, name='home'),
     path("Counselor-list/", views.cs_list, name='Counselor-list'),
     path("Counselor-detail/<int:id>", views.cs_detail, name='Counselor-detail'),
     path("User_security/", TemplateView.as_view(template_name='User_security.html'), name='User_security'),

@@ -6,10 +6,23 @@
 <body style="padding-top: 72px;">
 {% block html_body %}
     <!-- Hero Section-->
-    <section class="hero py-6 py-lg-7 text-white "><img class="bg-image"
-                                                        src="/static/image/Art-photo.jpg"
-                                                        alt="How can we help you today?">
-
+    <section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
+                                                                    src="/static/image/Communication-photo.jpg"
+                                                                    alt="How can we help you today?">
+        <div class="container overlay-content">
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}"
+                                               style="font-family: Jua">메인페이지</a></li>
+                <li class="breadcrumb-item active"><a href="{% url 'Communication-List' %}"
+                                                      style="font-family: Jua">목록페이지</a></li>
+                <li class="breadcrumb-item active " style="font-family: Jua">
+                    작성페이지
+                </li>
+            </ol>
+            <br><br><br>
+            <h1 class="hero-heading" style="font-family: Jua">Write Everyone</h1>
+        </div>
     </section>
 
 

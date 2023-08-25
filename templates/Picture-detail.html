@@ -7,8 +7,9 @@
 {% block html_body %}
     <div class="container py-7">
         <div class="overlay-content text-center ">
-            <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
-                 style="max-width: 4rem;">
+            <a href="{% url 'Picture-list' %}">
+                <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
+                     style="max-width: 4rem;"></a>
         </div>
     </div>
     <section>
@@ -43,8 +44,13 @@
                             </div>
                         </div>
                         <div class="text-content">
-                            <h2 style="font-family: Jua">{{ article.a_title }}</h2>
-                            <p style="font-family: Jua">{{ article.a_content }}</p>
+                            <h3 style="font-family: Jua">제목 *</h3>
+                            <blockquote class="blockquote blockquote-primary"><p
+                                    style="font-family: Jua">{{ article.a_title }}</p></blockquote>
+                            <h3 style="font-family: Jua">내용 *</h3>
+                            <blockquote class="blockquote blockquote-primary"><p
+                                    style="font-family: Jua">{{ article.a_content }}</p></blockquote>
+
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_migrate
 
 import users
 
@@ -20,7 +19,7 @@ def add_iff_not_exists(group, permissions):
 
 
 def get_permissions(content_type, permission_types):
-    content_name = content_type.model
+    content_name = content_type.name
     return [
         Permission.objects.get_or_create(
             codename=f'{_t_str[t]}_{content_name}',

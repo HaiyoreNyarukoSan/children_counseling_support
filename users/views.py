@@ -1,35 +1,36 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
 from users.forms import LoginForm, SignUpForm, PatientFormSet, CounselorSignUpForm
-from users.models import COUNSELOR_GROUP, PATIENT_GROUP, Patient
+from users.models import Patient
+from users.permissions import counselor_group, patient_group
+
+
+def save_user_to_group(user, group):
+    user.groups.add(group)
 
 
 # Create your views here.
 def login_patient_view(request):
-    return login_view(request, PATIENT_GROUP)
+    return login_view(request, patient_group)
 
 
 def login_counselor_view(request):
-    return login_view(request, COUNSELOR_GROUP)
+    return login_view(request, counselor_group)
 
 
-def save_user_to_group(user, group_name):
-    group, _ = Group.objects.get_or_create(name=group_name)
-    user.groups.add(group)
-
-
-def login_view(request, group_name):
+def login_view(request, group):
     if request.user.is_authenticated:
-        return redirect('')
+        return redirect('My-Page')
     if request.method == "POST":
         form = LoginForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
-            group, _ = Group.objects.get_or_create(name=group_name)
+            group, _ = Group.objects.get_or_create(name=group.name)
             if group in user.groups.all():
                 login(request, user)
                 # return redirect('board:articles')
@@ -39,18 +40,15 @@ def login_view(request, group_name):
         context = {
             "form": form,
         }
-        template_name = f"users/{'Counselor' if group_name == COUNSELOR_GROUP else 'Patient'}-Login.html"
-        return render(request, template_name, context)
     else:
         form = LoginForm()
         context = {
             "form": form,
         }
-        template_name = f"users/{'Counselor' if group_name == COUNSELOR_GROUP else 'Patient'}-Login.html"
+        template_name = f"users/{'Counselor' if group == counselor_group else 'Patient'}-Login.html"
         return render(request, template_name, context)
 
 
-# Create your views here.
 def signup_patient(request):
     if request.method == "POST":
         form = SignUpForm(data=request.POST, files=request.FILES)
@@ -60,7 +58,7 @@ def signup_patient(request):
         )
         if form.is_valid() and formset.is_valid():
             saved_user = form.save()
-            save_user_to_group(saved_user, PATIENT_GROUP)
+            save_user_to_group(saved_user, patient_group)
             saved_formset = formset.save(commit=False)
             for saved_patient in saved_formset:
                 saved_patient.p_user = saved_user
@@ -90,7 +88,7 @@ def signup_counselor(request):
         form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES)
         if form.is_valid() and form_counselor.is_valid():
             saved_user = form.save()
-            save_user_to_group(saved_user, COUNSELOR_GROUP)
+            save_user_to_group(saved_user, counselor_group)
             saved_counselor = form_counselor.save(commit=False)
             saved_counselor.c_user = saved_user
             saved_counselor.save()
@@ -107,6 +105,7 @@ def signup_counselor(request):
     return render(request, "users/Counselor-signup.html", context)
 
 
+@login_required(login_url='users:choose_your_type')
 def logout_view(request):
     logout(request)
     return redirect('My-Page')

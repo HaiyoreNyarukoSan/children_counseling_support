@@ -6,7 +6,7 @@ _COUNSELOR_GROUP = 'counselor'
 _t_str = {'a': 'add', 'v': 'view', 'd': 'delete', 'c': 'change'}
 
 
-class UserGroups:
+class _UserGroups:
     @property
     def patient_group(self):
         return Group.objects.get_or_create(name=_PATIENT_GROUP)[0]
@@ -14,6 +14,9 @@ class UserGroups:
     @property
     def counselor_group(self):
         return Group.objects.get_or_create(name=_COUNSELOR_GROUP)[0]
+
+
+UserGroups = _UserGroups()
 
 
 def add_iff_not_exists(group, permissions):
@@ -55,6 +58,5 @@ def set_permission(**kwargs):
     counselor_permissions.extend(get_permissions(comment_type, 'avdc'))
     counselor_permissions.extend(get_permissions(counselorreview_type, 'v'))
 
-    usergroups = UserGroups()
-    add_iff_not_exists(usergroups.patient_group, patient_permissions)
-    add_iff_not_exists(usergroups.counselor_group, counselor_permissions)
+    add_iff_not_exists(UserGroups.patient_group, patient_permissions)
+    add_iff_not_exists(UserGroups.counselor_group, counselor_permissions)

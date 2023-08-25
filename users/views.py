@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 
-from users.forms import LoginForm, SignUpForm, PatientFormSet, CounselorSignUpForm
-from users.models import Patient
+from users.forms import LoginForm, SignUpForm, CounselorSignUpForm, ChangeForm, patient_form_set, patient_new_form_set
+from users.models import Patient, Counselor
 from users.permissions import counselor_group, patient_group
 
 
@@ -45,14 +45,14 @@ def login_view(request, group):
         context = {
             "form": form,
         }
-        template_name = f"users/{'Counselor' if group == counselor_group else 'Patient'}-Login.html"
-        return render(request, template_name, context)
+    template_name = f"users/{'Counselor' if group == counselor_group else 'Patient'}-Login.html"
+    return render(request, template_name, context)
 
 
 def signup_patient(request):
     if request.method == "POST":
         form = SignUpForm(data=request.POST, files=request.FILES)
-        formset = PatientFormSet(
+        formset = patient_form_set(
             request.POST,
             prefix='patientForm'
         )
@@ -68,7 +68,7 @@ def signup_patient(request):
             form.add_error(None, '입력하신 정보는 올바르지 않습니다')
     else:
         form = SignUpForm()
-        formset = PatientFormSet(
+        formset = patient_new_form_set(
             queryset=Patient.objects.none(),
             prefix='patientForm'
         )
@@ -109,3 +109,25 @@ def signup_counselor(request):
 def logout_view(request):
     logout(request)
     return redirect('My-Page')
+
+
+def change(request):
+    if request.method == "POST":
+        form = ChangeForm(data=request.POST, files=request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('My-Page')
+        else:
+            form.add_error(None, '입력하신 정보는 올바르지 않습니다')
+    else:
+        form = ChangeForm(instance=request.user)
+        patients = Patient.objects.filter(p_user=request.user)
+        formset = patient_form_set(queryset=patients, prefix='patientForm') if patients.exists() else None
+        counselor = request.user.counselor_set.first()
+        form_counselor = CounselorSignUpForm(instance=counselor) if counselor else None
+    context = {
+        "form": form,
+        "formset": formset,
+        "form_counselor": form_counselor,
+    }
+    return render(request, "users/User-Change.html", context)

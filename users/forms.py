@@ -1,7 +1,7 @@
 from datetime import date
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.forms import modelformset_factory
 
 from users.models import User, Patient, Counselor
@@ -98,7 +98,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = (
             'username', 'u_nickname', 'last_name', 'first_name', 'u_gender', 'password1', 'password2', 'u_birthday',
-            'u_gender', 'u_contact', 'email')
+            'u_contact', 'email')
 
         labels = {
             'u_birthday': '생년월일',
@@ -175,7 +175,12 @@ class PatientSignUpForm(forms.ModelForm):
         }
 
 
-PatientFormSet = modelformset_factory(
+patient_form_set = modelformset_factory(
+    Patient,
+    form=PatientSignUpForm,
+    extra=0,  # Set 'extra' to 0 to allow dynamic form count
+)
+patient_new_form_set = modelformset_factory(
     Patient,
     form=PatientSignUpForm,
     extra=1,  # Set 'extra' to 0 to allow dynamic form count
@@ -211,6 +216,48 @@ class CounselorSignUpForm(forms.ModelForm):
                     # 'autocomplete': 'off',
                     'required': True,
                     'title': '이력을 입력하세요',
+                }
+            ),
+        }
+
+
+class ChangeForm(UserChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['u_nickname'].label = '별명'
+        self.fields['u_nickname'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Nickname',
+            # 'autocomplete': 'off',
+            'required': True,
+            'title': '별명을 입력하세요'
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'e-mail',
+            # 'autocomplete': 'off',
+            'required': True,
+            'title': 'e-mail을 입력하세요',
+        })
+
+    class Meta:
+        model = User
+        fields = ('u_nickname', 'u_contact', 'email')
+
+        labels = {
+            'u_nickname': '생년월일',
+            'u_contact': '전화번호',
+        }
+
+        widgets = {
+            'u_contact': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': "000-0000-0000",
+                    # 'autocomplete': 'off',
+                    'required': True,
+                    'title': '전화번호를 입력하세요',
                 }
             ),
         }

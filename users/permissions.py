@@ -1,8 +1,6 @@
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
 
-import users
-
 _PATIENT_GROUP = 'patient'
 _COUNSELOR_GROUP = 'counselor'
 _t_str = {'a': 'add', 'v': 'view', 'd': 'delete', 'c': 'change'}
@@ -36,6 +34,11 @@ def get_permissions(content_type, permission_types):
     ]
 
 
+# Permission 등록 방법
+# python manage.py shell
+# > from users.permissions import set_permission
+# > set_permission()
+
 def set_permission(**kwargs):
     article_type = ContentType.objects.get(app_label='board', model='article')
     comment_type = ContentType.objects.get(app_label='board', model='comment')
@@ -52,8 +55,6 @@ def set_permission(**kwargs):
     counselor_permissions.extend(get_permissions(comment_type, 'avdc'))
     counselor_permissions.extend(get_permissions(counselorreview_type, 'v'))
 
-    add_iff_not_exists(UserGroups.patient_group, patient_permissions)
-    add_iff_not_exists(UserGroups.counselor_group, counselor_permissions)
-
-# yourapp.models 대신 실제 앱의 models 모듈 참조를 사용하세요
-# post_migrate.connect(set_permission, sender=users.models)
+    usergroups = UserGroups()
+    add_iff_not_exists(usergroups.patient_group, patient_permissions)
+    add_iff_not_exists(usergroups.counselor_group, counselor_permissions)

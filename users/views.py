@@ -45,7 +45,7 @@ def login_view(request, group):
         context = {
             "form": form,
         }
-    template_name = f"users/{'Counselor' if group == UserGroups.counselor_group else 'Patient'}-Login.html"
+    template_name = f"users/{'Counselor' if group == counselor_group else 'Patient'}-Login.html"
     return render(request, template_name, context)
 
 
@@ -58,7 +58,7 @@ def signup_patient(request):
         )
         if form.is_valid() and formset.is_valid():
             saved_user = form.save()
-            save_user_to_group(saved_user, UserGroups.patient_group)
+            save_user_to_group(saved_user, patient_group)
             saved_formset = formset.save(commit=False)
             for saved_patient in saved_formset:
                 saved_patient.p_user = saved_user
@@ -88,7 +88,7 @@ def signup_counselor(request):
         form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES)
         if form.is_valid() and form_counselor.is_valid():
             saved_user = form.save()
-            save_user_to_group(saved_user, UserGroups.counselor_group)
+            save_user_to_group(saved_user, counselor_group)
             saved_counselor = form_counselor.save(commit=False)
             saved_counselor.c_user = saved_user
             saved_counselor.save()

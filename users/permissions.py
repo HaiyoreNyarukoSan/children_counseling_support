@@ -7,15 +7,13 @@ _t_str = {'a': 'add', 'v': 'view', 'd': 'delete', 'c': 'change'}
 
 
 class UserGroups:
-    # @property
-    # def patient_group(self):
-    #     return Group.objects.get_or_create(name=_PATIENT_GROUP)[0]
-    #
-    # @property
-    # def counselor_group(self):
-    #     return Group.objects.get_or_create(name=_COUNSELOR_GROUP)[0]
-    patient_group = Group.objects.get_or_create(name=_PATIENT_GROUP)[0]
-    counselor_group = Group.objects.get_or_create(name=_COUNSELOR_GROUP)[0]
+    @property
+    def patient_group(self):
+        return Group.objects.get_or_create(name=_PATIENT_GROUP)[0]
+
+    @property
+    def counselor_group(self):
+        return Group.objects.get_or_create(name=_COUNSELOR_GROUP)[0]
 
 
 def add_iff_not_exists(group, permissions):

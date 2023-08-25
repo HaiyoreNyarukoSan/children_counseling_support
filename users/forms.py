@@ -246,6 +246,7 @@ class ChangeForm(UserChangeForm):
         fields = ('u_nickname', 'u_contact', 'email')
 
         labels = {
+            'u_nickname': '생년월일',
             'u_contact': '전화번호',
         }
 

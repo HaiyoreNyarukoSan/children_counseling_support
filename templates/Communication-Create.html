@@ -1,202 +1,210 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+</head>
+<body style="padding-top: 72px;">
 {% block html_body %}
-<!-- Hero Section-->
-<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                src="/static/image/Communication-photo.jpg"
-                                                                alt="How can we help you today?">
-    <div class="container overlay-content">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}"
-                                           style="font-family: Jua">메인페이지</a></li>
-            <li class="breadcrumb-item active"><a href="{% url 'Communication-List' %}"
-                                                  style="font-family: Jua">목록페이지</a></li>
-            <li class="breadcrumb-item active " style="font-family: Jua">
-                작성페이지
-            </li>
-        </ol>
-        <br><br><br>
-        <h1 class="hero-heading" style="font-family: Jua">Write Everyone</h1>
-    </div>
-</section>
+    <!-- Hero Section-->
+    <section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
+                                                                    src="/static/image/Communication-photo.jpg"
+                                                                    alt="How can we help you today?">
+        <div class="container overlay-content">
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}"
+                                               style="font-family: Jua">메인페이지</a></li>
+                <li class="breadcrumb-item active"><a href="{% url 'Communication-List' %}"
+                                                      style="font-family: Jua">목록페이지</a></li>
+                <li class="breadcrumb-item active " style="font-family: Jua">
+                    작성페이지
+                </li>
+            </ol>
+            <br><br><br>
+            <h1 class="hero-heading" style="font-family: Jua">Write Everyone</h1>
+        </div>
+    </section>
 
 
-<section class="py-6 bg-gray-100">
-    <div class="container">
-        <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
-             style="max-width: 4rem;">
-        <h2 class="h4 mb-5" style="font-family: Jua">소통 게시판</h2>
-        <div class="row">
-            <div class="col-md-7 mb-5 mb-md-0">
-                <form class="form" id="contact-form" method="POST" action="{% url 'Communication-Create' %}"
-                      enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="controls">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
+    <section class="py-6 bg-gray-100">
+        <div class="container">
+            <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
+                 style="max-width: 4rem;">
+            <h2 class="h4 mb-5" style="font-family: Jua">소통 게시판</h2>
+            <div class="row">
+                <div class="col-md-7 mb-5 mb-md-0">
+                    <form class="form" id="contact-form" method="POST" action="{% url 'Communication-Create' %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
 
-                                    <label class="form-label" for="{{ communication_form.com_title.id_for_label }}"
-                                           style="font-family: Jua">제목 *</label>
-                                    {{ communication_form.com_title }}
+                                        <label class="form-label" for="{{ communication_form.com_title.id_for_label }}"
+                                               style="font-family: Jua">제목 *</label>
+                                        {{ communication_form.com_title }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message" style="font-family: Jua">내용
-                                *</label>
-                            {{ communication_form.com_content }}
-                        </div>
-                        <br>
-                        <input class="btn btn-outline-primary" type="submit" value="등록하기"
-                               style="font-family: Jua">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer-->
-<footer class="position-relative z-index-10 d-print-none">
-    <!-- Main block - menus, subscribe form-->
-    <div class="py-6 bg-gray-200 text-muted">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                        target="_blank"
-                                                        title="twitter"><i class="fab fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                        target="_blank"
-                                                        title="facebook"><i class="fab fa-facebook"></i></a></li>
-                        <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                        target="_blank"
-                                                        title="instagram"><i class="fab fa-instagram"></i></a></li>
-                        <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                        target="_blank"
-                                                        title="pinterest"><i class="fab fa-pinterest"></i></a></li>
-                        <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
-                                                        target="_blank"
-                                                        title="vimeo"><i class="fab fa-vimeo"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                    <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
-                    <ul class="list-unstyled">
-                        <li><a class="text-muted" href="index.html">Rooms </a></li>
-                        <li><a class="text-muted" href="category-rooms.html">Map on top </a></li>
-                        <li><a class="text-muted" href="category-2-rooms.html">Side map </a></li>
-                        <li><a class="text-muted" href="category-3-rooms.html">No map </a></li>
-                        <li><a class="text-muted" href="detail-rooms.html">Room detail </a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                    <h6 class="text-uppercase text-dark mb-3">Pages</h6>
-                    <ul class="list-unstyled">
-                        <li><a class="text-muted" href="compare.html">Comparison </a></li>
-                        <li><a class="text-muted" href="team.html">Team </a></li>
-                        <li><a class="text-muted" href="contact.html">Contact </a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h6 class="text-uppercase text-dark mb-3">Daily Offers & Discounts</h6>
-                    <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
-                        temporibus.</p>
-                    <form action="#" id="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input class="form-control bg-transparent border-dark border-right-0" type="email"
-                                   placeholder="Your Email Address" aria-label="Your Email Address">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-dark border-left-0" type="submit"><i
-                                        class="fa fa-paper-plane text-lg"></i></button>
+                            <div class="form-group">
+                                <label class="form-label" for="message" style="font-family: Jua">내용
+                                    *</label>
+                                {{ communication_form.com_content }}
                             </div>
+                            <br>
+                            <input class="btn btn-outline-primary" type="submit" value="등록하기"
+                                   style="font-family: Jua">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Copyright section of the footer-->
-    <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-left">
-                    <p class="text-sm mb-md-0">&copy; 2020, Your company. All rights reserved.</p>
-                </div>
-                <div class="col-md-6">
-                    <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
-                        <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
-                        <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="..."></li>
-                        <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
-                        <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="..."></li>
-                    </ul>
+    </section>
+
+    <!-- Footer-->
+    <footer class="position-relative z-index-10 d-print-none">
+        <!-- Main block - menus, subscribe form-->
+        <div class="py-6 bg-gray-200 text-muted">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
+                                                            target="_blank"
+                                                            title="twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
+                                                            target="_blank"
+                                                            title="facebook"><i class="fab fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
+                                                            target="_blank"
+                                                            title="instagram"><i class="fab fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
+                                                            target="_blank"
+                                                            title="pinterest"><i class="fab fa-pinterest"></i></a></li>
+                            <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#"
+                                                            target="_blank"
+                                                            title="vimeo"><i class="fab fa-vimeo"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+                        <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
+                        <ul class="list-unstyled">
+                            <li><a class="text-muted" href="index.html">Rooms </a></li>
+                            <li><a class="text-muted" href="category-rooms.html">Map on top </a></li>
+                            <li><a class="text-muted" href="category-2-rooms.html">Side map </a></li>
+                            <li><a class="text-muted" href="category-3-rooms.html">No map </a></li>
+                            <li><a class="text-muted" href="detail-rooms.html">Room detail </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+                        <h6 class="text-uppercase text-dark mb-3">Pages</h6>
+                        <ul class="list-unstyled">
+                            <li><a class="text-muted" href="compare.html">Comparison </a></li>
+                            <li><a class="text-muted" href="team.html">Team </a></li>
+                            <li><a class="text-muted" href="contact.html">Contact </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h6 class="text-uppercase text-dark mb-3">Daily Offers & Discounts</h6>
+                        <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
+                            temporibus.</p>
+                        <form action="#" id="newsletter-form">
+                            <div class="input-group mb-3">
+                                <input class="form-control bg-transparent border-dark border-right-0" type="email"
+                                       placeholder="Your Email Address" aria-label="Your Email Address">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-dark border-left-0" type="submit"><i
+                                            class="fa fa-paper-plane text-lg"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
-<!-- JavaScript files-->
-<script>
-    // ------------------------------------------------------- //
-    //   Inject SVG Sprite -
-    //   see more here
-    //   https://css-tricks.com/ajaxing-svg-sprite/
-    // ------------------------------------------------------ //
-    function injectSvgSprite(path) {
+        <!-- Copyright section of the footer-->
+        <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-left">
+                        <p class="text-sm mb-md-0">&copy; 2020, Your company. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
+                            <li class="list-inline-item"><img class="w-2rem" src="img/visa.svg" alt="..."></li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/mastercard.svg" alt="..."></li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/paypal.svg" alt="..."></li>
+                            <li class="list-inline-item"><img class="w-2rem" src="img/western-union.svg" alt="..."></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script>
+        // ------------------------------------------------------- //
+        //   Inject SVG Sprite -
+        //   see more here
+        //   https://css-tricks.com/ajaxing-svg-sprite/
+        // ------------------------------------------------------ //
+        function injectSvgSprite(path) {
 
-        var ajax = new XMLHttpRequest();
-        ajax.open("GET", path, true);
-        ajax.send();
-        ajax.onload = function (e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", path, true);
+            ajax.send();
+            ajax.onload = function (e) {
+                var div = document.createElement("div");
+                div.className = 'd-none';
+                div.innerHTML = ajax.responseText;
+                document.body.insertBefore(div, document.body.childNodes[0]);
+            }
         }
-    }
 
-    // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-    // use your own URL in production, please :)
-    // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-    //- injectSvgSprite('${path}icons/orion-svg-sprite.svg');
-    injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+        // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+        // use your own URL in production, please :)
+        // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+        //- injectSvgSprite('${path}icons/orion-svg-sprite.svg');
+        injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
 
-</script>
-<!-- jQuery-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Magnific Popup - Lightbox for the gallery-->
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-<!-- Smooth scroll-->
-<script src="vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-<!-- Bootstrap Select-->
-<script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-<script src="vendor/object-fit-images/ofi.min.js"></script>
-<!-- Swiper Carousel                       -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-<script>var basePath = ''</script>
-<!-- Main Theme JS file    -->
-<script src="js/theme.js"></script>
-<!-- Map-->
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-        crossorigin=""></script>
-<!-- Available tile layers-->
-<script src="js/map-layers.js"></script>
-<script src="js/map-detail.js"></script>
-<script>
-    createDetailMap({
-        mapId: 'detailMap',
-        mapCenter: [40.732346, -74.0014247],
-        markerShow: true,
-        markerPosition: [40.732346, -74.0014247],
-        markerPath: 'img/marker.svg',
-    })
-</script>
+    </script>
+    <!-- jQuery-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Magnific Popup - Lightbox for the gallery-->
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth scroll-->
+    <script src="vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+    <!-- Bootstrap Select-->
+    <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+    <script src="vendor/object-fit-images/ofi.min.js"></script>
+    <!-- Swiper Carousel                       -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+    <script>var basePath = ''</script>
+    <!-- Main Theme JS file    -->
+    <script src="js/theme.js"></script>
+    <!-- Map-->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+    <!-- Available tile layers-->
+    <script src="js/map-layers.js"></script>
+    <script src="js/map-detail.js"></script>
+    <script>
+        createDetailMap({
+            mapId: 'detailMap',
+            mapCenter: [40.732346, -74.0014247],
+            markerShow: true,
+            markerPosition: [40.732346, -74.0014247],
+            markerPath: 'img/marker.svg',
+        })
+    </script>
 
+{% endblock %}
+</body>
+</html>

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -12,7 +13,17 @@ from users.models import Counselor, Patient
 # 파일 업로드 게시판
 def a_list(request):
     articles = Article.objects.all().order_by('-id')
-    context = {'articles': articles}
+
+    article_per_page = 1
+
+    paginator = Paginator(articles, article_per_page)
+
+    page_number = request.GET.get('page')
+
+    page = paginator.get_page(page_number)
+
+    context = {'articles': articles, 'page': page}
+
     return render(request, 'Picture-list.html', context)
 
 
@@ -46,7 +57,17 @@ def a_create(request):
 def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')
-    context = {'communications': communications}
+
+    communication_per_page = 1
+
+    paginator = Paginator(communications, communication_per_page)
+
+    page_number = request.GET.get('page')
+
+    page = paginator.get_page(page_number)
+
+    context = {'communications': communications, 'page': page}
+
     return render(request, 'Communication-List.html', context)
 
 
@@ -95,13 +116,24 @@ def c_create(request):
 # 상담사 게시판
 def cs_list(request):
     counselors = Counselor.objects.all().order_by('-id')
-    context = {'counselors': counselors}
+
+    counselor_per_page = 1
+
+    paginator = Paginator(counselors, counselor_per_page)
+
+    page_number = request.GET.get('page')
+
+    page = paginator.get_page(page_number)
+
+    context = {'counselors': counselors, 'page': page}
+    
     return render(request, 'Counselor-list.html', context)
 
 
 @login_required
 def cs_detail(request, id):
     counselor = Counselor.objects.get(pk=id)
+    patient = Patient.objects.get(pk=id)
     reviews = counselor.counselorreview_set.all()
 
     if request.method == 'POST':
@@ -109,17 +141,21 @@ def cs_detail(request, id):
         if reviewform.is_valid():
             patient = Patient.objects.filter(p_user=request.user).first()
             content = reviewform.cleaned_data['r_content']
-            # rating = reviewform.cleaned_data['r_rating']
 
             CounselorReview.objects.create(
                 r_patient=patient,
                 r_counselor=counselor,
                 r_content=content,
-                # r_rating=rating
             )
             return redirect('board:cs_detail', id=id)
     else:
         reviewform = CounselorReviewForm()
 
-    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform}
+    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform, 'patient': patient}
     return render(request, 'Counselor-detail.html', context)
+
+
+def main(request):
+    counselors = Counselor.objects.all().order_by('-id')
+    context = {'counselors': counselors}
+    return render(request, 'Main.html', context)

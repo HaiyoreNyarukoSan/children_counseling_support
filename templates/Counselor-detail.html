@@ -6,8 +6,16 @@
 <body style="padding-top: 72px;">
 {% block html_body %}
     <br><br>
+
     <section class="py-5">
+
         <div class="container">
+            <ol class="breadcrumb pl-0  justify-content-start">
+                <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua"><a href="{% url 'Counselor-list' %}">상담사 목록
+                    페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua">상담사 상세 페이지</li>
+            </ol>
             <div class="row">
                 <div class="col-lg-3 mr-lg-auto">
                     <div class="card border-0 shadow mb-6 mb-lg-0">
@@ -42,22 +50,28 @@
                     </div>
                 </div>
                 <div class="col-lg-9 pl-lg-5">
-                    <h1 class="hero-heading mb-0" style="font-family: Jua">안녕하세요 여러분</h1>
+                    <br>
                     <div class="text-block">
-                        <p><span class="badge badge-secondary-light">소개</span></p>
+                        <p><span class="badge badge-secondary-light" style="font-size: 20px; font-family: Jua">소개</span>
+                        </p>
                         <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
 
                     </div>
                     <div class="text-block">
-                        <h4 class="mb-5" style="font-family: Jua">전문분야</h4>
+                        <p><span class="badge badge-secondary-light"
+                                 style="font-size: 20px; font-family: Jua">전문 분야</span>
                         <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
 
                     </div>
-                    <div class="text-block">
-                        <h4 class="mb-5" style="font-family: Jua">주요 자격 및 경력</h4>
+                    <div class="text-block"
+                         style="display: flex; flex-direction: column;">
+                        <p>
+                        <span class="badge badge-secondary-light"
+                              style="font-size: 20px; font-family: Jua; margin-bottom: 10px;">주요 자격증 및 경력</span></p>
                         <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
                              style="max-width: 50%; height: auto;">
                     </div>
+
                     <div class="text-block">
                         <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
                         {% for review in reviews %}
@@ -68,7 +82,7 @@
                                     <span class="text-uppercase text-muted text-sm">Dec 2018</span>
                                 </div>
                                 <div class="media-body">
-                                    <h6 class="mt-2 mb-1"></h6>
+                                    <h6 class="mt-2 mb-1">{{ patient.p_user.u_nickname }}</h6>
                                     <p class="text-muted text-sm"
                                        style="font-family: Jua">{{ review.r_content }}</p>
                                 </div>
@@ -87,6 +101,9 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
+                                                {#   <label class="form-label" for="name" style="font-family: Jua">닉네임#}
+                                                {#    *</label>#}
+                                                {#{ reviewform.r_nickname }}#}
                                             </div>
                                         </div>
                                     </div>

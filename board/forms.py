@@ -171,7 +171,7 @@ class CounselorReviewForm(forms.ModelForm):
         fields = ['r_content']
 
         labels = {
-            'r_content': '글 내용'
+            'r_content': '글 내용',
         }
 
     widgets = {

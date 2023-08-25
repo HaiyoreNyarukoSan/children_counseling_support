@@ -5,24 +5,42 @@
 </head>
 <body style="padding-top: 72px;">
 {% block html_body %}
-    <section class="position-relative py-6"><img class="custom-image " src="/static/image/Art-photo.jpg" alt="">
+    <section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
+                                                                    src="/static/image/Picture-photo.jpg"
+                                                                    alt="">
+        <div class="container overlay-content">
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb text-white justify-content-center no-border mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}"
+                                               style="font-family: Jua">메인페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua">목록페이지
+                </li>
+            </ol>
+            <br><br><br>
+            <h1 class="hero-heading" style="font-family: Jua">
+                Photo Upload List</h1>
+            <a href="{% url 'Picture-create' %}" class="btn btn-primary btn-lg mt-3"
+               style="font-family: Jua">업로드</a>
+        </div>
     </section>
+    <br><br>
     <section class="py-2">
         <div class="container">
             <div class="row mb-5">
                 <!-- blog item-->
-                {% for article in articles %}
+                {% for article in page %}
                     {% csrf_token %}
                     <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
                         <div class="card shadow border-0 h-100"><a href="post.html">
-                            <img src="{{ article.a_tree_image.url }}" alt="{{ article.a_title }}">
+                            <img src="{{ article.a_tree_image.url }}" alt="{{ article.a_title }}" width="350"
+                                 height="auto">
                         </a>
                             <div class="card-body">
                                 <h5 class="my-2"><a class="text-dark" href="post.html"
                                                     style="font-family: Jua">{{ article.a_title }} </a>
                                 </h5>
                                 <p class="text-gray-500 text-sm my-3" style="font-family: Jua"><i
-                                        class="far fa-clock mr-2"></i>January 16, 2016</p>
+                                        class="far fa-clock mr-2"></i>{{ article.a_published_date }}</p>
                                 <p class="my-2 text-muted text-sm" style="font-family: Jua">{{ article.a_content }}</p>
                                 <a
                                         class="btn btn-link pl-0"
@@ -39,11 +57,22 @@
             <!-- Pagination -->
             <nav aria-label="Blog pagination">
                 <ul class="pagination justify-content-between mb-5">
-                    <li class="page-item"><a class="page-link text-sm rounded" href="#"> <i
-                            class="fa fa-chevron-left mr-1"></i>Older posts</a></li>
-                    <li class="page-item disabled"><a class="page-link text-sm rounded" href="#" tabindex="-1">Newer
-                        posts
-                        <i class="fa fa-chevron-right ml-1"></i></a></li>
+                    {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link text-sm rounded" href="?page={{ page.previous_page_number }}"
+                               style="font-family: Jua">
+                                <i class="fa fa-chevron-left mr-1"></i>이전
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if page.has_next %}
+                        <li class="page-item ml-auto">
+                            <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
+                               style="font-family: Jua">
+                                다음 <i class="fa fa-chevron-right ml-1"></i>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

@@ -81,10 +81,11 @@
                 <h5 class="subtitle text-primary" style="font-family: Jua">심리상담사 추천</h5>
                 <h2 class="mb-5" style="font-family: Jua">전문가 추천으로 자세히 알아봐요</h2>
             </div>
+
             <div class="row">
                 <div class="col-md-4 offset-md-8 d-md-flex align-items-center justify-content-end">
                     <!-- 기존의 'col-md-4' 클래스를 이곳으로 이동하고 'd-flex', 'justify-content-end' 클래스를 추가 -->
-                    <a class=" " href="blog.html" style="font-family: Jua">
+                    <a class=" " href="{% url 'Counselor-list' %}" style="font-family: Jua">
                         더보기<i class="fas fa-angle-double-right ml-2"></i>
                     </a>
                 </div>
@@ -94,90 +95,26 @@
                 <!-- Additional required wrapper-->
                 <div class="swiper-wrapper pt-2 pb-5">
                     <!-- Slides-->
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="/static/image/User_01.png"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="/static/image/User_02.png"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
+                    {% for counselor in counselors %}
+                        <div class="swiper-slide px-3">
+                            <div class="testimonial card rounded-lg shadow border-0">
+                                <a href="{% url 'Counselor-detail' counselor.id %}">
+                                    <div class="testimonial-avatar"><img class="img-fluid"
+                                                                         src="/static/image/User_01.png"
+                                                                         alt="...">
+                                    </div>
+                                </a>
+
+                                <div class="text">
+                                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                                    <p class="testimonial-text" style="font-family: Jua">
+                                        {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}</p>
+                                    <strong style="font-family: Jua">{{ counselor.c_department }}</strong>
+                                    <p><strong style="font-family: Jua">{{ counselor.c_resume }}</strong></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="img/avatar/avatar-3.jpg"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="img/avatar/avatar-3.jpg"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="img/avatar/avatar-3.jpg"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img class="img-fluid" src="img/avatar/avatar-3.jpg"
-                                                                 alt="...">
-                            </div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica
-                                Watson</strong>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -208,7 +145,7 @@
                 <div class="d-flex align-items-lg-stretch mb-1 col-lg-6">
                     <div class="card shadow-lg border-0 w-100 border-0 hover-animate"
                          style="background: center center url(/static/image/Main_photo3.png) no-repeat; background-size: cover; min-height: 400px;">
-                        <a class="tile-link" href="category.html"> </a>
+                        <a class="tile-link" href="{% url 'Picture-list' %}"> </a>
                         <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                         </div>
                     </div>

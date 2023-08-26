@@ -15,30 +15,44 @@
                 <div class="row">
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
-                            <img class="figure-img img-fluid w-100"
-                                 src="{{ article.a_tree_image.url }}" alt="{{ article.a_title }}">
+                            {% if article.a_tree_image %}
+                            나무
+                            <img class="figure-img img-fluid w-100" src="{{ article.a_tree_image.url }}"
+                                 alt="{{ article.a_tree_image.label }}">
+                            {% endif %}
                         </figure>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
-                            <img class="figure-img img-fluid w-100"
-                                 src="{{ article.a_man_image.url }}" alt="{{ article.a_title }}">
+                            {% if article.a_man_image %}
+                            남자 사람
+                            <img class="figure-img img-fluid w-100" src="{{ article.a_man_image.url }}"
+                                 alt="{{ article.a_man_image.label }}">
+                            {% endif %}
                         </figure>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
-                            <img class="figure-img img-fluid w-100"
-                                 src="{{ article.a_woman_image.url }}" alt="{{ article.a_title }}">
+                            {% if article.a_woman_image %}
+                            여자 사람
+                            <img class="figure-img img-fluid w-100" src="{{ article.a_woman_image.url }}"
+                                 alt="{{ article.a_woman_image.label }}">
+                            {% endif %}
                         </figure>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
-                            <img class="figure-img img-fluid w-100"
-                                 src="{{ article.a_house_image.url }}" alt="{{ article.a_title }}">
+                            {% if article.a_house_image %}
+                            집
+                            <img class="figure-img img-fluid w-100" src="{{ article.a_house_image.url }}"
+                                 alt="{{ article.a_house_image.label }}">
+                            {% endif %}
                         </figure>
                     </div>
                 </div>
                 <div class="text-content">
+                    <h3 style="font-family: Jua">환자</h3>
+                    {{ article.a_patient.p_name }}
                     <h3 style="font-family: Jua">제목 *</h3>
                     <blockquote class="blockquote blockquote-primary"><p
                             style="font-family: Jua">{{ article.a_title }}</p></blockquote>

@@ -52,8 +52,7 @@ def a_create(request):
 
     else:
         # TODO : 환자 목록도 보내서, ArticleForm에서 환자 1명 고를 수 있게 하기
-        # patients = request.user.patient_set.all()
-        # context={'patients':patients}
+        patients = map(lambda patient: patient.name, request.user.patient_set.all())
         article_form = ArticleForm()
 
     return render(request, 'Picture-create.html', {'article_form': article_form})

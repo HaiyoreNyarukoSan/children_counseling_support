@@ -4,7 +4,8 @@ from django.contrib.auth.models import Group
 from django.db import transaction
 from django.shortcuts import render, redirect
 
-from users.forms import LoginForm, SignUpForm, CounselorSignUpForm, ChangeForm, patient_form_set, patient_new_form_set
+from users.forms import LoginForm, SignUpForm, CounselorSignUpForm, ChangeForm, patient_form_set, patient_new_form_set, \
+    UserPasswordChangeForm
 from users.models import Patient, Counselor
 from users.permissions import UserGroups
 
@@ -148,7 +149,57 @@ def change(request):
         "formset": formset,
         "form_counselor": form_counselor,
     }
-    return render(request, "users/User-Change.html", context)
+    return render(request, "users/choose_your_change.html", context)
+
+
+@login_required(login_url='users:choose_your_type', redirect_field_name='users:change')
+def change_information(request):
+    if request.method == "POST":
+        form = ChangeForm(data=request.POST, files=request.FILES, instance=request.user)
+        patients = Patient.objects.filter(p_user=request.user)
+        formset = patient_form_set(data=request.POST, files=request.FILES, queryset=patients,
+                                   prefix='patientForm') if patients.exists() else None
+        counselor = getattr(request.user, 'counselor', None)
+        form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES,
+                                             instance=counselor) if counselor else None
+        if _validate_forms(form, formset, form_counselor):
+            form.save()
+            if formset:
+                formset.save()
+            if form_counselor:
+                form_counselor.save()
+            return redirect('users:My-Page')
+        else:
+            form.add_error(None, '입력하신 정보는 올바르지 않습니다')
+    else:
+        form = ChangeForm(instance=request.user)
+        patients = Patient.objects.filter(p_user=request.user)
+        formset = patient_form_set(queryset=patients, prefix='patientForm') if patients.exists() else None
+        counselor = getattr(request.user, 'counselor', None)
+        form_counselor = CounselorSignUpForm(instance=counselor) if counselor else None
+    context = {
+        "form": form,
+        "formset": formset,
+        "form_counselor": form_counselor,
+    }
+    return render(request, "users/information_change.html", context)
+
+
+@login_required(login_url='users:choose_your_type', redirect_field_name='users:change')
+def change_password(request):
+    if request.method == "POST":
+        form = UserPasswordChangeForm(request.user, data=request.POST, files=request.FILES)
+        if _validate_forms(form):
+            form.save()
+            return redirect('users:My-Page')
+        else:
+            form.add_error(None, '입력하신 정보는 올바르지 않습니다')
+    else:
+        form = UserPasswordChangeForm(request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "users/password_change.html", context)
 
 
 @login_required(login_url='users:login-patient', redirect_field_name='users:my_page')

@@ -39,6 +39,10 @@ urlpatterns = [
     path("users/", include("users.urls")),
 ]
 
+handler403 = TemplateView.as_view(template_name='403.html')
+handler404 = TemplateView.as_view(template_name='404.html')
+handler500 = TemplateView.as_view(template_name='500.html')
+
 if settings.DEBUG:
     urlpatterns += static(
         prefix=settings.MEDIA_URL,

@@ -137,8 +137,11 @@ class C_CommentForm(forms.ModelForm):
 
 class CounselorReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        reviewer = kwargs.pop('reviewer') if 'reviewer' in kwargs else None
         super().__init__(*args, **kwargs)
         self.fields['r_patient'].label = '상담 받을 자녀분'
+        if reviewer:
+            self.fields['r_patient'].queryset = reviewer.patient_set
         self.fields['r_content'].label = '글 내용'
         self.fields['r_patient'].empty_label = None
         self.fields['r_patient'].label_from_instance = lambda patient: patient.p_name

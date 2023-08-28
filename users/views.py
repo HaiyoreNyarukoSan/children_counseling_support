@@ -24,7 +24,7 @@ def login_counselor_view(request):
 
 def login_view(request, group):
     if request.user.is_authenticated:
-        return redirect('My-Page')
+        return redirect('users:My-Page')
     if request.method == "POST":
         form = LoginForm(data=request.POST)
         if form.is_valid():
@@ -35,7 +35,7 @@ def login_view(request, group):
             if group in user.groups.all():
                 login(request, user)
                 # return redirect('board:articles')
-                return redirect('My-Page')
+                return redirect('users:My-Page')
             else:
                 form.add_error(None, '입력하신 사용자는 존재하지 않습니다')
         context = {
@@ -111,13 +111,14 @@ def signup_counselor(request):
 @login_required(login_url='users:choose_your_type')
 def logout_view(request):
     logout(request)
-    return redirect('My-Page')
+    return redirect('users:My-Page')
 
 
 def _validate_forms(*forms):
     return all(form is None or form.is_valid() for form in forms)
 
 
+@login_required(login_url='users:choose_your_type', redirect_field_name='users:change')
 def change(request):
     if request.method == "POST":
         form = ChangeForm(data=request.POST, files=request.FILES, instance=request.user)
@@ -133,7 +134,7 @@ def change(request):
                 formset.save()
             if form_counselor:
                 form_counselor.save()
-            return redirect('My-Page')
+            return redirect('users:My-Page')
         else:
             form.add_error(None, '입력하신 정보는 올바르지 않습니다')
     else:
@@ -148,3 +149,8 @@ def change(request):
         "form_counselor": form_counselor,
     }
     return render(request, "users/User-Change.html", context)
+
+
+@login_required(login_url='users:login-patient', redirect_field_name='users:my_page')
+def my_page(request):
+    return render(request, 'users/My-Page.html')

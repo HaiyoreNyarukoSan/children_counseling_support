@@ -5,8 +5,10 @@ from board.models import Article, Communication, Comment, C_Comment, CounselorRe
 
 class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        writer = kwargs.pop('a_writer')
         super().__init__(*args, **kwargs)
         self.fields['a_patient'].label = '상담 받을 자녀분'
+        self.fields['a_patient'].queryset = writer.patient_set
         self.fields['a_title'].label = '제목'
         self.fields['a_content'].label = '내용'
         self.fields['a_tree_image'].label = "나무 이미지"

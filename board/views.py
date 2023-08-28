@@ -47,7 +47,7 @@ def a_create(request):
             article_form.save()
             return redirect('board:a_list')
     else:
-        article_form = ArticleForm()
+        article_form = ArticleForm(a_writer=request.user)
 
     return render(request, 'Picture-create.html', {'article_form': article_form})
 

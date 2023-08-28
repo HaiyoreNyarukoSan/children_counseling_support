@@ -77,7 +77,7 @@ def a_create(request):
 
 # 소통게시판
 @login_required(login_url='users:login-patient', redirect_field_name='board:c_list')
-@permission_required('board.view_communication')
+@permission_required('board.view_communication', raise_exception=403)
 def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')

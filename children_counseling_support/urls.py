@@ -27,7 +27,6 @@ urlpatterns = [
     path("Counselor-detail/<int:id>", views.cs_detail, name='Counselor-detail'),
     path("User_security/", TemplateView.as_view(template_name='User_security.html'), name='User_security'),
     path("ChatBot/", TemplateView.as_view(template_name='ChatBot.html'), name='ChatBot'),
-    path("My-Page/", TemplateView.as_view(template_name='My-Page.html'), name='My-Page'),
     path("Picture-list", views.a_list, name='Picture-list'),
     path("Picture-create", views.a_create, name='Picture-create'),
     path("Communication-Create/", views.c_create, name='Communication-Create'),
@@ -38,6 +37,10 @@ urlpatterns = [
     path("board/", include('board.urls')),
     path("users/", include("users.urls")),
 ]
+
+handler403 = TemplateView.as_view(template_name='403.html')
+handler404 = TemplateView.as_view(template_name='404.html')
+handler500 = TemplateView.as_view(template_name='500.html')
 
 if settings.DEBUG:
     urlpatterns += static(

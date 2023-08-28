@@ -101,19 +101,30 @@
                     </div>
                 </form>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}" style="font-family: Jua">메인
-                        페이지</a>
+                    {% if user.patient_set.all.exists %}
+                    <li>
+                        나는 환자다
+                    </li>
+                    {% endif %}
+                    {% if user.counselor %}
+                    <li>
+                        나는 상담사다
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}" style="font-family: Jua">메인 페이지</a>
                     </li>
                     <!-- Megamenu-->
 
                     <!-- /Megamenu end-->
-                    <li class="nav-item"><a class="nav-link" href="{% url 'Picture-list' %}" style="font-family: Jua">미술치료</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Picture-list' %}" style="font-family: Jua">미술치료</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'Counselor-list' %}" style="font-family: Jua">상담사
-                        게시판</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Counselor-list' %}" style="font-family: Jua">상담사 게시판</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'Communication-List' %}"
-                                            style="font-family: Jua">소통 게시판</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Communication-List' %}" style="font-family: Jua">소통 게시판</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">

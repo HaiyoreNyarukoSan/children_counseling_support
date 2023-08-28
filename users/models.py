@@ -29,7 +29,7 @@ class Patient(models.Model):
 
 
 class Counselor(models.Model):
-    c_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    c_user = models.OneToOneField(User, on_delete=models.CASCADE)
     c_certificate = models.ImageField("썸네일 이미지", upload_to='counselor/certificate', blank=True, null=True)  # 자격증
     c_department = models.TextField(null=True)  # 전문 분야
     c_resume = models.TextField(null=True)  # 이력서

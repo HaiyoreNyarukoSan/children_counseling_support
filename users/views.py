@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.db import transaction
 from django.shortcuts import render, redirect
 
 from users.forms import LoginForm, SignUpForm, CounselorSignUpForm, ChangeForm, patient_form_set, patient_new_form_set
@@ -57,12 +58,13 @@ def signup_patient(request):
             prefix='patientForm'
         )
         if form.is_valid() and formset.is_valid():
-            saved_user = form.save()
-            save_user_to_group(saved_user, UserGroups.patient_group)
-            saved_formset = formset.save(commit=False)
-            for saved_patient in saved_formset:
-                saved_patient.p_user = saved_user
-                saved_patient.save()
+            with transaction.atomic():
+                saved_user = form.save()
+                save_user_to_group(saved_user, UserGroups.patient_group)
+                saved_formset = formset.save(commit=False)
+                for saved_patient in saved_formset:
+                    saved_patient.p_user = saved_user
+                    saved_patient.save()
             return redirect('users:login-patient')
         else:
             form.add_error(None, '입력하신 정보는 올바르지 않습니다')
@@ -87,11 +89,12 @@ def signup_counselor(request):
         form = SignUpForm(data=request.POST, files=request.FILES)
         form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES)
         if form.is_valid() and form_counselor.is_valid():
-            saved_user = form.save()
-            save_user_to_group(saved_user, UserGroups.counselor_group)
-            saved_counselor = form_counselor.save(commit=False)
-            saved_counselor.c_user = saved_user
-            saved_counselor.save()
+            with transaction.atomic():
+                saved_user = form.save()
+                save_user_to_group(saved_user, UserGroups.counselor_group)
+                saved_counselor = form_counselor.save(commit=False)
+                saved_counselor.c_user = saved_user
+                saved_counselor.save()
             return redirect('users:login-counselor')
         else:
             form.add_error(None, '입력하신 정보는 올바르지 않습니다')
@@ -111,11 +114,25 @@ def logout_view(request):
     return redirect('My-Page')
 
 
+def _validate_forms(*forms):
+    return all(form is None or form.is_valid() for form in forms)
+
+
 def change(request):
     if request.method == "POST":
         form = ChangeForm(data=request.POST, files=request.FILES, instance=request.user)
-        if form.is_valid():
+        patients = Patient.objects.filter(p_user=request.user)
+        formset = patient_form_set(data=request.POST, files=request.FILES, queryset=patients,
+                                   prefix='patientForm') if patients.exists() else None
+        counselor = getattr(request.user, 'counselor', None)
+        form_counselor = CounselorSignUpForm(data=request.POST, files=request.FILES,
+                                             instance=counselor) if counselor else None
+        if _validate_forms(form, formset, form_counselor):
             form.save()
+            if formset:
+                formset.save()
+            if form_counselor:
+                form_counselor.save()
             return redirect('My-Page')
         else:
             form.add_error(None, '입력하신 정보는 올바르지 않습니다')
@@ -123,7 +140,7 @@ def change(request):
         form = ChangeForm(instance=request.user)
         patients = Patient.objects.filter(p_user=request.user)
         formset = patient_form_set(queryset=patients, prefix='patientForm') if patients.exists() else None
-        counselor = request.user.counselor_set.first()
+        counselor = getattr(request.user, 'counselor', None)
         form_counselor = CounselorSignUpForm(instance=counselor) if counselor else None
     context = {
         "form": form,

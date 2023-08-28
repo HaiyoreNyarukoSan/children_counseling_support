@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
@@ -6,7 +7,7 @@ from board.models import Article, Communication, Comment, C_Comment, CounselorRe
 from django.contrib.auth.decorators import login_required, permission_required
 
 from users.models import Counselor, Patient
-from users.permissions import UserGroups
+from users.permissions import UserGroups, PermissionType, get_permission_name
 
 
 # 파일 업로드 게시판
@@ -42,18 +43,10 @@ def a_detail(request, id):
 def a_create(request):
     if request.method == 'POST':
         article_form = ArticleForm(data=request.POST, files=request.FILES)
-
         if article_form.is_valid():
-            # ArticleForm에 고른 환자를 받아서 new_post에 반영하기
-            new_post = article_form.save(commit=False)
-            new_post.a_patient = request.user.patient_set.first()
-            new_post.save()
+            article_form.save()
             return redirect('board:a_list')
-
     else:
-        # TODO : 환자 목록도 보내서, ArticleForm에서 환자 1명 고를 수 있게 하기
-        # patients = request.user.patient_set.all()
-        # context={'patients':patients}
         article_form = ArticleForm()
 
     return render(request, 'Picture-create.html', {'article_form': article_form})
@@ -144,25 +137,19 @@ def cs_detail(request, id):
         return redirect('home')  # 로그인 페이지 URL로 변경하세요.
     counselor = Counselor.objects.get(pk=id)
     # TODO : 수정 필요
-    patient = Patient.objects.first()
     reviews = counselor.counselorreview_set.all()
-
-    if request.method == 'POST' and request.user.has_perm('board.add_counselorreview'):
+    # required_permission = get_permission_name(CounselorReview, PermissionType.ADD)
+    if request.method == 'POST' and request.user.has_perm('board.add_counselor review'):
         reviewform = CounselorReviewForm(request.POST)
         if reviewform.is_valid():
-            patient = Patient.objects.filter(p_user=request.user).first()
-            content = reviewform.cleaned_data['r_content']
-
-            CounselorReview.objects.create(
-                r_patient=patient,
-                r_counselor=counselor,
-                r_content=content,
-            )
+            review = reviewform.save(commit=False)
+            review.r_counselor = counselor
+            review.save()
             return redirect('board:cs_detail', id=id)
     else:
         reviewform = CounselorReviewForm()
 
-    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform, 'patient': patient}
+    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform}
     return render(request, 'Counselor-detail.html', context)
 
 

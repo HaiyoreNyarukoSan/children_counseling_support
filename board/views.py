@@ -118,7 +118,7 @@ def c_detail(request, id):
             comment_to_delete = C_Comment.objects.get(pk=comment_id)
             comment_to_delete.delete()
             return redirect('board:c_detail', id=id)
-        
+
         c_comment_form = C_CommentForm(request.POST)
         if c_comment_form.is_valid():
             new_comment = c_comment_form.save(commit=False)
@@ -137,7 +137,7 @@ def c_detail(request, id):
         'c_comment_form': c_comment_form,
         'editcommunication_form': editcommunication_form
     }
-    
+
     return render(request, 'Communication-detail.html', context)
 
 
@@ -185,6 +185,7 @@ def cs_detail(request, id):
     counselor = Counselor.objects.get(pk=id)
     reviews = counselor.counselorreview_set.all()
     # required_permission = get_permission_name(CounselorReview, PermissionType.ADD)
+
     if 'delete-review' in request.POST:
         review_id = request.POST.get('delete-review')
         try:
@@ -201,7 +202,7 @@ def cs_detail(request, id):
             review.save()
             return redirect('board:cs_detail', id=id)
     else:
-        reviewform = CounselorReviewForm()
+        reviewform = CounselorReviewForm(reviewer=request.user)
 
     context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform}
     return render(request, 'Counselor-detail.html', context)
@@ -215,11 +216,15 @@ def main(request):
 
 def counselor_search(request):
     search_query = request.GET.get('q')  # 검색어 가져오기
+    search_terms = search_query.split()
 
     if search_query:
         # Counselor 모델에서 검색 수행
         counselors = Counselor.objects.filter(
-            Q(c_user__last_name__icontains=search_query) | Q(c_user__first_name__icontains=search_query)
+            Q(c_user__last_name__iexact=search_terms[0]) |
+            Q(c_user__first_name__iexact=search_terms[0]) |
+            Q(c_user__last_name__iexact=' '.join(search_terms)) |
+            Q(c_user__first_name__iexact=' '.join(search_terms))
         )
     else:
         counselors = []

@@ -1,66 +1,70 @@
 {% extends 'base.html' %}
 {% block html_body %}
-<section class="py-5">
-    <div class="container">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb #{breadcrumbClass}">
-            <li class="breadcrumb-item"><a href="index.html" style="font-family: Jua">Home</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua">Your account</li>
-        </ol>
-        <h1 class="hero-heading mb-0" style="font-family: Jua">회원 정보</h1>
-        <p class="text-muted mb-5 " style="font-family: Jua">
-            여기에서 계정과 설정을 관리하세요.</p>
-        <div class="row">
-            <div class="col-6 col-md-4 mb-30px">
-                <div class="card h-100 border-0 shadow hover-animate">
-                    <div class="card-body">
-                        <div class="icon-rounded bg-secondary-light mb-3">
-                            <svg class="svg-icon text-secondary w-2rem h-2rem">
-                                <use xlink:href="#identity-1"></use>
-                            </svg>
+    <section class="py-5">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb #{breadcrumbClass}">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}" style="font-family: Jua">메인페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua">마이 페이지</li>
+            </ol>
+            <h1 class="hero-heading mb-0" style="font-family: Jua">회원 정보</h1>
+            <p class="text-muted mb-5 " style="font-family: Jua">
+                여기에서 계정과 설정을 관리하세요.</p>
+            <div class="row">
+                <div class="col-6 col-md-4 mb-30px">
+                    <div class="card h-100 border-0 shadow hover-animate">
+                        <div class="card-body">
+                            <div class="icon-rounded bg-secondary-light mb-3">
+                                <svg class="svg-icon text-secondary w-2rem h-2rem">
+                                    <use xlink:href="#identity-1"></use>
+                                </svg>
+                            </div>
+                            <h5 class="card-title mb-3">
+                                <a class="text-decoration-none text-dark stretched-link" href="{% url 'Picture-list' %}"
+                                   style="font-family: Jua">
+                                    미술 치료
+                                </a>
+                            </h5>
+                            <p class="text-muted card-text text-sm" style="font-family: Jua">미술 치료 내역을 확인하세요.</p>
                         </div>
-                        <h5 class="card-title mb-3"><a class="text-decoration-none text-dark stretched-link"
-                                                       href="user-personal.html" style="font-family: Jua">미술 치료</a>
-                        </h5>
-                        <p class="text-muted card-text text-sm" style="font-family: Jua">미술 치료 내역을 확인하세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-4 mb-30px">
-                <div class="card h-100 border-0 shadow hover-animate">
-                    <div class="card-body">
-                        <div class="icon-rounded bg-secondary-light mb-3">
-                            <svg class="svg-icon text-secondary w-2rem h-2rem">
-                                <use xlink:href="#password-1"></use>
-                            </svg>
+                <div class="col-6 col-md-4 mb-30px">
+                    <div class="card h-100 border-0 shadow hover-animate">
+                        <div class="card-body">
+                            <div class="icon-rounded bg-secondary-light mb-3">
+                                <svg class="svg-icon text-secondary w-2rem h-2rem">
+                                    <use xlink:href="#password-1"></use>
+                                </svg>
+                            </div>
+                            <h5 class="card-title mb-3">
+                                <a class="text-decoration-none text-dark stretched-link" href="{% url 'users:change' %}"
+                                   style="font-family: Jua">회원 수정&탈퇴</a>
+                            </h5>
+                            <p class="text-muted card-text text-sm" style="font-family: Jua">회원정보 수정 및 탈퇴는 여기서 하세요.</p>
                         </div>
-                        <h5 class="card-title mb-3">
-                            <a class="text-decoration-none text-dark stretched-link" href="{% url 'users:change' %}"
-                               style="font-family: Jua">회원 수정&탈퇴</a>
-                        </h5>
-                        <p class="text-muted card-text text-sm" style="font-family: Jua">회원정보 수정 및 탈퇴는 여기서 하세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-4 mb-30px">
-                <div class="card h-100 border-0 shadow hover-animate">
-                    <div class="card-body">
-                        <div class="icon-rounded bg-secondary-light mb-3">
-                            <svg class="svg-icon text-secondary w-2rem h-2rem">
-                                <use xlink:href="#chat-app-1"></use>
-                            </svg>
+
+                <div class="col-6 col-md-4 mb-30px">
+                    <div class="card h-100 border-0 shadow hover-animate">
+                        <div class="card-body">
+                            <div class="icon-rounded bg-secondary-light mb-3">
+                                <svg class="svg-icon text-secondary w-2rem h-2rem">
+                                    <use xlink:href="#chat-app-1"></use>
+                                </svg>
+                            </div>
+                            <h5 class="card-title mb-3"><a class="text-decoration-none text-dark stretched-link"
+                                                           href="#" style="font-family: Jua">1대1상담</a>
+                            </h5>
+                            <p class="text-muted card-text text-sm" style="font-family: Jua">Choose notification
+                                preferences and how you want to
+                                be
+                                contacted</p>
                         </div>
-                        <h5 class="card-title mb-3"><a class="text-decoration-none text-dark stretched-link"
-                                                       href="#" style="font-family: Jua">1대1상담</a>
-                        </h5>
-                        <p class="text-muted card-text text-sm" style="font-family: Jua">Choose notification
-                            preferences and how you want to
-                            be
-                            contacted</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

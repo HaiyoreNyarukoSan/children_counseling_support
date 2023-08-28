@@ -1,125 +1,136 @@
 {% extends 'base.html' %}
-<body style="padding-top: 72px;">
 {% block html_body %}
-<br><br>
+    <section class="py-5">
 
-<section class="py-5">
-
-    <div class="container">
-        <ol class="breadcrumb pl-0  justify-content-start">
-            <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua"><a href="{% url 'Counselor-list' %}">상담사 목록
-                페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua">상담사 상세 페이지</li>
-        </ol>
-        <div class="row">
-            <div class="col-lg-3 mr-lg-auto">
-                <div class="card border-0 shadow mb-6 mb-lg-0">
-                    <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block"
-                                                                                      href="#"><img
-                            class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png"
-                            alt=""></a>
-                        <h5 style="font-family: Jua">
-                            {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}
-                        </h5>
-                        <p class="text-muted text-sm mb-0" style="font-family: Jua">미술심리 상담사 </p>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="media align-items-center mb-3">
-
-                            <div class="media-body">
-                                <h6 style="font-family: Jua">상담 선호 시간</h6>
-                            </div>
+        <div class="container">
+            <ol class="breadcrumb pl-0  justify-content-start">
+                <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua"><a href="{% url 'Counselor-list' %}">상담사 목록
+                    페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua">상담사 상세 페이지</li>
+            </ol>
+            <div class="row">
+                <div class="col-lg-3 mr-lg-auto">
+                    <div class="card border-0 shadow mb-6 mb-lg-0">
+                        <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block"
+                                                                                          href="#"><img
+                                class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png"
+                                alt=""></a>
+                            <h5 style="font-family: Jua">
+                                {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}
+                            </h5>
+                            <p class="text-muted text-sm mb-0" style="font-family: Jua">미술심리 상담사 </p>
                         </div>
-                        <div class="media align-items-center mb-3">
+                        <div class="card-body p-4">
+                            <div class="media align-items-center mb-3">
 
-                            <div class="media-body">
-                                <p><span class="badge badge-secondary-light"
-                                         style="font-family: Jua">오후(13~17시)</span>
-                                </p>
-
+                                <div class="media-body">
+                                    <h6 style="font-family: Jua">상담 선호 시간</h6>
+                                </div>
                             </div>
+                            <div class="media align-items-center mb-3">
+
+                                <div class="media-body">
+                                    <p><span class="badge badge-secondary-light"
+                                             style="font-family: Jua">오후(13~17시)</span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <button class="btn btn-primary" type="submit" style="font-family: Jua">1대1 상담하기</button>
+                            <hr>
+                            <select class="selectpicker" data-style="btn-form-control" title="자녀 수">
+                                <option value="1" style="font-family: Jua">1명</option>
+                                <option value="2" style="font-family: Jua">2명</option>
+                                <option value="3" style="font-family: Jua">3명</option>
+                                <option value="4" style="font-family: Jua">4명</option>
+                            </select>
                         </div>
-                        <hr>
-                        <button class="btn btn-primary" type="submit" style="font-family: Jua">1대1 상담하기</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9 pl-lg-5">
-                <br>
-                <div class="text-block">
-                    <p><span class="badge badge-secondary-light" style="font-size: 20px; font-family: Jua">소개</span>
-                    </p>
-                    <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
+                <div class="col-lg-9 pl-lg-5">
+                    <br>
+                    <div class="text-block">
+                        <p><span class="badge badge-secondary-light" style="font-size: 20px; font-family: Jua">소개</span>
+                        </p>
+                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
 
-                </div>
-                <div class="text-block">
-                    <p><span class="badge badge-secondary-light"
-                             style="font-size: 20px; font-family: Jua">전문 분야</span>
-                    <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
+                    </div>
+                    <div class="text-block">
+                        <p><span class="badge badge-secondary-light"
+                                 style="font-size: 20px; font-family: Jua">전문 분야</span>
+                        <p class="text-muted" style="font-family: Jua">{{ counselor.c_resume }}</p>
 
-                </div>
-                <div class="text-block"
-                     style="display: flex; flex-direction: column;">
-                    <p>
+                    </div>
+                    <div class="text-block"
+                         style="display: flex; flex-direction: column;">
+                        <p>
                         <span class="badge badge-secondary-light"
                               style="font-size: 20px; font-family: Jua; margin-bottom: 10px;">주요 자격증 및 경력</span></p>
-                    <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
-                         style="max-width: 50%; height: auto;">
-                </div>
-
-                <div class="text-block">
-                    <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
-                    {% for review in reviews %}
-                    <div class="media d-block d-sm-flex review">
-                        <div class="text-md-center mr-4 mr-xl-5">
-                            <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
-                                 alt="">
-                            <span class="text-uppercase text-muted text-sm">Dec 2018</span>
-                        </div>
-                        <div class="media-body">
-                            <h6 class="mt-2 mb-1">{{ review.r_patient.p_user.u_nickname }}</h6>
-                            <h6 class="mt-2 mb-1">{{ review.r_patient.p_name }}</h6>
-                            <p class="text-muted text-sm"
-                               style="font-family: Jua">{{ review.r_content }}</p>
-                        </div>
+                        <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
+                             style="max-width: 50%; height: auto;">
                     </div>
-                    {% endfor %}
-                    <div class="py-5">
-                        <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
-                                data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
-                                style="font-family: Jua">댓글 작성
-                        </button>
-                        <div class="collapse mt-4" id="leaveReview">
-                            <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
-                            <form class="form" id="contact-form" method="POST"
-                                  action="{% url 'Counselor-detail' id=counselor.id %}">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            {# <label class="form-label" for="name" style="font-family: Jua">닉네임#}
-                                            {# *</label>#}
-                                            {#{ reviewform.r_nickname }}#}
+
+                    <div class="text-block">
+                        <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
+                        {% for review in reviews %}
+                            <div class="media d-block d-sm-flex review">
+                                <div class="text-md-center mr-4 mr-xl-5">
+                                    <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
+                                         alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h6 class="mt-2 mb-1">{{ review.r_patient.p_user.u_nickname }}</h6>
+                                    <h6 class="mt-2 mb-1">{{ review.r_patient.p_name }}</h6>
+                                    <p class="text-muted text-sm"
+                                       style="font-family: Jua">{{ review.r_content }}</p>
+                                </div>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <!-- 다른 필드들... -->
+                                    <input type="hidden" name="delete-review" value="{{ review.id }}">
+                                    <button class="btn btn-outline-primary" data-toggle="collapse" type="submit"
+                                            style="font-family: Jua">삭제
+                                    </button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                        <div class="py-5">
+                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
+                                    data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
+                                    style="font-family: Jua">댓글 작성
+                            </button>
+                            <div class="collapse mt-4" id="leaveReview">
+                                <h5 class="mb-4" style="font-family: Jua">댓글 작성</h5>
+                                <form class="form" id="contact-form" method="POST"
+                                      action="{% url 'Counselor-detail' id=counselor.id %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                {#   <label class="form-label" for="name" style="font-family: Jua">닉네임#}
+                                                {#    *</label>#}
+                                                {#{ reviewform.r_nickname }}#}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="{{reviewform.r_patient.auto_id}}"
-                                           style="font-family: Jua">자녀분</label>
-                                    {{ reviewform.r_patient }}
-                                    <label class="form-label" for="{{reviewform.r_content.auto_id}}"
-                                           style="font-family: Jua">댓글 *</label>
-                                    {{ reviewform.r_content }}
-                                </div>
-                                <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
-                                </button>
-                            </form>
+                                    <div class="form-group">
+                                        <label class="form-label" for="{{ reviewform.r_patient.auto_id }}"
+                                               style="font-family: Jua">자녀분</label>
+                                        {{ reviewform.r_patient }}
+                                        <label class="form-label" for="{{ reviewform.r_content.auto_id }}"
+                                               style="font-family: Jua">댓글 *</label>
+                                        {{ reviewform.r_content }}
+                                    </div>
+                                    <button class="btn btn-primary" type="submit" style="font-family: Jua">제출하기
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

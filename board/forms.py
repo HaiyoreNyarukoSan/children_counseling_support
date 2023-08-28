@@ -1,6 +1,7 @@
 from django import forms
 
-from board.models import Article, Communication, Comment, C_Comment, CounselorReview
+from board.models import Article, Communication, C_Comment, CounselorReview
+from users.models import Counselor
 
 
 class ArticleForm(forms.ModelForm):
@@ -160,6 +161,80 @@ class CounselorReviewForm(forms.ModelForm):
     class Meta:
         model = CounselorReview
         fields = ['r_patient', 'r_content']
+
+
+class EditArticleForm(forms.ModelForm):
+    a_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    a_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Article
+        fields = ['a_title', 'a_content']
+
+        labels = {
+            'a_title': '제목',
+            'a_content': '내용'
+        }
+        widgets = {
+            'a_title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'text',
+                    'name': 'name',
+                    'id': 'name',
+                    'placeholder': '제목을 입력하세요',
+                    'required': 'required'
+                }
+            ),
+
+            'a_content': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': '4',
+                    'name': 'message',
+                    'id': 'message',
+                    'placeholder': '내용을 입력하세요',
+                    'required': 'required'
+                }
+            )
+        }
+
+
+class EditCommunicationForm(forms.ModelForm):
+    a_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    a_content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Communication
+        fields = ['com_title', 'com_content']
+
+        labels = {
+            'com_title': '제목',
+            'com_content': '내용'
+        }
+        widgets = {
+            'com_title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'text',
+                    'name': 'name',
+                    'id': 'name',
+                    'placeholder': '제목을 입력하세요',
+                    'required': 'required'
+                }
+            ),
+
+            'com_content': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': '4',
+                    'name': 'message',
+                    'id': 'message',
+                    'placeholder': '내용을 입력하세요',
+                    'required': 'required'
+                }
+            )
+        }
 
 # class CounselorForm(forms.ModelForm):
 #     a_title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

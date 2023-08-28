@@ -1,85 +1,84 @@
 {% extends 'base.html' %}
 {% block html_body %}
-<br><br>
-<section class="py-5">
-    <div class="container">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb pl-0  justify-content-start">
-            <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua">상담사 목록페이지</li>
-        </ol>
-        <div class="d-flex justify-content-between align-items-end mb-5">
-            <h1 class="hero-heading mb-0" style="font-family: Jua">Counselor List</h1>
-        </div>
-        <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
-
-
-        </div>
-        {% for counselor in page %}
-        {% csrf_token %}
-        <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4"
-                                               href="{% url 'Counselor-detail' counselor.id %}">
-            <div class="row">
-                <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                    <div class="d-flex align-items-center mb-3">
-                        <h2 class="h5 mb-0" style="font-family: Jua">
-                            {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}</h2>
-                        <img
-                                class="avatar avatar-sm avatar-border-white ml-3"
-                                src="/static/image/User_01.png" alt="Jack London">
-                    </div>
-                    <span class="badge badge-pill p-2 badge-secondary-light"
-                          style="font-family: Jua">오전(9~13시)</span>
-                    <span class="badge badge-pill p-2 badge-primary-light"
-                          style="font-family: Jua">오후(13~17시)</span>
-                    <span class="badge badge-pill p-2 badge-success-light"
-                          style="font-family: Jua">저녁(17~21시)</span>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
-                            <h6 class="label-heading" style="font-family: Jua">이력서 및 소개</h6>
-                            <p class="text-sm font-weight-bold"
-                               style="font-family: Jua">{{ counselor.c_resume }}</p>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-3 py-3">
-                            <h6 class="label-heading" style="font-family: Jua">전문 분야</h6>
-                            <p class="text-sm font-weight-bold"
-                               style="font-family: Jua">{{ counselor.c_department }}</p>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-3 py-3">
-                            <h6 class="label-heading" style="font-family: Jua">자격증</h6>
-                            <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
-                                 style="max-width: 50%; height: auto;">
-                        </div>
-                    </div>
-                </div>
+    <section class="py-5">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <ol class="breadcrumb pl-0  justify-content-start">
+                <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
+                <li class="breadcrumb-item active" style="font-family: Jua">상담사 목록페이지</li>
+            </ol>
+            <div class="d-flex justify-content-between align-items-end mb-5">
+                <h1 class="hero-heading mb-0" style="font-family: Jua">Counselor List</h1>
             </div>
-        </a>
+            <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
+
+
+            </div>
+            {% for counselor in page %}
+                {% csrf_token %}
+                <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4"
+                                                       href="{% url 'Counselor-detail' counselor.id %}">
+                    <div class="row">
+                        <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                            <div class="d-flex align-items-center mb-3">
+                                <h2 class="h5 mb-0" style="font-family: Jua">
+                                    {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}</h2>
+                                <img
+                                        class="avatar avatar-sm avatar-border-white ml-3"
+                                        src="/static/image/User_01.png" alt="Jack London">
+                            </div>
+                            <span class="badge badge-pill p-2 badge-secondary-light"
+                                  style="font-family: Jua">오전(9~13시)</span>
+                            <span class="badge badge-pill p-2 badge-primary-light"
+                                  style="font-family: Jua">오후(13~17시)</span>
+                            <span class="badge badge-pill p-2 badge-success-light"
+                                  style="font-family: Jua">저녁(17~21시)</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                                    <h6 class="label-heading" style="font-family: Jua">이력서 및 소개</h6>
+                                    <p class="text-sm font-weight-bold"
+                                       style="font-family: Jua">{{ counselor.c_resume }}</p>
+
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3 py-3">
+                                    <h6 class="label-heading" style="font-family: Jua">전문 분야</h6>
+                                    <p class="text-sm font-weight-bold"
+                                       style="font-family: Jua">{{ counselor.c_department }}</p>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3 py-3">
+                                    <h6 class="label-heading" style="font-family: Jua">자격증</h6>
+                                    <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
+                                         style="max-width: 50%; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            {% endfor %}
+            <!-- Pagination -->
+            <nav aria-label="Blog pagination">
+                <ul class="pagination justify-content-between mb-5">
+                    {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link text-sm rounded" href="?page={{ page.previous_page_number }}"
+                               style="font-family: Jua">
+                                <i class="fa fa-chevron-left mr-1"></i>이전
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if page.has_next %}
+                        <li class="page-item ml-auto">
+                            <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
+                               style="font-family: Jua">
+                                다음 <i class="fa fa-chevron-right ml-1"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
-        {% endfor %}
-        <!-- Pagination -->
-        <nav aria-label="Blog pagination">
-            <ul class="pagination justify-content-between mb-5">
-                {% if page.has_previous %}
-                <li class="page-item">
-                    <a class="page-link text-sm rounded" href="?page={{ page.previous_page_number }}"
-                       style="font-family: Jua">
-                        <i class="fa fa-chevron-left mr-1"></i>이전
-                    </a>
-                </li>
-                {% endif %}
-                {% if page.has_next %}
-                <li class="page-item ml-auto">
-                    <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
-                       style="font-family: Jua">
-                        다음 <i class="fa fa-chevron-right ml-1"></i>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-</section>
+    </section>
 {% endblock %}

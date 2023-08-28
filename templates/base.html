@@ -76,12 +76,13 @@
                 <a class="navbar-brand py-1" href="{% url 'home' %}">
                     <img src="/static/image/Header-Logo.png" alt="" class="logo-image">
                 </a>
-                <form class="form-inline d-none d-sm-flex" action="#" id="search">
+                <form class="form-inline d-none d-sm-flex" action="{% url 'search-counselor' %}" method="GET">
                     <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
-                        <label class="label-absolute" for="search_search"><i class="fa fa-search"></i><span
-                                class="sr-only">What are you looking for?</span></label>
+                        <label class="label-absolute" for="search_search">
+                            <i class="fa fa-search"></i><span class="sr-only">Search</span>
+                        </label>
                         <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search"
-                               placeholder="Search" aria-label="Search">
+                               name="q" placeholder="Search" aria-label="Search">
                         <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
                     </div>
                 </form>

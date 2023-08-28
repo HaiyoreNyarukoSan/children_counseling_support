@@ -1,40 +1,49 @@
 {% extends 'base.html' %}
 {% block html_body %}
-<br><br> <br>
-<section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 pl-lg-5">
-                <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
-                     style="max-width: 4rem;">
-                <h1 class="hero-heading mb-0" style="font-family: Jua">소통하면서 친해져요!</h1>
-                <div class="text-block">
-                </div>
-                <div class="text-block">
-                    <h4 class="mb-5" style="font-family: Jua">제목</h4>
-                    <p class="text-muted" style="font-family: Jua">{{ communication.com_title }}</p>
-
-                </div>
-                <div class="text-block">
-                    <h4 class="mb-5" style="font-family: Jua">내용</h4>
-                    <p class="text-muted" style="font-family: Jua">{{ communication.com_content }}</p>
-                </div>
-
-                <div class="text-block">
-                    <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
-                    {% for comment in comments %}
-                    <div class="media d-block d-sm-flex review">
-                        <div class="text-md-center mr-4 mr-xl-5">
-                            <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
-                                 alt="">
-                        </div>
-                        <div class="media-body">
-                            {# <h6 class="mt-2 mb-1">{{ comment.cc_commenter.username }}</h6>#}
-                            <p class="text-muted text-sm"
-                               style="font-family: Jua">{{ comment }}</p>
-                        </div>
+    <br><br> <br>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 pl-lg-5">
+                    <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
+                         style="max-width: 4rem;">
+                    <h1 class="hero-heading mb-0" style="font-family: Jua">소통하면서 친해져요!</h1>
+                    <div class="text-block">
                     </div>
-                    {% endfor %}
+                    <div class="text-block">
+                        <h4 class="mb-5" style="font-family: Jua">제목</h4>
+                        <p class="text-muted" style="font-family: Jua">{{ communication.com_title }}</p>
+
+                    </div>
+                    <div class="text-block">
+                        <h4 class="mb-5" style="font-family: Jua">내용</h4>
+                        <p class="text-muted" style="font-family: Jua">{{ communication.com_content }}</p>
+                    </div>
+
+                    <div class="text-block">
+                        <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
+                        {% for comment in comments %}
+                            <div class="media d-block d-sm-flex review">
+                                <div class="text-md-center mr-4 mr-xl-5">
+                                    <img class="d-block avatar avatar-xl p-2 mb-2" src="/static/image/User_02.png"
+                                         alt="">
+                                </div>
+                                <div class="media-body">
+                                    {# <h6 class="mt-2 mb-1">{{ comment.cc_commenter.username }}</h6>#}
+                                    <p class="text-muted text-sm"
+                                       style="font-family: Jua">{{ comment }}</p>
+                                </div>
+                            </div>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <!-- 다른 필드들... -->
+                                <input type="hidden" name="delete_comment" value="{{ comment.id }}">
+                                <button class="btn btn-outline-primary" data-toggle="collapse" type="submit"
+                                        style="font-family: Jua">삭제
+                                </button>
+                            </form>
+                            </div>
+                        {% endfor %}
                     <div class="py-5">
                         <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
                                 data-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview"
@@ -63,6 +72,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        </div>
+    </section>
 {% endblock %}

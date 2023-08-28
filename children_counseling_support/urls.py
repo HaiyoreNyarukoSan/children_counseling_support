@@ -36,6 +36,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("board/", include('board.urls')),
     path("users/", include("users.urls")),
+    path("chat/", include("chat.urls")),
 ]
 
 if settings.DEBUG:

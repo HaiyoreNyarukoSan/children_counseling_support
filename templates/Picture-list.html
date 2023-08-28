@@ -31,7 +31,7 @@
                                  height="auto">
                         </a>
                             <div class="card-body">
-                                <h5 class="my-2"><a class="text-dark" href="{% url 'Picture-detail' id=article.id %}"
+                                <h5 class="my-2"><a class="text-dark" href="post.html"
                                                     style="font-family: Jua">{{ article.a_title }} </a>
                                 </h5>
                                 <p class="text-gray-500 text-sm my-3" style="font-family: Jua"><i
@@ -48,28 +48,28 @@
                 {% endfor %}
 
 
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Blog pagination">
+                <ul class="pagination justify-content-between mb-5">
+                    {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link text-sm rounded" href="?page={{ page.previous_page_number }}"
+                               style="font-family: Jua">
+                                <i class="fa fa-chevron-left mr-1"></i>이전
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if page.has_next %}
+                        <li class="page-item ml-auto">
+                            <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
+                               style="font-family: Jua">
+                                다음 <i class="fa fa-chevron-right ml-1"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
-        <!-- Pagination -->
-        <nav aria-label="Blog pagination">
-            <ul class="pagination justify-content-between mb-5">
-                {% if page.has_previous %}
-                <li class="page-item">
-                    <a class="page-link text-sm rounded" href="?page={{ page.previous_page_number }}"
-                       style="font-family: Jua">
-                        <i class="fa fa-chevron-left mr-1"></i>이전
-                    </a>
-                </li>
-                {% endif %}
-                {% if page.has_next %}
-                <li class="page-item ml-auto">
-                    <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
-                       style="font-family: Jua">
-                        다음 <i class="fa fa-chevron-right ml-1"></i>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-</section>
+    </section>
 {% endblock %}

@@ -6,10 +6,11 @@ from users.models import Counselor
 
 class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        writer = kwargs.pop('a_writer')
+        writer = kwargs.pop('a_writer') if 'a_writer' in kwargs else None
         super().__init__(*args, **kwargs)
         self.fields['a_patient'].label = '상담 받을 자녀분'
-        self.fields['a_patient'].queryset = writer.patient_set
+        if writer:
+            self.fields['a_patient'].queryset = writer.patient_set
         self.fields['a_title'].label = '제목'
         self.fields['a_content'].label = '내용'
         self.fields['a_tree_image'].label = "나무 이미지"

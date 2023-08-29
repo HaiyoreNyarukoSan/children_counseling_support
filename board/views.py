@@ -11,13 +11,14 @@ from board.forms import ArticleForm, CommunicationForm, C_CommentForm, Counselor
 from board.models import Article, Communication, Comment, C_Comment, CounselorReview
 from django.contrib.auth.decorators import login_required, permission_required
 
+from chat.forms import RoomForm
 from users.models import Counselor, Patient
 from users.permissions import UserGroups, PermissionType, get_permission_name
 
 
 # 파일 업로드 게시판
 def a_list(request):
-    articles = Article.objects.all().order_by('-id')
+    articles = Article.objects.all()
 
     article_per_page = 1
 
@@ -203,8 +204,9 @@ def cs_detail(request, id):
             return redirect('board:cs_detail', id=id)
     else:
         reviewform = CounselorReviewForm(reviewer=request.user)
+        roomform = RoomForm(reviewer=request.user)
 
-    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform}
+    context = {'counselor': counselor, 'reviews': reviews, 'reviewform': reviewform, 'roomform': roomform}
     return render(request, 'Counselor-detail.html', context)
 
 

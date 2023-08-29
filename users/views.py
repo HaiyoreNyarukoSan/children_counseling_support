@@ -112,7 +112,7 @@ def signup_counselor(request):
 @login_required(login_url='users:choose_your_type')
 def logout_view(request):
     logout(request)
-    return redirect('users:My-Page')
+    return redirect('users:choose_your_type')
 
 
 def _validate_forms(*forms):

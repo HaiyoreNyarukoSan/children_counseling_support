@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "board.apps.BoardConfig",
+    "analyzer.apps.AnalyzerConfig",
 ]
 
 ASGI_APPLICATION = "children_counseling_support.asgi.application"

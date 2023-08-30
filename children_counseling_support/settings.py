@@ -17,8 +17,8 @@ AUTH_USER_MODEL = "users.User"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-h8-_^_bvl4n*k&cf%+b84b_my(inr(u-q9h!86s-ilq3od$gb@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -74,7 +74,7 @@ ROOT_URLCONF = "children_counseling_support.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -94,12 +94,12 @@ WSGI_APPLICATION = "children_counseling_support.wsgi.application"
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'children_counseling_support',
-        'USER': 'root',
-        'PASSWORD': 'test1234',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "children_counseling_support",
+        "USER": "root",
+        "PASSWORD": "test1234",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
     }
 }
 
@@ -138,7 +138,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 # STATIC_ROOT = BASE_DIR / STATIC_URL
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/',
+    BASE_DIR / "static/",
 ]
 
 # Default primary key field type

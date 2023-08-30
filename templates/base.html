@@ -112,16 +112,15 @@
                 </form>
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
-                    {% if user.patient_set.all.exists %}
                     <li>
-                        {{user.last_name}} {{user.first_name}} 보호자님 환영합니다
+                        {{user.u_nickname}}
+                        {% if user.patient_set.all.exists %}
+                        보호자님 환영합니다
+                        {% endif %}
+                        {% if user.counselor %}
+                        상담사님 환영합니다
+                        {% endif %}
                     </li>
-                    {% endif %}
-                    {% if user.counselor %}
-                    <li>
-                        {{user.last_name}} {{user.first_name}} 상담사님 환영합니다
-                    </li>
-                    {% endif %}
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}" style="font-family: Jua">메인 페이지</a>

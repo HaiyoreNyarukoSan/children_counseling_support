@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "chat",
     "users",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,6 +45,18 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "board.apps.BoardConfig",
 ]
+
+ASGI_APPLICATION = "children_counseling_support.asgi.application"
+# mysite/settings.py
+# Channels
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

@@ -36,6 +36,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("board/", include('board.urls')),
     path("users/", include("users.urls")),
+    path("chat/", include("chat.urls")),
 ]
 
 handler403 = TemplateView.as_view(template_name='403.html')

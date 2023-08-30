@@ -1,88 +1,91 @@
 {% extends 'base.html' %}
 {% block html_body %}
-    <!-- Hero Section-->
-    <section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                    src="/static/image/Picture-photo.jpg"
-                                                                    alt="">
-        <div class="container overlay-content">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}"
-                                               style="font-family: Jua">메인페이지</a></li>
-                <li class="breadcrumb-item active"><a href="{% url 'Picture-list' %}"
-                                                      style="font-family: Jua">목록페이지</a></li>
-                <li class="breadcrumb-item active " style="font-family: Jua">
-                    작성페이지
-                </li>
-            </ol>
-            <br><br><br>
-            <h1 class="hero-heading" style="font-family: Jua">Write Upload</h1>
-        </div>
-    </section>
-    <section class="py-6 bg-gray-100">
-        <div class="container">
-            <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
-                 style="max-width: 4rem;">
-            <h2 class="h4 mb-5" style="font-family: Jua">사진업로드</h2>
-            <div class="row">
-                <div class="col-md-7 mb-5 mb-md-0">
-                    <form class="form" id="contact-form" method="POST" action="{% url 'Picture-create' %}"
-                          enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% for field in article_form %}
-                            <div class="form-group">
-                                <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
-                                    {{ field.label }}
-                                </label>
-                                {{ field }} {{ field.errors }}
-                                {% if field.field.widget.template_name == "django/forms/widgets/clearable_file_input.html" %}
-                                    <div class="preview" id="preview_{{ field.auto_id }}"></div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                        <input class="btn btn-outline-primary" type="submit" value="업로드" style="font-family: Jua">
-                    </form>
-                </div>
+<!-- Hero Section-->
+<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
+                                                                src="/static/image/Picture-photo.jpg"
+                                                                alt="">
+    <div class="container overlay-content">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}"
+                                           style="font-family: Jua">메인페이지</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'Picture-list' %}"
+                                                  style="font-family: Jua">목록페이지</a></li>
+            <li class="breadcrumb-item active " style="font-family: Jua">
+                작성페이지
+            </li>
+        </ol>
+        <br><br><br>
+        <h1 class="hero-heading" style="font-family: Jua">Write Upload</h1>
+    </div>
+</section>
+<section class="py-6 bg-gray-100">
+    <div class="container">
+        <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
+             style="max-width: 4rem;">
+        <h2 class="h4 mb-5" style="font-family: Jua">사진업로드</h2>
+        <div class="row">
+            <div class="col-md-7 mb-5 mb-md-0">
+                <form class="form" id="contact-form" method="POST" action="{% url 'Picture-create' %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in article_form %}
+                    <div class="form-group">
+                        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+                            {{ field.label }}
+                        </label>
+                        {{ field }} {{ field.errors }}
+                        {% if field.field.widget.template_name == "django/forms/widgets/clearable_file_input.html" %}
+                        <div class="preview" id="preview_{{ field.auto_id }}"></div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <input class="btn btn-outline-primary" type="submit" value="업로드" style="font-family: Jua">
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
 {% block html_additional_script %}
-    <script>
-        function showPreview(event, previewId) {
-            const input = event.target;
-            const file = input.files[0];
+<script>
+    function showPreview(event, previewId) {
+        const input = event.target;
+        const file = input.files[0];
 
-            if (file) {
-                const reader = new FileReader();
+        if (file) {
+            const reader = new FileReader();
 
-                reader.onload = function (e) {
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
+            reader.onload = function (e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.className = 'img-thumbnail'
+                img.style.width = '60%';
+                img.style.height = '60%';
 
-                    const preview = document.getElementById(previewId);
-                    preview.innerHTML = "";
-                    preview.appendChild(img);
-                };
+                const preview = document.getElementById(previewId);
+                preview.innerHTML = "";
+                preview.appendChild(img);
+            };
 
-                reader.readAsDataURL(file);
-            }
+            reader.readAsDataURL(file);
         }
+    }
 
-        document.getElementById("{{ article_form.a_tree_image.auto_id }}").addEventListener("change", function (event) {
-            showPreview(event, "preview_{{ article_form.a_tree_image.auto_id }}");
-        });
+    document.getElementById("{{ article_form.a_tree_image.auto_id }}").addEventListener("change", function (event) {
+        showPreview(event, "preview_{{ article_form.a_tree_image.auto_id }}");
+    });
 
-        document.getElementById("{{ article_form.a_man_image.auto_id }}").addEventListener("change", function (event) {
-            showPreview(event, "preview_{{ article_form.a_man_image.auto_id }}");
-        });
+    document.getElementById("{{ article_form.a_man_image.auto_id }}").addEventListener("change", function (event) {
+        showPreview(event, "preview_{{ article_form.a_man_image.auto_id }}");
+    });
 
-        document.getElementById("{{ article_form.a_woman_image.auto_id }}").addEventListener("change", function (event) {
-            showPreview(event, "preview_{{ article_form.a_woman_image.auto_id }}");
-        });
+    document.getElementById("{{ article_form.a_woman_image.auto_id }}").addEventListener("change", function (event) {
+        showPreview(event, "preview_{{ article_form.a_woman_image.auto_id }}");
+    });
 
-        document.getElementById("{{ article_form.a_house_image.auto_id }}").addEventListener("change", function (event) {
-            showPreview(event, "preview_{{ article_form.a_house_image.auto_id }}");
-        });
-    </script>
+    document.getElementById("{{ article_form.a_house_image.auto_id }}").addEventListener("change", function (event) {
+        showPreview(event, "preview_{{ article_form.a_house_image.auto_id }}");
+    });
+</script>
 {% endblock %}

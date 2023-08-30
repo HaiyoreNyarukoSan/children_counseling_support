@@ -91,7 +91,7 @@
                             <i class="fa fa-search"></i><span class="sr-only">Search</span>
                         </label>
                         <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search"
-                               name="q" placeholder="Search" aria-label="Search">
+                               name="q" placeholder="상담사 검색" aria-label="Search">
                         <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
                     </div>
                 </form>
@@ -106,7 +106,7 @@
                         <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span
                                 class="sr-only">What are you looking for?</span></label>
                         <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200"
-                               id="searchcollapsed_search" placeholder="Search" aria-label="Search">
+                               id="searchcollapsed_search" placeholder="상담사 검색" aria-label="Search">
                         <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"> </i></button>
                     </div>
                 </form>
@@ -114,12 +114,12 @@
                     {% if user.is_authenticated %}
                     {% if user.patient_set.all.exists %}
                     <li>
-                        환자
+                        {{user.last_name}} {{user.first_name}} 보호자님 환영합니다
                     </li>
                     {% endif %}
                     {% if user.counselor %}
                     <li>
-                        상담사
+                        {{user.last_name}} {{user.first_name}} 상담사님 환영합니다
                     </li>
                     {% endif %}
                     {% endif %}

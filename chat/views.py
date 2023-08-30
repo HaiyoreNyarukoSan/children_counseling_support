@@ -17,8 +17,14 @@ def room_patient(request):
             # room = room_form.save(commit=False)
             patient = room_form.cleaned_data["r_patient"]
             room, _ = chat_room.objects.get_or_create(r_patient=patient, r_counselor=counselor)
-            room.save()
-            context = {'room': room}
+            chatmessages = room.chat_message_set.all()
+            chatmessage = ""
+            for cmessage in chatmessages:
+                nickname = cmessage.m_writer.u_nickname
+                message = cmessage.m_content
+                chatmessage += f"{nickname}: {message}\n"
+    
+            context = {'room': room, 'chatmessage': chatmessage}
             return render(request, "chat/room.html", context)
 
 
@@ -29,6 +35,12 @@ def room_counselor(request):
         patient = Patient.objects.get(pk=patient_id)
         counselor = request.user.counselor  # 로그인 상태
         room, _ = chat_room.objects.get_or_create(r_patient=patient, r_counselor=counselor)
-        room.save()
-        context = {'room': room}
+        chatmessages = room.chat_message_set.all()
+        chatmessage = ""
+        for cmessage in chatmessages:
+            nickname = cmessage.m_writer.u_nickname
+            message = cmessage.m_content
+            chatmessage += f"{nickname}: {message}\n"
+
+        context = {'room': room, 'chatmessage': chatmessage}
         return render(request, "chat/room.html", context)

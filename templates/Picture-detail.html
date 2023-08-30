@@ -3,7 +3,7 @@
 <div class="container py-7">
     <div class="overlay-content text-center ">
         <a href="{% url 'Picture-list' %}">
-            <img class="img-fluid mb-4" src="/static/image/Picture-Logo.png" alt="..."
+            <img class="img-fluid mb-4" src="/static/image/Picture/Picture-Logo.png" alt="..."
                  style="max-width: 4rem;"></a>
     </div>
 </div>
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
                             {% if article.a_tree_image %}
-                            나무
+                            <h6 style="font-family: Jua">나무</h6>
                             <img class="figure-img img-fluid w-100" src="{{ article.a_tree_image.url }}"
                                  alt="{{ article.a_tree_image.label }}">
                             {% endif %}
@@ -25,7 +25,7 @@
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
                             {% if article.a_man_image %}
-                            남자 사람
+                            <h6 style="font-family: Jua">남자사람</h6>
                             <img class="figure-img img-fluid w-100" src="{{ article.a_man_image.url }}"
                                  alt="{{ article.a_man_image.label }}">
                             {% endif %}
@@ -34,7 +34,7 @@
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
                             {% if article.a_woman_image %}
-                            여자 사람
+                            <h6 style="font-family: Jua">여자사람</h6>
                             <img class="figure-img img-fluid w-100" src="{{ article.a_woman_image.url }}"
                                  alt="{{ article.a_woman_image.label }}">
                             {% endif %}
@@ -43,7 +43,7 @@
                     <div class="col-sm-6 mb-3">
                         <figure class="figure">
                             {% if article.a_house_image %}
-                            집
+                            <h6 style="font-family: Jua">집</h6>
                             <img class="figure-img img-fluid w-100" src="{{ article.a_house_image.url }}"
                                  alt="{{ article.a_house_image.label }}">
                             {% endif %}
@@ -53,13 +53,11 @@
                 <div class="py-5">
                     <div class="text-content">
                         <h3 style="font-family: Jua">환자</h3>
-                        {{ article.a_patient.p_name }}
-                        <h3 style="font-family: Jua">제목 *</h3>
-                        <blockquote class="blockquote blockquote-primary"><p
-                                style="font-family: Jua">{{ article.a_title }}</p></blockquote>
-                        <h3 style="font-family: Jua">내용 *</h3>
-                        <blockquote class="blockquote blockquote-primary"><p
-                                style="font-family: Jua">{{ article.a_content }}</p></blockquote>
+                        <p style="font-family: Jua">{{ article.a_patient.p_name }}</p>
+                        <h3 style="font-family: Jua">제목</h3>
+                        <p style="font-family: Jua">{{ article.a_title }}</p>
+                        <h3 style="font-family: Jua">내용</h3>
+                        <p style="font-family: Jua">{{ article.a_content }}</p>
                     </div>
 
                     <button class="btn btn-link pl-0 text-primary collapsed" type="button"

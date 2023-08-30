@@ -51,8 +51,8 @@ def a_detail(request, id):
             article = editart_form.save()  # 수정 내용 저장
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
             # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(images
-            analyzer(images)
+            # 예시) article.mental_state = analyzer(image)
+            article.mentalstate = analyzer(images)
             return redirect('board:a_detail', id=id)
     else:
         editart_form = ArticleForm(instance=article)  # GET 요청 시 폼 초기화
@@ -73,8 +73,8 @@ def a_create(request):
             article = article_form.save()
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
             # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(images
-            analyzer(images)
+            # 예시) article.mental_state = analyzer(images)
+            article.mentalstate = analyzer(images)
             return redirect('board:a_list')
     else:
         article_form = ArticleForm(a_writer=request.user)

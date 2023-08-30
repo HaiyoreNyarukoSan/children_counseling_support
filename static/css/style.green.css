@@ -12344,7 +12344,7 @@ a.text-dark:hover, a.text-dark:focus {
     border: none;
     overflow: hidden;
     box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
-    min-height: 350px;
+    min-height: 800px;
 }
 
 .card-img-overlay-top {

@@ -57,3 +57,21 @@ class C_Comment(models.Model):  # 소통게시판의 댓글모델
 
     def __str__(self):
         return self.cc_content
+
+
+# 심리상담모델
+class Mentalstate(models.Model):
+    m_article = models.OneToOneField(Article, on_delete=models.CASCADE)
+    aggression = models.IntegerField(null=True)  # 공격성
+    anxiety = models.IntegerField(null=True)  # 불안감
+    dependency = models.IntegerField(null=True)  # 의존성
+    stress = models.IntegerField(null=True)  # 스트레스
+    timidity = models.IntegerField(null=True)  # 소심함
+    sociability = models.IntegerField(null=True)  # 사회성
+    depression = models.IntegerField(null=True)  # 우울감
+    independence = models.IntegerField(null=True)  # 독립성
+    achievement = models.IntegerField(null=True)  # 성취감
+    selfish = models.IntegerField(null=True)  # 이기적인
+
+    def __str__(self):
+        return self.m_article

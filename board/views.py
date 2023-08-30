@@ -4,8 +4,9 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from pyexpat.errors import messages
 
-from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm
-from board.models import Article, Communication, Comment, C_Comment, CounselorReview
+from analyzer.views import analyzer
+from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm, EditArticleForm
+from board.models import Article, Communication, C_Comment, CounselorReview
 from django.contrib.auth.decorators import login_required, permission_required
 
 from chat.forms import RoomForm
@@ -15,7 +16,7 @@ from users.permissions import UserGroups
 
 # 파일 업로드 게시판
 def a_list(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('-id')
 
     article_per_page = 1
 
@@ -47,7 +48,11 @@ def a_detail(request, id):
         editart_form = ArticleForm(request.POST, instance=article)  # POST 요청 시 폼에 데이터 채우기
 
         if editart_form.is_valid():
-            editart_form.save()  # 수정 내용 저장
+            article = editart_form.save()  # 수정 내용 저장
+            images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
+            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
+            # 예시) article.mental_state = analyzer(images
+            analyzer(images)
             return redirect('board:a_detail', id=id)
     else:
         editart_form = ArticleForm(instance=article)  # GET 요청 시 폼 초기화
@@ -65,7 +70,11 @@ def a_create(request):
     if request.method == 'POST':
         article_form = ArticleForm(data=request.POST, files=request.FILES)
         if article_form.is_valid():
-            article_form.save()
+            article = article_form.save()
+            images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
+            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
+            # 예시) article.mental_state = analyzer(images
+            analyzer(images)
             return redirect('board:a_list')
     else:
         article_form = ArticleForm(a_writer=request.user)
@@ -183,7 +192,6 @@ def cs_detail(request, id):
     counselor = Counselor.objects.get(pk=id)
     reviews = counselor.counselorreview_set.all()
     # required_permission = get_permission_name(CounselorReview, PermissionType.ADD)
-
     if 'delete-review' in request.POST:
         review_id = request.POST.get('delete-review')
         try:

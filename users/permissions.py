@@ -76,11 +76,6 @@ def get_permission_name(model, permission_type):
     return f"{contenttype.app_label}.{required_permission.codename}"
 
 
-# Permission 등록 방법
-# python manage.py shell
-# > from users.permissions import set_permission
-# > set_permission()
-
 def set_permission(**kwargs):
     article_type = ContentType.objects.get(app_label='board', model='article')
     comment_type = ContentType.objects.get(app_label='board', model='comment')

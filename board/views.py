@@ -1,19 +1,16 @@
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from pyexpat.errors import messages
 
-from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm, EditArticleForm
+from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm
 from board.models import Article, Communication, Comment, C_Comment, CounselorReview
 from django.contrib.auth.decorators import login_required, permission_required
 
 from chat.forms import RoomForm
-from users.models import Counselor, Patient
-from users.permissions import UserGroups, PermissionType, get_permission_name
+from users.models import Counselor
+from users.permissions import UserGroups
 
 
 # 파일 업로드 게시판

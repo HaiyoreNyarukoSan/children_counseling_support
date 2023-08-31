@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from ultralytics import YOLO
 
-from board.models import Mentalstate
 from children_counseling_support.settings import STATICFILES_DIRS
 
 
@@ -32,7 +31,7 @@ LABELS = {
 }
 
 
-def person_stat(boxes, labels, stat):
+def person_stat(boxes, labels):
     necks = [box for box in boxes if labels[int(box.cls)] == '목']
     shoulders = [box for box in boxes if labels[int(box.cls)] == '어깨']
     bodys = [box for box in boxes if labels[int(box.cls)] == '사람전체']
@@ -43,50 +42,67 @@ def person_stat(boxes, labels, stat):
     foots = [box for box in boxes if labels[int(box.cls)] == '발']
     shoes = [box for box in boxes if labels[int(box.cls)] == '발']
 
+    stat = {
+        '의존성': 0,
+        '불안감': 0,
+        '소심함': 0,
+        '이기적인': 0,
+        '공격성': 0,
+        '독립성': 0,
+    }
+
+    def get_wh(box):
+        _, _, w, h = map(int, box.xyxy[0])
+        return w, h
+
+    def get_area(box):
+        w, h = get_wh(box)
+        return w * h
+
     if len(necks) > 50:
         stat["소심함"] += 30
 
-    if sum(box.w * box.h for box in shoulders) > 50:
+    if sum(get_area(box) for box in shoulders) > 50:
         stat["이기적인"] += 60
 
-    if sum(box.h for box in bodys) > 50:
+    if sum(get_wh(box)[1] for box in bodys) > 50:
         stat["이기적인"] += 30
 
-    if sum(box.w for box in bodys) > 50:
+    if sum(get_wh(box)[0] for box in bodys) > 50:
         stat["이기적인"] += 30
 
-    if sum(box.w * box.h for box in chests) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in chests) > 50:
         stat["불안감"] += 20
 
-    if sum(box.w * box.h for box in arms) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in arms) > 50:
         stat["공격성"] += 30
-    elif sum(box.w * box.h for box in arms) < 50:
+    elif sum(get_wh(box)[0] * get_wh(box)[1] for box in arms) < 50:
         stat["소심함"] += 40
     else:
         stat["불안감"] += 20
 
-    if sum(box.w * box.h for box in hands) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in hands) > 50:
         stat["이기적인"] += 30
-    elif sum(box.w * box.h for box in hands) < 50:
+    elif sum(get_wh(box)[0] * get_wh(box)[1] for box in hands) < 50:
         stat["소심함"] += 30
     else:
         stat["불안감"] += 10
 
-    if sum(box.w * box.h for box in legs) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in legs) > 50:
         stat["불안감"] += 50
-    elif sum(box.w * box.h for box in legs) < 50:
+    elif sum(get_wh(box)[0] * get_wh(box)[1] for box in legs) < 50:
         stat["소심함"] += 20
 
-    if sum(box.w * box.h for box in foots) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in foots) > 50:
         stat["독립성"] += 20
-    elif sum(box.w * box.h for box in foots) < 50:
+    elif sum(get_wh(box)[0] * get_wh(box)[1] for box in foots) < 50:
         stat["불안감"] += 10
     else:
         stat["이기적인"] += 30
 
-    if sum(box.w * box.h for box in shoes) > 50:
+    if sum(get_wh(box)[0] * get_wh(box)[1] for box in shoes) > 50:
         stat["의존성"] += 40
-    elif sum(box.w * box.h for box in shoes) < 50:
+    elif sum(get_wh(box)[0] * get_wh(box)[1] for box in shoes) < 50:
         stat["소심함"] += 10
     else:
         stat["이기적인"] += 20
@@ -106,7 +122,6 @@ def tree_stat(boxes, labels):
     stat = {
         '의존성': 0,
         '우울감': 0,
-        '의존성': 0,
         '불안감': 0,
         '사회성': 0,
     }
@@ -146,7 +161,7 @@ def house_stat(boxes, labels):
         '불안감': 0,
         '소심함': 0
     }
-    
+
     door_area = [box for box in boxes if labels[int(box.cls)] == '문']
     door_count = len(door_area)
 
@@ -172,7 +187,7 @@ def house_stat(boxes, labels):
         stat['우울감'] += 20
 
     # 문의 넓이가 전체 이미지의 넓이의 50% 이상인지 확인
-    if door_area >= 50:
+    if sum([box.area for box in door_area]) >= 50:
         stat['의존성'] += 30
     else:
         stat['사회성'] += 30
@@ -184,19 +199,12 @@ def house_stat(boxes, labels):
     elif window_count == 0 and door_count == 0:
         stat['사회성'] += 20
 
-    # 창문을 지붕에 그린 경우
-    windows = ['창문1', '창문2']
-    # 창문 객체인데, 좌표를 어떻게 얻어내지?
     [window.xyxy[0] for window in windows]
     roofs_xyxy = [roof.xyxy[0] for roof in roofs]
-    [('0', '0', '1', '2'), ('2', '3', '3', '4')]
-    # 좌표를 얻었는데, 숫자가 아니고 문자열이야. 어떻게 하지?
+
     [tuple(map(int, window.xyxy[0])) for window in windows]
-    [(0, 0, 1, 2), (2, 3, 3, 4)]
     [tuple(map(int, roof.xyxy[0])) for roof in roofs]
-    # for X in Y 부분은 간단한데, 앞부분이 복잡해
-    # 뭔가 방법이 없을까?
-    # X를 tuple(map(int, X.xyxy[0]))로 바꾸는 걸, 한번에 적용할 수는 없을까?
+
     list(
         map(
             lambda window: tuple(map(int, window.xyxy[0])),
@@ -316,19 +324,7 @@ def stat_evaluater(bd):
     for stat in stat_type:
         total_score[stat] = (house_score.get(stat, 0) + woman_score.get(stat, 0)
                              + man_score.get(stat, 0) + tree_score.get(stat, 0))
-    score_model = Mentalstate.objects.create(
-        aggression=total_score['공격성'],
-        anxiety=total_score['불안감'],
-        dependency=total_score['의존성'],
-        stress=total_score['스트레스'],
-        timidity=total_score['소심함'],
-        sociability=total_score['사회성'],
-        depression=total_score['우울감'],
-        independence=total_score['독립성'],
-        achievement=total_score['성취감'],
-        selfish=total_score['이기적인'])
-
-    return score_model
+    return total_score
 
 
 def analyzer(images):
@@ -339,8 +335,6 @@ def analyzer(images):
         if not (image and model): continue
         result = model.predict(image.path)[0]
         boxes = result.boxes
-        boxes_dict[category] = boxes
-    # TODO : (가칭)stat_evaluater 함수 만들기
-    # * parameter : boxes_dict : category별로 boxes가 들어있는 dict 변수
-    # * 반환값 : 심리 상태를 나타내는 Model
-    return stat_evaluater(boxes_dict)
+        boxes_dict[category] = (boxes)
+    total_score = stat_evaluater(boxes_dict)
+    return total_score

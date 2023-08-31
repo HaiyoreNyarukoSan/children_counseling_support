@@ -6,7 +6,7 @@ from pyexpat.errors import messages
 
 from analyzer.views import analyzer
 from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm, EditArticleForm
-from board.models import Article, Communication, C_Comment, CounselorReview
+from board.models import Article, Communication, C_Comment, CounselorReview, Mentalstate
 from django.contrib.auth.decorators import login_required, permission_required
 
 from chat.forms import RoomForm
@@ -18,7 +18,7 @@ from users.permissions import UserGroups
 def a_list(request):
     articles = Article.objects.all().order_by('-id')
 
-    article_per_page = 1
+    article_per_page = 3
 
     paginator = Paginator(articles, article_per_page)
 
@@ -50,9 +50,20 @@ def a_detail(request, id):
         if editart_form.is_valid():
             article = editart_form.save()  # 수정 내용 저장
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(image)
-            article.mentalstate = analyzer(images)
+            total_score = analyzer(images)
+            article.mentalstate = Mentalstate.objects.create(
+                m_article=article,
+                aggression=total_score['공격성'],
+                anxiety=total_score['불안감'],
+                dependency=total_score['의존성'],
+                stress=total_score['스트레스'],
+                timidity=total_score['소심함'],
+                sociability=total_score['사회성'],
+                depression=total_score['우울감'],
+                independence=total_score['독립성'],
+                achievement=total_score['성취감'],
+                selfish=total_score['이기적인'])
+            article.save()
             return redirect('board:a_detail', id=id)
     else:
         editart_form = ArticleForm(instance=article)  # GET 요청 시 폼 초기화
@@ -72,9 +83,20 @@ def a_create(request):
         if article_form.is_valid():
             article = article_form.save()
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(images)
-            article.mentalstate = analyzer(images)
+            total_score = analyzer(images)
+            article.mentalstate = Mentalstate.objects.create(
+                m_article=article,
+                aggression=total_score['공격성'],
+                anxiety=total_score['불안감'],
+                dependency=total_score['의존성'],
+                stress=total_score['스트레스'],
+                timidity=total_score['소심함'],
+                sociability=total_score['사회성'],
+                depression=total_score['우울감'],
+                independence=total_score['독립성'],
+                achievement=total_score['성취감'],
+                selfish=total_score['이기적인'])
+            article.save()
             return redirect('board:a_list')
     else:
         article_form = ArticleForm(a_writer=request.user)

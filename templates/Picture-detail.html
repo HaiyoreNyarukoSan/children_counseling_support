@@ -124,7 +124,23 @@
                         <h3 style="font-family: Jua">내용</h3>
                         <p style="font-family: Jua">{{ article.a_content }}</p>
                     </div>
-
+                    <hr>
+                    {% if user.counselor %}
+                    <form method="POST" action="/chat/counselor">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ article.a_patient_id }}" name="patient_id">
+                        <button class="btn btn-primary" type="submit" style="font-family: Jua">
+                            {% if article.a_patient.chat_room_set.exists %}
+                            진행 중인 상담이 있습니다<br>
+                            상담을 신청하시겠나요?
+                            {% else %}
+                            1대1 상담하기
+                            {% endif %}
+                        </button>
+                    </form>
+                    {% endif %}
+                    {% if user.patient_set.exists %}
+                    <!-- 수정 버튼 -->
                     <button class="btn btn-link pl-0 text-primary collapsed" type="button"
                             data-toggle="collapse"
                             data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword"
@@ -156,22 +172,9 @@
                                 style="font-family: Jua">삭제 하기
                         </button>
                     </form>
-                    {% if user.counselor %}
-                    <form method="POST" action="/chat/counselor">
-                        {% csrf_token %}
-                        <input type="hidden" value="{{ article.a_patient_id }}" name="patient_id">
-                        <button class="btn btn-primary" type="submit" style="font-family: Jua">
-                            {% if article.a_patient.chat_room_set.exists %}
-                            진행 중인 상담이 있습니다<br>
-                            상담을 신청하시겠나요?
-                            {% else %}
-                            1대1 상담하기
-                            {% endif %}
-                        </button>
-                    </form>
-                    {% endif %}
-                    {% if user.patient_set.exists %}
-                    <form method="POST" action="{% url 'chat:get_room' article.a_patient.chat_room_set.first.id %}">
+                    {% if article.a_patient.chat_room_set.exists %}
+                    <form method="POST"
+                          action="{% url 'chat:get_room' room_id=article.a_patient.chat_room_set.first.id %}">
                         {% csrf_token %}
                         <input type="hidden" value="{{ article.a_patient_id }}" name="patient_id">
                         <button class="btn btn-primary" type="submit" style="font-family: Jua">
@@ -179,6 +182,11 @@
                             입장하시겠나요?
                         </button>
                     </form>
+                    {% else %}
+                    <p style="font-family: Jua">아직 상담을 해주시는 분이 없으세요.</p>
+                    <p style="font-family: Jua">상담 받고 싶으시다면, <a href="{% url 'Counselor-list' %}">상담사 페이지</a>에서
+                        상담 받고 싶은 분을 찾아보세요</p>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>

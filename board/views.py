@@ -48,22 +48,7 @@ def a_detail(request, id):
         editart_form = ArticleForm(request.POST, instance=article)  # POST 요청 시 폼에 데이터 채우기
 
         if editart_form.is_valid():
-            article = editart_form.save()  # 수정 내용 저장
-            images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            total_score = analyzer(images)
-            article.mentalstate = Mentalstate.objects.create(
-                m_article=article,
-                aggression=total_score['공격성'],
-                anxiety=total_score['불안감'],
-                dependency=total_score['의존성'],
-                stress=total_score['스트레스'],
-                timidity=total_score['소심함'],
-                sociability=total_score['사회성'],
-                depression=total_score['우울감'],
-                independence=total_score['독립성'],
-                achievement=total_score['성취감'],
-                selfish=total_score['이기적인'])
-            article.save()
+            editart_form.save()  # 수정 내용 저장
             return redirect('board:a_detail', id=id)
     else:
         editart_form = ArticleForm(instance=article)  # GET 요청 시 폼 초기화

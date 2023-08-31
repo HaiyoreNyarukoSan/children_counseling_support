@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 pl-lg-5">
-                <img class="img-fluid mb-4" src="/static/image/Communication-Logo.png" alt="..."
+                <img class="img-fluid mb-4" src="/static/image/Communication/Communication-Logo.png" alt="..."
                      style="max-width: 4rem;">
                 <h1 class="hero-heading mb-0" style="font-family: Jua">소통하면서 친해져요!</h1>
                 <div class="text-block">
@@ -20,6 +20,7 @@
                     <p class="text-muted" style="font-family: Jua">{{ communication.com_content }}</p>
                 </div>
                 <br>
+                {% if communication.c_writer_id == user.id %}
                 <button class="btn btn-outline-primary" type="button"
                         data-toggle="collapse"
                         data-target="#updatePassword" aria-expanded="false" aria-controls="updatePassword"
@@ -51,7 +52,7 @@
                             style="font-family: Jua">삭제 하기
                     </button>
                 </form>
-
+                {% endif %}
                 <div class="text-block">
                     <h5 class="mb-4" style="font-family: Jua">댓글 목록 </h5>
                     {% for comment in comments %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block html_body %}
+<div class="container-fluid px-3">
+    <div class="row min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+                {% block html_main_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block html_additional_script %}
+{% block html_additional_js %}
+{% endblock %}
+{% endblock %}

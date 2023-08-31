@@ -1,0 +1,43 @@
+{% extends 'users/Base-User.html' %}
+{% block html_main_content %}
+<div class="mb-5">
+    {% block html_user_logo %}
+    {% endblock %}
+    <h2 style="font-family: Jua">Welcome back</h2>
+</div>
+<form class="form-validate" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="form-label" for="{{ form.username.auto_id }}" style="font-family: Jua">
+            {{ form.username.label }}
+        </label>
+        {{ form.username }}
+    </div>
+    <div class="form-group mb-4">
+        <div class="row">
+            <div class="col">
+                <label class="form-label" for="{{ form.password.auto_id }}" style="font-family: Jua">
+                    {{ form.password.label }}
+                </label>
+            </div>
+            <div class="col-auto"><a class="form-text small" href="#">비밀번호를
+                잊어버렸나요</a></div>
+        </div>
+        {{ form.password }}
+    </div>
+    <button class="btn btn-lg btn-block btn-primary" style="font-family: Jua">로그인</button>
+</form>
+<hr class="my-3 hr-text letter-spacing-2" data-content="OR">
+{% block html_other_login %}
+{% endblock %}
+<hr class="my-4">
+<p class="text-center">
+    <small class="text-muted text-center" style="font-family: Jua">
+        아직 계정이 없으신가요?
+        {% block html_signup %}
+        {% endblock %}
+    </small>
+</p>
+{% endblock %}
+{% block html_additional_js %}
+{% endblock %}

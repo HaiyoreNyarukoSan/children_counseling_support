@@ -1,0 +1,23 @@
+{% extends 'users/Base-User.html' %}
+{% block html_main_content %}
+<div class="mb-4">
+    <img class="img-fluid mb-3" src="/static/image/Loing_logo.png" alt="..."
+         style="max-width: 4rem;">
+    <img class="img-fluid mb-4" src="/static/image/Login_logo2.png" alt="..."
+         style="max-width: 4rem;">
+    <h2 style="font-family: Jua">바꾸고 싶은 정보의 정보를 골라주세요</h2>
+
+</div>
+<a href="{% url 'users:change_information' %}" style="font-family: Jua">
+    <button class="btn btn-lg btn-block btn-primary" style="font-family: Jua">
+        <span class="d-none d-sm-inline">개인정보</span>
+    </button>
+</a>
+</form>
+<hr class="my-3 hr-text letter-spacing-2" data-content="OR">
+<a href="{% url 'users:change_password' %}" style="font-family: Jua">
+    <button class="btn btn-lg btn-block btn-secondary" style="font-family: Jua">
+        <span class="d-none d-sm-inline">비밀번호</span>
+    </button>
+</a>
+{% endblock %}

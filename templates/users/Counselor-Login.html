@@ -1,0 +1,15 @@
+{% extends 'users/User-Login.html' %}
+{% block html_user_logo %}
+    <a href="{% url 'home' %}">
+        <img class="img-fluid mb-3" src="/static/image/Login_logo2.png" alt="..." style="max-width: 4rem;"></a>
+{% endblock %}
+{% block html_other_login %}
+    <a href="{% url 'users:login-patient' %}" style="font-family: Jua">
+        <button class="btn btn btn-outline-muted btn-block btn-social mb-3" style="font-family: Jua">
+            일반 회원 <span class="d-none d-sm-inline">로그인</span>
+        </button>
+    </a>
+{% endblock %}
+{% block html_signup %}
+<a href="{% url 'users:signup-counselor' %}" style="font-family: Jua">상담사 회원가입</a>
+{% endblock %}

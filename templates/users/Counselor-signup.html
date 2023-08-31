@@ -1,0 +1,21 @@
+{% extends 'users/User-input-form.html' %}
+{% block html_user_logo %}
+<img class="img-fluid mb-4" src="/static/image/Login_logo2.png" alt="..." style="max-width: 4rem;">
+<h2 style="font-family: Jua">상담사 회원가입</h2>
+{% endblock %}
+{% block html_additional_form %}
+<label>상담사분의 정보를 입력해주세요</label>
+{% for field in form_counselor %}
+<div class="form-group">
+    <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+        {{ field.label }}
+    </label>
+    {{ field }} {{field.errors}}
+</div>
+{% endfor %}
+{% endblock %}
+{% block html_buttons %}
+<button class="btn btn-lg btn-block btn-primary" type="submit" style="font-family: Jua">
+    회원 가입
+</button>
+{% endblock %}

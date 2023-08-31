@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <style>
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+    </style>
+
+    <style>
+        .custom-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            position: relative;
+            top: -50px;
+        }
+    </style>
+
+    <style>
+        #preview {
+            max-width: 300px;
+            max-height: 300px;
+            overflow: hidden;
+        }
+
+        #preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+
+    <style>
+        .list-inline li {
+            display: inline; /* 이미지를 인라인으로 표시 */
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>아이를 위한 상담 공간</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Price Slider Stylesheets -->
+    <link rel="stylesheet" href="/static/vendor/nouislider/nouislider.css">
+    <!-- Google fonts - Playfair Display-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=REM:ital,wght@1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/vendor/nouislider/nouislider.css">
+    <!-- Google fonts - Playfair Display-->
+    <!-- swiper-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+    <!-- Magnigic Popup-->
+    <link rel="stylesheet" href="/static/vendor/magnific-popup/magnific-popup.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    {% block html_header %}
+    {% endblock %}
+</head>
+<body style="padding-top: 72px;">
+<header class="header">
+    <meta charset="UTF-8">
+    {% include 'navbar.html' %}
+</header>
+{% block html_body %}
+{% endblock %}
+
+<!-- JavaScript files-->
+<script>
+    // ------------------------------------------------------- //
+    //   Inject SVG Sprite -
+    //   see more here
+    //   https://css-tricks.com/ajaxing-svg-sprite/
+    // ------------------------------------------------------ //
+    function injectSvgSprite(path) {
+
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", path, true);
+        ajax.send();
+        ajax.onload = function (e) {
+            var div = document.createElement("div");
+            div.className = 'd-none';
+            div.innerHTML = ajax.responseText;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+        }
+    }
+
+    // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+    // use your own URL in production, please :)
+    // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+    //- injectSvgSprite('${path}icons/orion-svg-sprite.svg');
+    injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+
+</script>
+<!-- jQuery-->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Magnific Popup - Lightbox for the gallery-->
+<script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<!-- Smooth scroll-->
+<script src="/static/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+<!-- Bootstrap Select-->
+<script src="/static/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+<script src="/static/vendor/object-fit-images/ofi.min.js"></script>
+<!-- Swiper Carousel                       -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+<script>var basePath = ''</script>
+<!-- Main Theme JS file    -->
+<script src="/static/js/theme.js"></script>
+{% block html_additional_script %}
+{% endblock %}
+
+{% block html_footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+</body>
+</html>

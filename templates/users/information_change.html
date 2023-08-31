@@ -1,0 +1,63 @@
+{% extends 'users/User-input-form.html' %}
+{% block html_user_logo %}
+<img class="img-fluid mb-4" src="/static/image/Login_logo2.png" alt="..." style="max-width: 4rem;">
+<h2 style="font-family: Jua">회원 정보 수정</h2>
+{% endblock %}
+{% block html_additional_form %}
+{% if form_counselor %}
+<label>상담사분의 정보를 입력해주세요</label>
+{% for field in form_counselor %}
+<div class="form-group">
+    <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+        {{ field.label }}
+    </label>
+    {{ field }} {{field.errors}}
+</div>
+{% endfor %}
+{% endif %}
+{% if formset %}
+<label for="num_forms">자식분의 정보를 입력해주세요</label>
+<div id="formset_container">
+    {% for form in formset %}
+    {% with forloop.counter as form_index %}
+    <div class="form-group" style="border: 1px solid black; padding: 10px;">
+        {% for field in form %}
+        {% if field.field.widget.input_type != "hidden" %}
+        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+            {{ field.label }}
+        </label>
+        {{ field }} {{ field.errors }}
+        {% else %}
+        {{ field }} {{ field.errors }}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endwith %}
+    {% endfor %}
+    {{ formset.management_form }}
+</div>
+<button class="btn btn-secondary" id="generate_forms" type="button">추가</button>
+<button class="btn btn-secondary" id="delete_forms" type="button">삭제</button>
+{% endif %}
+{% endblock %}
+{% block html_hidden_form %}
+<div id="empty_form" style="display:none;">
+    <div class="form-group" style="border: 1px solid black; padding: 10px;">
+        {% for field in empty_form %}
+        {% if field.field.widget.input_type != "hidden" %}
+        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+            {{ field.label }}
+        </label>
+        {{ field }} {{ field.errors }}
+        {% else %}
+        {{ field }} {{ field.errors }}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block html_buttons %}
+<button class="btn btn-lg btn-block btn-primary" type="submit" style="font-family: Jua">
+    정보 수정
+</button>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'users/Base-User.html' %}
+{% block html_main_content %}
+<div class="mb-5">
+    {% block html_user_logo %}
+    {% endblock %}
+    <h2 style="font-family: Jua">Welcome</h2>
+</div>
+<form class="form-validate" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+            {{ field.label }}
+        </label>
+        {{ field }} {{field.errors}}
+    </div>
+    {% endfor %}
+    {% block html_additional_form %}
+    {% endblock %}
+    <hr>
+    {% block html_buttons %}
+    {% endblock %}
+</form>
+{% block html_hidden_form %}
+{% endblock %}
+{% endblock %}
+{% block html_additional_js %}
+<!-- Patient Form script -->
+<script src="/static/js/patient-form.js"></script>
+{% endblock %}

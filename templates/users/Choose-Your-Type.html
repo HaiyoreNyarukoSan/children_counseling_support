@@ -1,0 +1,23 @@
+{% extends 'users/Base-User.html' %}
+{% block html_main_content %}
+    <div class="mb-4">
+        <img class="img-fluid mb-3" src="/static/image/Login_logo.png" alt="..."
+             style="max-width: 4rem;">
+        <img class="img-fluid mb-4" src="/static/image/Login_logo2.png" alt="..."
+             style="max-width: 4rem;">
+        <h2 style="font-family: Jua">로그인 종류를 골라주세요</h2>
+
+    </div>
+    <a href="{% url 'users:login-patient' %}" style="font-family: Jua">
+        <button class="btn btn-lg btn-block btn-primary" style="font-family: Jua">
+            일반 <span class="d-none d-sm-inline">로그인</span>
+        </button>
+    </a>
+    </form>
+    <hr class="my-3 hr-text letter-spacing-2" data-content="OR 상담사라면">
+    <a href="{% url 'users:login-counselor' %}" style="font-family: Jua">
+        <button class="btn btn btn-outline-muted btn-block btn-social mb-3" style="font-family: Jua">
+            상담사 <span class="d-none d-sm-inline">로그인</span>
+        </button>
+    </a>
+{% endblock %}

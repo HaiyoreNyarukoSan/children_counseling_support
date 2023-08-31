@@ -51,25 +51,72 @@
                     </div>
                 </div>
                 <div class="py-5">
-                    {% if article.mentalstate %}
-                    <p>공격성 : {{ article.mentalstate.aggression }}</p>
-                    <p>불안감 : {{ article.mentalstate.anxiety }}</p>
-                    <p>의존성 : {{ article.mentalstate.dependency }}</p>
-                    <p>스트레스 : {{ article.mentalstate.stress }}</p>
-                    <p>소심함 : {{ article.mentalstate.timidity }}</p>
-                    <p>사회성 : {{ article.mentalstate.sociability }}</p>
-                    <p>우울감 : {{ article.mentalstate.depression }}</p>
-                    <p>독립성 : {{ article.mentalstate.independence }}</p>
-                    <p>성취감 : {{ article.mentalstate.achievement }}</p>
-                    <p>이기적인 : {{ article.mentalstate.selfish }}</p>
-                    {% else %}
-                    결과가 아직 나오지 않았어요<br>
-                    잠시만 더 기다려주세요<br>
-                    기다려도 나오지 않으면 관리자에게 연락해주세요<br>
-                    {% endif %}
-                </div>
-                <div class="py-5">
                     <div class="text-content">
+                        {#결과값 #}
+                        <section class="py-6">
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table class="table text-gray-700 table-striped table-hover">
+                                        {% if article.mentalstate %}
+                                        <tr>
+                                            <th class="py-4 align-middle" style="font-family: Jua">공격성 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.aggression }}
+                                            </td>
+                                            <th class="py-4 align-middle" style="font-family: Jua">불안감 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.anxiety }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-4 align-middle" style="font-family: Jua">의존성 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.dependency }}
+                                            </td>
+                                            <th class="py-4 align-middle" style="font-family: Jua">스트레스 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.stress }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-4 align-middle" style="font-family: Jua">소심함 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.timidity }}
+                                            </td>
+                                            <th class="py-4 align-middle" style="font-family: Jua">사회성 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.sociability }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-4 align-middle" style="font-family: Jua">우울감 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.depression }}
+                                            </td>
+                                            <th class="py-4 align-middle" style="font-family: Jua">독립성 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.independence }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-4 align-middle" style="font-family: Jua">성취함 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.achievement }}
+                                            </td>
+                                            <th class="py-4 align-middle" style="font-family: Jua">이기주의 :</th>
+                                            <td class="py-4 text-center align-middle" style="font-family: Jua">
+                                                {{ article.mentalstate.selfish }}
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        <p>결과가 아직 나오지 않았어요.</p>
+                                        <p> 잠시만 더 기다려주세요.</p>
+                                        <p>기다려도 나오지 않으면 관리자에게 연락해주세요.</p>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
                         <h3 style="font-family: Jua">환자</h3>
                         <p style="font-family: Jua">{{ article.a_patient.p_name }}</p>
                         <h3 style="font-family: Jua">제목</h3>

@@ -12,31 +12,13 @@
         <input class="btn-primary" id="chat-message-submit" type="button" value="Send">
         {{ room.id|json_script:"room-name" }}
         {{ user.id|json_script:"user_id" }}
-        {# {{ user.nickname|json_script:"user_nickname" }}#}
     </div>
 </section>
 {% endblock %}
 {% block html_additional_script %}
 <script>
-    {
-        #const
-        user_id = ${"#user_id"}
-    #
-    }
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
-    {
-        #const
-        roomName = 12345
-    #
-    }
     const user_id = JSON.parse(document.getElementById('user_id').textContent);
-
-    {
-        #const
-        user_nickname = JSON.parse(document.getElementById('user_nickname').textContent);
-    #
-    }
-
 
     const chatSocket = new WebSocket(
         'ws://'

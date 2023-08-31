@@ -1,0 +1,94 @@
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand py-1" href="{% url 'home' %}">
+                <img src="/static/image/Header_Logo.png" alt="" class="logo-image">
+            </a>
+            <form class="form-inline d-none d-sm-flex" action="{% url 'search-counselor' %}" method="GET">
+                <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
+                    <label class="label-absolute" for="search_search">
+                        <i class="fa fa-search"></i><span class="sr-only">Search</span>
+                    </label>
+                    <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200" id="search_search"
+                           name="q" placeholder="상담사 검색" aria-label="Search">
+                    <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"></i></button>
+                </div>
+            </form>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <!-- Navbar Collapse -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <form class="form-inline mt-4 mb-2 d-sm-none" action="#" id="searchcollapsed">
+                <div class="input-label-absolute input-label-absolute-left input-reset w-100">
+                    <label class="label-absolute" for="searchcollapsed_search"><i class="fa fa-search"></i><span
+                            class="sr-only">What are you looking for?</span></label>
+                    <input class="form-control form-control-sm border-0 shadow-0 bg-gray-200"
+                           id="searchcollapsed_search" placeholder="상담사 검색" aria-label="Search">
+                    <button class="btn btn-reset btn-sm" type="reset"><i class="fa-times fas"> </i></button>
+                </div>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li>
+                    {{user.u_nickname}}
+                    {% if user.patient_set.all.exists %}
+                    보호자님 환영합니다
+                    {% endif %}
+                    {% if user.counselor %}
+                    상담사님 환영합니다
+                    {% endif %}
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}" style="font-family: Jua">메인 페이지</a>
+                </li>
+                <!-- Megamenu-->
+
+                {% if user.is_authenticated %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:My-Page' %}" style="font-family: Jua">나의 공간</a>
+                </li>
+                {% endif %}
+                <!-- /Megamenu end-->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Picture-list' %}" style="font-family: Jua">미술치료</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Counselor-list' %}" style="font-family: Jua">상담사 게시판</a>
+                </li>
+                {% if user.is_authenticated %}
+                {% if user.patient_set.all.exists %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Communication-List' %}" style="font-family: Jua">소통 게시판</a>
+                </li>
+                {% endif %}
+                <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                    <a class="btn btn-primary" href="{% url 'users:logout' %}" style="font-family: Jua">로그아웃</a>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <div class="nav-link dropdown-toggle" id="docsSignupDropdownMenuLink"
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: Jua">
+                        회원가입
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="docsSignupDropdownMenuLink">
+                        <a class="nav-link" href="{% url 'users:signup-patient' %}" style="font-family: Jua">회원
+                            회원가입</a>
+                        <a class="nav-link" href="{% url 'users:signup-counselor' %}" style="font-family: Jua">상담사
+                            회원가입</a>
+                    </div>
+                </li>
+                <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                    <a class="btn btn-primary" href="{% url 'users:choose_your_type' %}"
+                       style="font-family: Jua">로그인</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- /Navbar -->

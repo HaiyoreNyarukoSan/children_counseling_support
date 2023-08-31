@@ -39,7 +39,7 @@ def analyzer(images):
         if not (image and model): continue
         result = model.predict(image.path)[0]
         boxes = result.boxes
-        boxes_dict[category] = (boxes)
+        boxes_dict[category] = boxes
     # TODO : (가칭)stat_evaluater 함수 만들기
     # * parameter : boxes_dict : category별로 boxes가 들어있는 dict 변수
     # * 반환값 : 심리 상태를 나타내는 Model

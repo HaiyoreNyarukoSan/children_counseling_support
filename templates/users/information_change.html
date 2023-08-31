@@ -41,6 +41,20 @@
 {% endif %}
 {% endblock %}
 {% block html_hidden_form %}
+<div id="empty_form" style="display:none;">
+    <div class="form-group" style="border: 1px solid black; padding: 10px;">
+        {% for field in empty_form %}
+        {% if field.field.widget.input_type != "hidden" %}
+        <label class="form-label" for="{{ field.auto_id }}" style="font-family: Jua">
+            {{ field.label }}
+        </label>
+        {{ field }} {{ field.errors }}
+        {% else %}
+        {{ field }} {{ field.errors }}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
 {% block html_buttons %}
 <button class="btn btn-lg btn-block btn-primary" type="submit" style="font-family: Jua">

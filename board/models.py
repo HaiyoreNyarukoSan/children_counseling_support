@@ -74,4 +74,6 @@ class Mentalstate(models.Model):
     selfish = models.IntegerField(null=True)  # 이기적인
 
     def __str__(self):
-        return self.m_article
+        value = "\n".join(
+            f'{field.name}: {field.value}' for field in self._meta.fields if field.get_internal_type == 'IntegerField')
+        return value

@@ -97,7 +97,7 @@ def a_create(request):
                 achievement=total_score['성취감'],
                 selfish=total_score['이기적인'])
             article.save()
-            return redirect('board:a_list')
+            return redirect('board:a_detail', id=article.id)
     else:
         article_form = ArticleForm(a_writer=request.user)
 

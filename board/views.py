@@ -16,7 +16,10 @@ from users.permissions import UserGroups
 
 # 파일 업로드 게시판
 def a_list(request):
-    articles = Article.objects.all().order_by('-id')
+    articles = Article.objects.all() if UserGroups.counselor_group in request.user.groups.all() else Article.objects.filter(
+        a_patient__p_user=request.user).all()
+
+    articles.order_by('-id')
 
     article_per_page = 3
 

@@ -2,11 +2,14 @@
 {% block html_body %}
 <section class="py-5">
     <div class="container">
-        상담사 : {{ room.r_counselor.c_user.last_name }} {{ room.r_counselor.c_user.first_name }}
+        <p style="font-family: Jua"> 상담사
+            : {{ room.r_counselor.c_user.last_name }} {{ room.r_counselor.c_user.first_name }}</p>
         <br>
-        환자 : {{ room.r_patient.p_name }}
+        <p style="font-family: Jua"> 환자 : {{ room.r_patient.p_name }}</p>
         <br>
-        보호자 : {{ room.r_patient.p_user.last_name }} {{ room.r_patient.p_user.first_name }}
+        <p style="font-family: Jua"> 보호자
+            : {{ room.r_patient.p_user.last_name }} {{ room.r_patient.p_user.first_name }}</p>
+
         <textarea class="form-control " id="chat-log" cols="100" rows="20">{{ chatmessage }}</textarea><br>
         <input class="form-control" id="chat-message-input" type="text" size="100"><br>
         <input class="btn-primary" id="chat-message-submit" type="button" value="Send">

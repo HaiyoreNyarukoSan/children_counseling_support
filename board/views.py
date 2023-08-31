@@ -6,7 +6,7 @@ from pyexpat.errors import messages
 
 from analyzer.views import analyzer
 from board.forms import ArticleForm, CommunicationForm, C_CommentForm, CounselorReviewForm, EditArticleForm
-from board.models import Article, Communication, C_Comment, CounselorReview
+from board.models import Article, Communication, C_Comment, CounselorReview, Mentalstate
 from django.contrib.auth.decorators import login_required, permission_required
 
 from chat.forms import RoomForm
@@ -16,9 +16,12 @@ from users.permissions import UserGroups
 
 # 파일 업로드 게시판
 def a_list(request):
-    articles = Article.objects.all().order_by('-id')
+    articles = Article.objects.all() if UserGroups.counselor_group in request.user.groups.all() else Article.objects.filter(
+        a_patient__p_user=request.user).all()
 
-    article_per_page = 1
+    articles.order_by('-id')
+
+    article_per_page = 3
 
     paginator = Paginator(articles, article_per_page)
 
@@ -48,11 +51,7 @@ def a_detail(request, id):
         editart_form = ArticleForm(request.POST, instance=article)  # POST 요청 시 폼에 데이터 채우기
 
         if editart_form.is_valid():
-            article = editart_form.save()  # 수정 내용 저장
-            images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(images
-            analyzer(images)
+            editart_form.save()  # 수정 내용 저장
             return redirect('board:a_detail', id=id)
     else:
         editart_form = ArticleForm(instance=article)  # GET 요청 시 폼 초기화
@@ -72,10 +71,21 @@ def a_create(request):
         if article_form.is_valid():
             article = article_form.save()
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            # TODO : 그림을 분석해서 얻어낸 심리 상태를 article에 기록하기
-            # 예시) article.mental_state = analyzer(images
-            analyzer(images)
-            return redirect('board:a_list')
+            total_score = analyzer(images)
+            article.mentalstate = Mentalstate.objects.create(
+                m_article=article,
+                aggression=total_score['공격성'],
+                anxiety=total_score['불안감'],
+                dependency=total_score['의존성'],
+                stress=total_score['스트레스'],
+                timidity=total_score['소심함'],
+                sociability=total_score['사회성'],
+                depression=total_score['우울감'],
+                independence=total_score['독립성'],
+                achievement=total_score['성취감'],
+                selfish=total_score['이기적인'])
+            article.save()
+            return redirect('board:a_detail', id=article.id)
     else:
         article_form = ArticleForm(a_writer=request.user)
 
@@ -89,7 +99,7 @@ def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')
 
-    communication_per_page = 1
+    communication_per_page = 6
 
     paginator = Paginator(communications, communication_per_page)
 
@@ -174,7 +184,7 @@ def cs_list(request):
     if search_query:
         counselors = counselors.filter(c_user__username__icontains=search_query)
 
-    counselor_per_page = 2
+    counselor_per_page = 3
 
     paginator = Paginator(counselors, counselor_per_page)
 
@@ -236,7 +246,7 @@ def counselor_search(request):
     else:
         counselors = []
 
-    counselor_per_page = 2
+    counselor_per_page = 3
 
     paginator = Paginator(counselors, counselor_per_page)
 

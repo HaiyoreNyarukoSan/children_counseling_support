@@ -4,7 +4,7 @@
         <div class="swiper-container hero-slider">
             <div class="swiper-wrapper dark-overlay">
                 <div class="swiper-slide"
-                     style="background-image:url(/static/image/Main_photo1.jpg)"></div>
+                     style="background-image:url(/static/image/Main/Main_photo1.jpg)"></div>
             </div>
         </div>
         <div class="container py-6 py-md-7 text-white z-index-20">
@@ -31,12 +31,12 @@
                     <div class="px-0 px-lg-3">
                         <div class="icon-rounded bg-primary-light mb-3">
                             <use>
-                                <img src="/static/image/Main_Logo1.png" alt="" class="logo-image">
+                                <img src="/static/image/Main/Main_Logo1.png" alt="" class="logo-image">
                             </use>
                             </svg>
                         </div>
-                        <h3 class="h5" style="font-family: Jua">상담사추천</h3>
-                        <p class="text-muted" style="font-family: Jua">믿을 수 있는 전문가의 심리상담사 추천! 현재 나의 마음 상태를
+                        <h3 class="h5" style="font-family: Jua">상담사</h3>
+                        <p class="text-muted" style="font-family: Jua">믿을 수 있는 전문가의 심리상담사! 현재 나의 마음 상태를
                             알아볼 수 있어요.</p>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="px-0 px-lg-3">
                         <div class="icon-rounded bg-primary-light mb-3">
                             <use>
-                                <img src="/static/image/Main_Logo2.png" alt="" class="logo-image">
+                                <img src="/static/image/Main/Main_Logo2.png" alt="" class="logo-image">
                             </use>
                             </svg>
                         </div>
@@ -57,7 +57,7 @@
                     <div class="px-0 px-lg-3">
                         <div class="icon-rounded bg-primary-light mb-3">
                             <use>
-                                <img src="/static/image/Main_Logo3.png" alt="" class="logo-image">
+                                <img src="/static/image/Main/Main_Logo3.png" alt="" class="logo-image">
                             </use>
                             </svg>
                         </div>
@@ -74,8 +74,8 @@
     <section class="py-7">
         <div class="container">
             <div class="text-center">
-                <h5 class="subtitle text-primary" style="font-family: Jua">심리상담사 추천</h5>
-                <h2 class="mb-5" style="font-family: Jua">전문가 추천으로 자세히 알아봐요</h2>
+                <h5 class="subtitle text-primary" style="font-family: Jua">심리상담사 목록</h5>
+                <h2 class="mb-5" style="font-family: Jua">전문가 상담으로 자세히 알아봐요</h2>
             </div>
 
             <div class="row">
@@ -103,12 +103,14 @@
 
                                 <div class="text">
                                     <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                    <p class="testimonial-text" style="font-family: Jua">
+                                    <p class="testimonial-text" style="font-family: Jua">이름 :
                                         {{ counselor.c_user.last_name }}{{ counselor.c_user.first_name }}</p>
-                                    <strong style="font-family: Jua">{{ counselor.c_department }}</strong>
-                                    <p><strong style="font-family: Jua">{{ counselor.c_resume }}</strong></p>
-                                    <img src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
-                                         style="max-width: 50%; height: auto;">
+                                    <strong style="font-family: Jua">전문 분야 : {{ counselor.c_department }}</strong>
+                                    <p><strong style="font-family: Jua">이력서 : {{ counselor.c_resume }}</strong></p>
+                                    <p><strong style="font-family: Jua">자격증 : <img
+                                            src="{{ counselor.c_certificate.url }}" alt="" class="img-fluid"
+                                            style="max-width: 50%; height: auto;"></strong></p>
+
                                 </div>
                             </div>
                         </div>
@@ -134,7 +136,7 @@
             <div class="row justify-content-center">
                 <div class="d-flex align-items-lg-stretch mb-1 col-lg-6">
                     <div class="card shadow-lg border-0 w-100 border-0 hover-animate"
-                         style="background: center center url(/static/image/Main_1대1photo.png) no-repeat; background-size: cover; min-height: 400px;">
+                         style="background: center center url(/static/image/Main/Main_photo333.png) no-repeat; background-size: cover; min-height: 400px;">
                         <a class="tile-link" href="{% url 'Counselor-list' %}"> </a>
                         <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                         </div>
@@ -142,7 +144,7 @@
                 </div>
                 <div class="d-flex align-items-lg-stretch mb-1 col-lg-6">
                     <div class="card shadow-lg border-0 w-100 border-0 hover-animate"
-                         style="background: center center url(/static/image/Main_artphoto.png) no-repeat; background-size: cover; min-height: 400px;">
+                         style="background: center center url(/static/image/Main/Main_photo222.png) no-repeat; background-size: cover; min-height: 400px;">
                         <a class="tile-link" href="{% url 'Picture-list' %}"> </a>
                         <div class="d-flex align-items-center h-100 text-white justify-content-center py-6 py-lg-7">
                         </div>
@@ -152,47 +154,47 @@
         </div>
     </section>
 
-
     <section class="py-6">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-12">
                     <h5 class="subtitle text-primary text-center" style="font-family:Jua">편리하게 이용해보세요</h5>
-                    <h2 class="text-center" style="font-family: Jua">전문가추천,정보확인,1대1상담까지!</h2>
+                    <h2 class="text-center" style="font-family: Jua">홈페이가 어렵다면 이곳을 보세요!</h2>
                 </div>
             </div>
             <div class=" swiper-container guides-slider mx-n2 pt-3">
                 <!-- Additional required wrapper-->
                 <div class="swiper-wrapper pb-5">
                     <!-- Slides-->
-                    <div class="swiper-slide h-auto px-lg-3">
+                    <div class="swiper-slide h-auto px-lg-0">
+                        <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a
+                                class="tile-link "
+                                href="category.html"></a><img
+                                class="bg-image" src="/static/image/Main/Main_photo2.png" alt="Card image">
+                        </div>
+                    </div>
+                    <div class="swiper-slide h-auto px-lg-0">
                         <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link"
                                                                                                      href="category.html"></a><img
-                                class="bg-image" src="/static/image/Main_photo4.png" alt="Card image">
+                                class="bg-image" src="/static/image/Main/Main_photo3.png" alt="Card image">
 
                         </div>
                     </div>
-                    <div class="swiper-slide h-auto px-lg-3">
+                    <div class="swiper-slide h-auto px-lg-0">
                         <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link"
                                                                                                      href="category.html"></a><img
-                                class="bg-image" src="/static/image/Main_photo5.png" alt="Card image">
+                                class="bg-image" src="/static/image/Main/Main_photo4.png" alt="Card image">
 
                         </div>
                     </div>
-                    <div class="swiper-slide h-auto px-lg-3">
+                    <div class="swiper-slide h-auto px-lg-0">
                         <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link"
                                                                                                      href="category.html"></a><img
-                                class="bg-image" src="/static/image/Main_photo6.png" alt="Card image">
+                                class="bg-image" src="/static/image/Main/Main_photo5.png" alt="Card image">
 
                         </div>
                     </div>
-                    <div class="swiper-slide h-auto px-lg-3">
-                        <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link"
-                                                                                                     href="category.html"></a><img
-                                class="bg-image" src="/static/image/Main_photo7.png" alt="Card image">
 
-                        </div>
-                    </div>
                 </div>
                 <div class="swiper-pagination d-md-none"></div>
             </div>

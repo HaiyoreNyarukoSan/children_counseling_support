@@ -111,7 +111,7 @@ def c_list(request):
     # 게시글 모두 가져와서 화면에 출력하는 일을 한다.
     communications = Communication.objects.all().order_by('-id')
 
-    communication_per_page = 1
+    communication_per_page = 6
 
     paginator = Paginator(communications, communication_per_page)
 
@@ -196,7 +196,7 @@ def cs_list(request):
     if search_query:
         counselors = counselors.filter(c_user__username__icontains=search_query)
 
-    counselor_per_page = 2
+    counselor_per_page = 3
 
     paginator = Paginator(counselors, counselor_per_page)
 
@@ -258,7 +258,7 @@ def counselor_search(request):
     else:
         counselors = []
 
-    counselor_per_page = 2
+    counselor_per_page = 3
 
     paginator = Paginator(counselors, counselor_per_page)
 

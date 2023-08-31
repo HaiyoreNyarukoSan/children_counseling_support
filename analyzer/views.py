@@ -66,10 +66,10 @@ def person_stat(boxes, labels):
         stat["이기적인"] += 60
 
     if sum(get_wh(box)[1] for box in bodys) > 50:
-        stat["이기적인"] += 30
+        stat["이기적인"] += 10
 
     if sum(get_wh(box)[0] for box in bodys) > 50:
-        stat["이기적인"] += 30
+        stat["이기적인"] += 10
 
     if sum(get_wh(box)[0] * get_wh(box)[1] for box in chests) > 50:
         stat["불안감"] += 20
@@ -82,7 +82,7 @@ def person_stat(boxes, labels):
         stat["불안감"] += 20
 
     if sum(get_wh(box)[0] * get_wh(box)[1] for box in hands) > 50:
-        stat["이기적인"] += 30
+        stat["이기적인"] += 10
     elif sum(get_wh(box)[0] * get_wh(box)[1] for box in hands) < 50:
         stat["소심함"] += 30
     else:
@@ -105,7 +105,7 @@ def person_stat(boxes, labels):
     elif sum(get_wh(box)[0] * get_wh(box)[1] for box in shoes) < 50:
         stat["소심함"] += 10
     else:
-        stat["이기적인"] += 20
+        stat["이기적인"] += 10
 
     return stat
 
@@ -132,10 +132,10 @@ def tree_stat(boxes, labels):
     cloud_count = len([box for box in boxes if labels[int(box.cls)] == '구름'])
 
     if root_count == 0 >= 50:
-        stat["불안감"] += 40
+        stat["불안감"] += 20
 
     if not root_count:
-        stat["불안감"] += 30
+        stat["불안감"] += 20
 
     if branch_count == 0:
         stat['우울감'] += 30
@@ -193,7 +193,7 @@ def house_stat(boxes, labels):
         stat['사회성'] += 30
 
     if window_count == sum(1 for box in boxes if labels[int(box.cls)] == '창문'):
-        stat['이기적인'] += 30
+        stat['이기적인'] += 10
     elif window_count > 0 and door_count == 0:
         stat['의존성'] += 40
     elif window_count == 0 and door_count == 0:
@@ -255,7 +255,7 @@ def house_stat(boxes, labels):
         for window_xyxy, roof_xyxy
         in map(lambda window: tuple(map(int, window.xyxy[0])), windows)
     ]
-    stat['이기적인'] += 30 * sum(window_roof) / len(window_roof)
+    stat['이기적인'] += 10 * sum(window_roof) / len(window_roof)
 
     # 창문과 문이 없는 경우
     if window_count == 0 and door_count == 0:
@@ -274,7 +274,7 @@ def house_stat(boxes, labels):
     for smoke_x1, smoke_y1, smoke_x2, smoke_y2 in smokes_xyxy:
         for chimney_x1, chimney_y1, chimney_x2, chimney_y2 in chimneys_xyxy:
             if smoke_x1 >= chimney_x1 and smoke_y1 >= chimney_y1:
-                stat['불안감'] += 40
+                stat['불안감'] += 20
 
     # w, h = x2 - x1, y2 - y1
     houses_xyxy = [house.xyxy[0] for house in houses]

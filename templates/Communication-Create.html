@@ -1,58 +1,59 @@
 {% extends 'base.html' %}
 {% block html_body %}
-    <!-- Hero Section-->
-    <section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                    src="/static/image/Communication/Communication-photo.jpg"
-                                                                    alt="How can we help you today?">
-        <div class="container overlay-content">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}"
-                                               style="font-family: Jua">메인페이지</a></li>
-                <li class="breadcrumb-item active"><a href="{% url 'Communication-List' %}"
-                                                      style="font-family: Jua">목록페이지</a></li>
-                <li class="breadcrumb-item active " style="font-family: Jua">
-                    작성페이지
-                </li>
-            </ol>
-            <br><br><br>
-            <h1 class="hero-heading" style="font-family: Jua">Write Everyone</h1>
-        </div>
-    </section>
-    <section class="py-6 bg-gray-100">
-        <div class="container">
-            <img class="img-fluid mb-4" src="/static/image/Communication/Communication-Logo.png" alt="..."
-                 style="max-width: 4rem;">
-            <h2 class="h4 mb-5" style="font-family: Jua">소통 게시판</h2>
-            <div class="row">
-                <div class="col-md-7 mb-5 mb-md-0">
-                    <form class="form" id="contact-form" method="POST" action="{% url 'Communication-Create' %}"
-                          enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="controls">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-
-                                        <label class="form-label" for="{{ communication_form.com_title.id_for_label }}"
-                                               style="font-family: Jua">제목 *</label>
-                                        {{ communication_form.com_title }}
-                                    </div>
+<!-- Hero Section-->
+<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
+                                                                src="/static/image/Communication/Communication-photo.jpg"
+                                                                alt="How can we help you today?">
+    <div class="container overlay-content">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}" style="font-family: Jua">메인페이지</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="{% url 'Communication-List' %}" style="font-family: Jua">목록페이지</a>
+            </li>
+            <li class="breadcrumb-item active " style="font-family: Jua">
+                작성페이지
+            </li>
+        </ol>
+        <br><br><br>
+        <h1 class="hero-heading" style="font-family: Jua">Write Everyone</h1>
+    </div>
+</section>
+<section class="py-6 bg-gray-100">
+    <div class="container">
+        <img class="img-fluid mb-4" src="/static/image/Communication/Communication-Logo.png" alt="..."
+             style="max-width: 4rem;">
+        <h2 class="h4 mb-5" style="font-family: Jua">소통 게시판</h2>
+        <div class="row">
+            <div class="col-md-7 mb-5 mb-md-0">
+                <form class="form" id="contact-form" method="POST" action="{% url 'Communication-Create' %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="{{ communication_form.com_title.id_for_label }}"
+                                           style="font-family: Jua">제목 *</label>
+                                    {{ communication_form.com_title }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="message" style="font-family: Jua">내용
-                                    *</label>
-                                {{ communication_form.com_content }}
-                            </div>
-                            <br>
-                            <input class="btn btn-outline-primary" type="submit" value="등록하기"
-                                   style="font-family: Jua">
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message" style="font-family: Jua">
+                                내용 *
+                            </label>
+                            {{ communication_form.com_content }}
+                        </div>
+                        <br>
+                        <input class="btn btn-outline-primary" type="submit" value="등록하기" style="font-family: Jua">
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
 

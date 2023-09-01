@@ -26,7 +26,7 @@ urlpatterns = [
     path("Counselor-list/", views.cs_list, name='Counselor-list'),
     path("Counselor-detail/<int:id>", views.cs_detail, name='Counselor-detail'),
     path("User_security/", TemplateView.as_view(template_name='User_security.html'), name='User_security'),
-    path("ChatBot/", TemplateView.as_view(template_name='ChatBot.html'), name='ChatBot'),
+    # path("ChatBot/", TemplateView.as_view(template_name='ChatBot.html'), name='ChatBot'),
     path("Picture-list", views.a_list, name='Picture-list'),
     path("Picture-create", views.a_create, name='Picture-create'),
     path("Communication-Create/", views.c_create, name='Communication-Create'),

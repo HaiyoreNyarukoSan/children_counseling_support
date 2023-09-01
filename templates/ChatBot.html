@@ -1,149 +1,147 @@
 {% extends 'base.html' %}
 {% block html_body %}
-    <section class="py-5">
-        <div class="container">
-            <!-- Breadcrumbs -->
-            <ol class="breadcrumb pl-0  justify-content-start">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="user-messages.html">Inbox</a></li>
-                <li class="breadcrumb-item active">Your messages with Anna</li>
-            </ol>
-            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4">
-                <h1 class="mb-3 mb-md-0 hero-heading mb-0" style="font-family: Jua">Your messages with Anna</h1>
-
-            </div>
-            <div class="card border-0 shadow mb-4">
-                <div class="card-body p-4">
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <div class="media-body">
-                                <h6><a class="text-reset" href="detail-rooms.html" style="font-family: Jua">김가현</a>
-                                </h6>
-                                <p class="text-muted text-sm mb-0" style="font-family: Jua">미술치료 상담사</p>
-                                <div class="mt-n1"><i class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-primary"></i><i
-                                        class="fa fa-xs fa-star text-gray-200"></i>
-                                </div>
+<section class="py-5">
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="user-messages.html">Inbox</a></li>
+            <li class="breadcrumb-item active">Your messages with Anna</li>
+        </ol>
+        <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4">
+            <h1 class="mb-3 mb-md-0 hero-heading mb-0" style="font-family: Jua">Your messages with Anna</h1>
+        </div>
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body p-4">
+                <div class="text-block pb-3">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h6>
+                                <a class="text-reset" href="detail-rooms.html" style="font-family: Jua">김가현</a>
+                            </h6>
+                            <p class="text-muted text-sm mb-0" style="font-family: Jua">미술치료 상담사</p>
+                            <div class="mt-n1">
+                                <i class="fa fa-xs fa-star text-primary"></i>
+                                <i class="fa fa-xs fa-star text-primary"></i>
+                                <i class="fa fa-xs fa-star text-primary"></i>
+                                <i class="fa fa-xs fa-star text-primary"></i>
+                                <i class="fa fa-xs fa-star text-gray-200"></i>
                             </div>
-                            <a href="detail-rooms.html"><img class="ml-3 rounded"
-                                                             src="img/photo/photo-1512917774080-9991f1c4c750.jpg"
-                                                             alt=""
-                                                             width="100"></a>
                         </div>
-                    </div>
-                    <div class="text-block pt-3 pb-0">
-
+                        <a href="detail-rooms.html">
+                            <img class="ml-3 rounded" src="img/photo/photo-1512917774080-9991f1c4c750.jpg" alt=""
+                                 width="100">
+                        </a>
                     </div>
                 </div>
             </div>
-            <!-- Chat Box-->
-            <div class="px-4 py-5">
-                <div class="row">
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="/static/image/User_01.png" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">One morning, when Gregor Samsa woke from troubled dreams, he
-                                    found
-                                    himself transformed in his bed into a horrible vermin. He lay on his armour-like
-                                    back,
-                                    and if he lifted his head a little he could see his brown belly, slightly domed
-                                    and
-                                    divided by arches into stiff sections</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+        </div>
+        <!-- Chat Box-->
+        <div class="px-4 py-5">
+            <div class="row">
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="/static/image/User_01.png" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">One morning, when Gregor Samsa woke from troubled dreams, he
+                                found
+                                himself transformed in his bed into a horrible vermin. He lay on his armour-like
+                                back,
+                                and if he lifted his head a little he could see his brown belly, slightly domed
+                                and
+                                divided by arches into stiff sections</p>
                         </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">The bedding was hardly able to cover it and
-                                    seemed ready
-                                    to slide off any moment. His many legs, pitifully thin compared with the size of
-                                    the
-                                    rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot;
-                                    he
-                                    thought. It wasn't a dream.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
-                    </div>
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="img/avatar/avatar-1.jpg" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">His room, a proper human room although a little too small,
-                                    lay
-                                    peacefully between its four familiar walls. A collection of textile samples lay
-                                    spread
-                                    out on the table.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">Samsa was a travelling salesman - and above it
-                                    there hung
-                                    a picture that he had recently cut out of an illustrated magazine and housed in
-                                    a nice,
-                                    gilded frame.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
-                    </div>
-                    <!-- Sender Message-->
-                    <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
-                                                                   src="img/avatar/avatar-1.jpg" alt="user">
-                        <div class="media-body ml-3">
-                            <div class="bg-gray-200 rounded p-4 mb-2">
-                                <p class="text-sm mb-0">He must have tried it a hundred times, shut his eyes so that
-                                    he
-                                    wouldn't have to look at the floundering legs, and only stopped when he began to
-                                    feel a
-                                    mild, dull pain there that he had never felt before.</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                    </div>
-                    <!-- Reciever Message-->
-                    <div class="media col-md-9 col-xl-7 ml-auto mb-3">
-                        <div class="media-body mr-3">
-                            <div class="bg-primary rounded p-4 mb-2">
-                                <p class="text-sm mb-0 text-white">One morning, when Gregor Samsa woke from troubled
-                                    dreams,
-                                    he found himself transformed in his bed into a horrible vermin. He lay on his
-                                    armour-like back, and if he lifted his head a little he could see his brown
-                                    belly,
-                                    slightly domed and divided by arches into stiff sections</p>
-                            </div>
-                            <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
-                        </div>
-                        <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
                     </div>
                 </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">The bedding was hardly able to cover it and
+                                seemed ready
+                                to slide off any moment. His many legs, pitifully thin compared with the size of
+                                the
+                                rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot;
+                                he
+                                thought. It wasn't a dream.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="img/avatar/avatar-1.jpg" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">His room, a proper human room although a little too small,
+                                lay
+                                peacefully between its four familiar walls. A collection of textile samples lay
+                                spread
+                                out on the table.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">Samsa was a travelling salesman - and above it
+                                there hung
+                                a picture that he had recently cut out of an illustrated magazine and housed in
+                                a nice,
+                                gilded frame.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
+                <!-- Sender Message-->
+                <div class="media col-md-9 col-xl-7 mb-3"><img class="avatar avatar-border-white"
+                                                               src="img/avatar/avatar-1.jpg" alt="user">
+                    <div class="media-body ml-3">
+                        <div class="bg-gray-200 rounded p-4 mb-2">
+                            <p class="text-sm mb-0">He must have tried it a hundred times, shut his eyes so that
+                                he
+                                wouldn't have to look at the floundering legs, and only stopped when he began to
+                                feel a
+                                mild, dull pain there that he had never felt before.</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                </div>
+                <!-- Reciever Message-->
+                <div class="media col-md-9 col-xl-7 ml-auto mb-3">
+                    <div class="media-body mr-3">
+                        <div class="bg-primary rounded p-4 mb-2">
+                            <p class="text-sm mb-0 text-white">One morning, when Gregor Samsa woke from troubled
+                                dreams,
+                                he found himself transformed in his bed into a horrible vermin. He lay on his
+                                armour-like back, and if he lifted his head a little he could see his brown
+                                belly,
+                                slightly domed and divided by arches into stiff sections</p>
+                        </div>
+                        <p class="small text-muted ml-3">12:00 PM | Aug 13</p>
+                    </div>
+                    <img class="avatar avatar-border-white" src="img/avatar/avatar-10.jpg" alt="user">
+                </div>
             </div>
-            <!-- Typing area-->
-            <form class="bg-light rounded shadow-sm" action="#">
-                <div class="input-group">
+        </div>
+        <!-- Typing area-->
+        <form class="bg-light rounded shadow-sm" action="#">
+            <div class="input-group">
                 <textarea class="form-control border-0 p-4 bg-light text-sm" placeholder="메세지 입력하세요."
                           aria-describedby="button-sendMessage"></textarea>
-                    <div class="input-group-append">
-                        <button class="btn btn-link" id="button-sendMessage" type="submit"><i
-                                class="fa fa-paper-plane"></i>
-                        </button>
-                    </div>
+                <div class="input-group-append">
+                    <button class="btn btn-link" id="button-sendMessage" type="submit"><i
+                            class="fa fa-paper-plane"></i>
+                    </button>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
+</section>
 {% endblock %}

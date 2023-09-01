@@ -45,16 +45,26 @@ stat_type = (aggression, anxiety, dependency, stress, timidity, sociability, dep
              selfish)
 
 
-def xyxy_extractor(boxes):
+def get_wh(box):
+    _, _, w, h = map(int, box.xyxy[0])
+    return w, h
+
+
+def get_area(box):
+    w, h = get_wh(box)
+    return w * h
+
+
+def get_xyxys(boxes):
     return map(lambda box: tuple(map(int, box.xyxy[0])), boxes)
 
 
-def wh_extractor(boxes):
+def get_whs(boxes):
     return map(lambda box: tuple(map(int, box.xywh[0]))[2:], boxes)
 
 
-def areas(boxes):
-    whs = wh_extractor(boxes)
+def get_areas(boxes):
+    whs = get_whs(boxes)
     return map(lambda wh: wh[0] * wh[1], whs)
 
 
@@ -91,14 +101,6 @@ def person_stat(boxes, labels):
         aggression: 0,
         independence: 0,
     }
-
-    def get_wh(box):
-        _, _, w, h = map(int, box.xyxy[0])
-        return w, h
-
-    def get_area(box):
-        w, h = get_wh(box)
-        return w * h
 
     if len(necks) > 50:
         stat[timidity] += 30
@@ -207,10 +209,10 @@ def house_stat(boxes, labels):
     door_count = len(door_area)
 
     roofs = [box for box in boxes if labels[int(box.cls)] == '창문']
-    roofs_xyxy = list(xyxy_extractor(roofs))
+    roofs_xyxy = list(get_xyxys(roofs))
 
     windows = [box for box in boxes if labels[int(box.cls)] == '지붕']
-    windows_xyxy = list(xyxy_extractor(windows))
+    windows_xyxy = list(get_xyxys(windows))
     window_count = len(windows)
 
     smokes = [box for box in boxes if labels[int(box.cls)] == '굴뚝']
@@ -231,7 +233,7 @@ def house_stat(boxes, labels):
         stat[depression] += 20
 
     # 문의 넓이가 전체 이미지의 넓이의 50% 이상인지 확인
-    if sum(areas(door_area)) >= 50:
+    if sum(get_areas(door_area)) >= 50:
         stat[dependency] += 30
     else:
         stat[sociability] += 30
@@ -252,13 +254,8 @@ def house_stat(boxes, labels):
         stat[sociability] += 50
 
     # 굴똑에연기
-    smokes_xyxy = [smoke.xyxy[0] for smoke in smokes]
-    chimneys_xyxy = [chimney.xyxy[0] for chimney in chimneys]
-    [tuple(map(int, smoke.xyxy[0])) for smoke in smokes]
-    [tuple(map(int, chimney.xyxy[0])) for chimney in chimneys]
-
-    list(map(lambda smoke: tuple(map(int, smoke.xyxy[0])), smokes))
-    list(map(lambda chimney: tuple(map(int, chimney.xyxy[0])), chimneys))
+    smokes_xyxy = get_xyxys(smokes)
+    chimneys_xyxy = get_xyxys(chimneys)
 
     # 굴뚝에 연기가 나는 경우
     for smoke_x1, smoke_y1, smoke_x2, smoke_y2 in smokes_xyxy:
@@ -273,8 +270,8 @@ def house_stat(boxes, labels):
     # 지붕을 너무 크게 그렸다면
 
     counter = 0
-    for roof_w, roof_h in wh_extractor(roofs):
-        for house_w, house_h in wh_extractor(houses):
+    for roof_w, roof_h in get_whs(roofs):
+        for house_w, house_h in get_whs(houses):
             if roof_w >= 50 * house_w and roof_h >= 50 * house_h:
                 counter += 1
     stat[depression] += 50 * counter // (len(roofs_xyxy) * len(houses_xyxy))

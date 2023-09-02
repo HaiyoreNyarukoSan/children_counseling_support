@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% block html_body %}
 <!-- Hero Section-->
-<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                src="/static/image/Picture/Picture-photo.jpg"
-                                                                alt="">
+<section class="hero py-6 py-lg-7 text-white dark-overlay">
+    <img class="bg-image" src="/static/image/Picture/Picture-photo.jpg" alt="">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}"
-                                           style="font-family: Jua">메인페이지</a></li>
-            <li class="breadcrumb-item active"><a href="{% url 'Picture-list' %}"
-                                                  style="font-family: Jua">목록페이지</a></li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}" style="font-family: Jua">메인페이지</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a href="{% url 'Picture-list' %}" style="font-family: Jua">목록페이지</a>
+            </li>
             <li class="breadcrumb-item active " style="font-family: Jua">
                 작성페이지
             </li>
@@ -21,8 +22,7 @@
 </section>
 <section class="py-6 bg-gray-100">
     <div class="container">
-        <img class="img-fluid mb-4" src="/static/image/Picture/Picture-Logo.png" alt="..."
-             style="max-width: 4rem;">
+        <img class="img-fluid mb-4" src="/static/image/Picture/Picture-Logo.png" alt="..." style="max-width: 4rem;">
         <h2 class="h4 mb-5" style="font-family: Jua">사진업로드</h2>
         <div class="row">
             <div class="col-md-7 mb-5 mb-md-0">

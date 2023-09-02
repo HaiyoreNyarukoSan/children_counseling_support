@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% block html_body %}
-<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                src="/static/image/Communication/Communication-photo.jpg"
-                                                                alt="How can we help you today?">
+<section class="hero py-6 py-lg-7 text-white dark-overlay">
+    <img class="bg-image" src="/static/image/Communication/Communication-photo.jpg" alt="How can we help you today?">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}"
-                                           style="font-family: Jua">메인페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua">목록페이지
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}" style="font-family: Jua">메인페이지</a>
+            </li>
+            <li class="breadcrumb-item active" style="font-family: Jua">
+                목록페이지
             </li>
         </ol>
         <br><br><br>
         <h1 class="hero-heading" style="font-family: Jua">
             Communication Board List</h1>
-        <a href="{% url 'Communication-Create' %}" class="btn btn-primary btn-lg mt-3"
-           style="font-family: Jua">작성 하기</a>
+        <a href="{% url 'Communication-Create' %}" class="btn btn-primary btn-lg mt-3" style="font-family: Jua">
+            작성 하기
+        </a>
     </div>
 </section>
-</div>
-</section>
-
 <br><br>
 <section class="py-2">
     <div class="container">
@@ -68,7 +67,8 @@
                 {% endif %}
                 {% if page.has_next %}
                 <li class="page-item ml-auto">
-                    <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}" style="font-family: Jua">
+                    <a class="page-link text-sm rounded" href="?page={{ page.next_page_number }}"
+                       style="font-family: Jua">
                         다음
                         <i class="fa fa-chevron-right ml-1"></i>
                     </a>
@@ -77,6 +77,5 @@
             </ul>
         </nav>
     </div>
-
 </section>
 {% endblock %}

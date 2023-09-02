@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block html_body %}
 <!-- Hero Section-->
-<section class="hero py-6 py-lg-7 text-white dark-overlay"><img class="bg-image"
-                                                                src="/static/image/Communication/Communication-photo.jpg"
-                                                                alt="How can we help you today?">
+<section class="hero py-6 py-lg-7 text-white dark-overlay">
+    <img class="bg-image" src="/static/image/Communication/Communication-photo.jpg" alt="How can we help you today?">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0" style="font-size: 20px; ">
@@ -36,7 +35,9 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="form-label" for="{{ communication_form.com_title.id_for_label }}"
-                                           style="font-family: Jua">제목 *</label>
+                                           style="font-family: Jua">
+                                        제목 *
+                                    </label>
                                     {{ communication_form.com_title }}
                                 </div>
                             </div>

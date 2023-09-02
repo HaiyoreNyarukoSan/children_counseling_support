@@ -4,18 +4,23 @@
 
     <div class="container">
         <ol class="breadcrumb pl-0  justify-content-start">
-            <li class="breadcrumb-item" style="font-family: Jua"><a href="{% url 'home' %}">메인 페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua"><a href="{% url 'Counselor-list' %}">상담사 목록
-                페이지</a></li>
-            <li class="breadcrumb-item active" style="font-family: Jua">상담사 상세 페이지</li>
+            <li class="breadcrumb-item" style="font-family: Jua">
+                <a href="{% url 'home' %}">메인 페이지</a>
+            </li>
+            <li class="breadcrumb-item active" style="font-family: Jua">
+                <a href="{% url 'Counselor-list' %}">상담사 목록 페이지</a>
+            </li>
+            <li class="breadcrumb-item active" style="font-family: Jua">
+                상담사 상세 페이지
+            </li>
         </ol>
         <div class="row">
             <div class="col-lg-3 mr-lg-auto">
                 <div class="card border-0 shadow mb-6 mb-lg-0">
-                    <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block"
-                                                                                      href="#"><img
-                            class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png"
-                            alt=""></a>
+                    <div class="card-header bg-gray-100 py-4 border-0 text-center">
+                        <a class="d-inline-block" href="#">
+                            <img class="d-block avatar avatar-xxl p-2 mb-2" src="/static/image/User_01.png" alt="">
+                        </a>
                         <h5 style="font-family: Jua">
                             {{ counselor.c_user.last_name }} {{ counselor.c_user.first_name }}
                         </h5>

@@ -15,6 +15,10 @@
 
 > python -m pip install -U channels["daphne"]
 
+# MySQL 연결
+
+> python -m pip install mysqlclient
+
 ## Docker 실행
 
 > docker run --rm -p 6379:6379 redis:7
@@ -32,4 +36,4 @@
 
 4. 설치하기
 
-> pip install -e . 
+> pip install -e .

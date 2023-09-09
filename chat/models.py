@@ -1,5 +1,4 @@
 from django.db import models
-from board.models import Article
 from users.models import Patient, Counselor, User
 
 

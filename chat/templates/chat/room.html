@@ -13,6 +13,16 @@
         <textarea class="form-control " id="chat-log" cols="100" rows="20">{{ chatmessage }}</textarea><br>
         <input class="form-control" id="chat-message-input" type="text" size="100"><br>
         <input class="btn-primary" id="chat-message-submit" type="button" value="Send">
+        <p style="font-family: Jua">환자분의 과거 상담글</p>
+        <ul>
+            {% for article in room.r_patient.article_set.all %}
+            <li>
+                <a class="list-group" href="{% url 'board:a_detail' id=article.id %}">
+                    <p style="font-family: Jua">{{ article.a_title }}</p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
         {{ room.id|json_script:"room-name" }}
         {{ user.id|json_script:"user_id" }}
     </div>

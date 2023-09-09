@@ -13,11 +13,11 @@ from users.forms import (
     patient_new_form_set,
     UserPasswordChangeForm,
 )
-from users.models import Patient, Counselor
+from users.models import Patient, Counselor, User
 from users.permissions import UserGroups
 
 
-def save_user_to_group(user, group):
+def save_user_to_group(user: User, group: Group):
     user.groups.add(group)
 
 

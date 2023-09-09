@@ -15,6 +15,7 @@ from users.permissions import UserGroups
 
 
 # 파일 업로드 게시판
+@permission_required('board.view_article')
 def a_list(request):
     articles = Article.objects.all() if UserGroups.counselor_group in request.user.groups.all() else Article.objects.filter(
         a_patient__p_user=request.user).all()

@@ -168,8 +168,8 @@ def change_information(request):
         )
         counselor = getattr(request.user, "counselor", None)
         form_counselor = CounselorSignUpForm(instance=counselor) if counselor else None
-    empty_form = formset.empty_form
-    empty_form.prefix = "patientForm-__prefix__"
+    empty_form = formset.empty_form if formset else None
+    if empty_form: empty_form.prefix = "patientForm-__prefix__"
     context = {
         "form": form,
         "formset": formset,

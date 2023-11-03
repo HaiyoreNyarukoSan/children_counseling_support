@@ -1,3 +1,6 @@
+from pathlib import Path
+from typing import List, Tuple
+
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -72,7 +75,8 @@ def a_create(request):
         if article_form.is_valid():
             article = article_form.save()
             images = [article.a_tree_image, article.a_man_image, article.a_woman_image, article.a_house_image]
-            total_score = analyzer(images)
+            paths: Tuple[Path] = tuple(image.path for image in images)
+            total_score = analyzer(paths)
             article.mentalstate = Mentalstate.objects.create(
                 m_article=article,
                 aggression=total_score['공격성'],

@@ -15,6 +15,8 @@ from typing import List, DefaultDict, Dict, Callable, Tuple
 from scipy.stats import norm
 import math
 
+from analyzer.utils import fetch_pickle, write_pickle
+
 base_path = Path("C:/jupyter_home/data/ccs")
 categories = views.DATA_CATEGORY
 stats = views.STAT_TYPE
@@ -54,8 +56,7 @@ class CategoryData:
         cpi = path / "images"
         images = sorted(p for p in cpi.iterdir() if p.suffix == ".jpg")
         cpb = base_path / f'{self.category}_boxes.pkl'
-        # with open(cpb, 'rb') as f:
-        #     bboxes: List[views.BoundingBoxType] = pickle.load(f)
+        # bboxes: List[views.BoundingBoxType] = fetch_pickle(cpb)
         self._jsons = jsons
         self._labels = [bboxes_from_json(file, category) for file in jsons]
         self._images = images
@@ -109,12 +110,10 @@ def threshold(vs: List[float], tv: float):
 def create_or_get_category_data(category) -> CategoryData:
     pkl_path = base_path / f'{category}_data.pkl'
     if pkl_path.exists():
-        with open(pkl_path, 'rb') as f:
-            cdata: CategoryData = pickle.load(f)
+        cdata: CategoryData = fetch_pickle(pkl_path)
     else:
         cdata = CategoryData(category)
-        with open(pkl_path, 'wb') as f:
-            pickle.dump(cdata, f)
+        write_pickle(cdata, pkl_path)
     return cdata
 
 
@@ -290,14 +289,11 @@ review(mental_stats)
 '''
 print('YOLO 결과로 계산시')
 n = 1024
-cbboxes_dict = get_category_bboxes_dict(n)
-# x: List[views.BoundingBoxType] = cbboxes_dict['나무']
-# print(type(x[0]))
-# print(x[0].cls)
 cbboxes_list = []
 for category in categories:
-    cbboxes_list.append(cbboxes_dict[category])
-cbboxes_list = list(cbboxes for cbboxes in zip(*cbboxes_list))
+    data_path = base_path
+    bboxes: List[views.BoundingBoxType] = fetch_pickle(data_path / f'{category}_boxes.pkl')
+    cbboxes_list.append(bboxes[:100])
 mental_stats = views.stat_evaluater(cbboxes_list)
 review(mental_stats)
 # '''

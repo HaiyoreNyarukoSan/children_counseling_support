@@ -1,21 +1,16 @@
 from pathlib import Path
 from typing import Tuple, List, Union
 
-import ultralytics.engine.results
-from django.shortcuts import render
 import numpy as np
-from ultralytics import YOLO
+import ultralytics
 
-from analyzer.evaluator import ModelEvaluator
-from analyzer.legacy_evaluator import FunctionEvaluator
-from analyzer.utils import find_static_file, fetch_pickle
-from children_counseling_support.settings import STATICFILES_DIRS
+from analyzer.utils import xyxys_in_xyxys
 
 BoundingBoxType = ultralytics.engine.results.Boxes
-YOLOResultType = ultralytics.engine.results.Results
-MAX_SCORE = 10
+InputDataType = Tuple[List[BoundingBoxType]]
 
 DATA_CATEGORY = ['나무', '남자사람', '여자사람', '집']
+
 LABELS = {
     '나무': ['나무전체', '기둥', '수관', '가지', '뿌리', '나뭇잎', '꽃', '열매', '그네', '새', '다람쥐', '구름', '달', '별'],
     '남자사람': ['사람전체', '머리', '얼굴', '눈', '코', '입', '귀', '머리카락', '목', '상체', '팔', '손', '다리', '발', '단추', '주머니', '운동화',
@@ -32,28 +27,100 @@ neuroticism = '신경성'
 openness_to_experience = '경험에 대한 개방성'
 
 STAT_TYPE = (agreeableness, conscientiousness, extraversion, neuroticism, openness_to_experience)
+# LABEL로 구한 percentile
+# STAT_PERCENTILE = (
+#     (2.94051, 3.16667, 3.27344, 3.35, 3.41667, 3.48461, 3.55224, 3.63415, 3.73994, 3.98437),  # agreeableness
+#     (3.90141, 4.06452, 4.16923, 4.25611, 4.33333, 4.4, 4.46032, 4.54386, 4.65517, 4.91667),  # conscientiousness
+#     (4.36947, 4.70297, 4.86517, 4.97727, 5.06, 5.13953, 5.23317, 5.33637, 5.47656, 5.7619),  # extraversion
+#     (7.38028, 7.5298, 7.59355, 7.63694, 7.68056, 7.71856, 7.75904, 7.80292, 7.8625, 7.97436),  # neuroticism
+#     (3.28571, 3.54348, 3.65421, 3.74699, 3.81694, 3.88, 3.9697, 4.05495, 4.16667, 4.41935)  # openness_to_experience
+# )
+# YOLO BoundingBoxes로 구한 percentile
+STAT_PERCENTILE = (
+    (2.57812, 2.59398, 2.59398, 2.5969, 2.61832, 2.80488, 2.80488, 2.8125, 2.82258, 2.84127),
+    (3.42424, 3.44118, 3.44776, 3.48387, 3.48387, 3.5, 3.50794, 3.55738, 3.67606, 3.74627),
+    (3.04545, 3.06667, 3.07059, 3.11111, 3.18391, 3.40476, 3.40964, 3.42353, 3.44444, 3.60274),
+    (8.10429, 8.13095, 8.13095, 8.13924, 8.15862, 8.21081, 8.22286, 8.23497, 8.23497, 8.24855),
+    (2.83333, 2.84158, 2.84783, 2.85567, 2.87755, 2.95402, 2.95402, 2.95652, 2.97727, 3.0)
+)
+percentile_score = lambda score, percentile: next((i for i, threshold in enumerate(percentile) if score < threshold),
+                                                  len(percentile))
+
+default_stat = tuple(5 for _ in STAT_TYPE)
 
 
-# Create your views here.
-def yolo_model_fetcher(category):
-    model_path = f'model/checkpoint_{category}.pt'
-    fullpath = find_static_file(model_path)
-    return YOLO(fullpath)
-
-
-def update(category):
-    models[category] = yolo_model_fetcher(category)
-
-
-model_path = STATICFILES_DIRS
-models = dict((category, yolo_model_fetcher(category)) for category in DATA_CATEGORY)
-IMAGE_SIZE = 1280
-image_area = IMAGE_SIZE * IMAGE_SIZE
-
-'''
 def change_score(stat, condition, value):
     if condition: stat.append(value)
     # stat.append(value if condition else default_stat)
+
+
+class BoxData:
+    def __init__(self, boxes: List[BoundingBoxType], labels: List[str], target: str):
+        if isinstance(target, str):
+            index = labels.index(target)
+            self._boxes = [box for box in boxes if int(box.cls) == index]
+        else:
+            indices = [labels.index(t) for t in target if t in labels]
+            self._boxes = [box for box in boxes if int(box.cls) in indices]
+        self._count = len(self._boxes)
+
+    @property
+    def _xyxys(self):
+        return map(lambda box: tuple(map(int, box.xyxy[0])), self._boxes)
+
+    @property
+    def _whs(self):
+        return map(lambda box: tuple(map(int, box.xywh[0]))[2:], self._boxes)
+
+    @property
+    def count(self):
+        return self._count
+
+    @property
+    def xyxys(self):
+        return self._xyxys
+
+    @property
+    def whs(self):
+        return self._whs
+
+    @property
+    def area_sum(self):
+        return sum(wh[0] * wh[1] for wh in self._whs)
+
+    @property
+    def xmin_ave(self):
+        return sum(xyxy[0] for xyxy in self._xyxys) / self._count if self._count else 0
+
+    @property
+    def ymin_ave(self):
+        return sum(xyxy[1] for xyxy in self._xyxys) / self._count if self._count else 0
+
+    @property
+    def xmax_ave(self):
+        return sum(xyxy[2] for xyxy in self._xyxys) / self._count if self._count else 0
+
+    @property
+    def ymax_ave(self):
+        return sum(xyxy[3] for xyxy in self._xyxys) / self._count if self._count else 0
+
+    @property
+    def w_sum(self):
+        return sum(wh[0] for wh in self._whs)
+
+    @property
+    def h_sum(self):
+        return sum(wh[1] for wh in self._whs)
+
+    @property
+    def wh_sum(self):
+        return sum(sum(wh) for wh in self._whs)
+
+    def count_of_is_inside(self, boxdata):
+        return xyxys_in_xyxys(self._xyxys, boxdata.xyxys, (('xy', 'in'),)) / self.count if self.count else 0
+
+    def count_of_is_above(self, boxdata):
+        return xyxys_in_xyxys(self._xyxys, boxdata.xyxys, (('x', 'in'), ('y', 'lt'))) / self.count if self.count else 0
 
 
 def person_stat(boxes, labels):
@@ -224,45 +291,28 @@ def house_stat(boxes, labels):
 
     return stat
 
-'''
+
+def weighted_mean_evaluator(arr):
+    arr = np.array(arr)
+    weights = np.square(arr - 5) + 1
+    return np.average(arr, weights=weights)
 
 
-def get_bounding_boxes_single_category(model: YOLO, images: List[Path]):
-    result_list: List[YOLOResultType] = []
-    i, batch_size = 0, 32
-    while sub_images := images[i:i + batch_size]:
-        result_list.extend(model.predict(sub_images))
-        i += batch_size
-    return list(result.boxes for result in result_list)
+def stat_evaluater_single(boxes_list: Tuple[BoundingBoxType]):
+    scores = []
+    stats: tuple = (tree_stat, man_stat, woman_stat, house_stat)
+    for category, boxes, stat in zip(DATA_CATEGORY, boxes_list, stats):
+        label = LABELS[category]
+        scores.extend(stat(boxes, label))
+    # evaluate average scores of object detected
+    score = [(weighted_mean_evaluator(r)) for r in zip(*scores)]
+    # regularize score using pre-computed stat_percentile
+    score = [percentile_score(s, p) for s, p in zip(score, STAT_PERCENTILE)]
+    return {stype: score for stype, score in zip(STAT_TYPE, score)}
 
 
-def get_bounding_boxes(containers: Tuple[List[Path]]):
-    # containers : ([t1,t2],[m1,m2],[w1,w2],[h1,h2])
-    assert (len(containers) == len(DATA_CATEGORY))
-    boxes_list_categorized = []
-    for category, images in zip(DATA_CATEGORY, containers):
-        model: YOLO = models[category]
-        if not (images and model): continue
-        cboxes: List[BoundingBoxType] = get_bounding_boxes_single_category(model, images)
-        boxes_list_categorized.append(cboxes)
-    return tuple(boxes_list_categorized)
-
-
-# def analyzer(images_list: Union[Tuple[Path], List[Tuple[Path]]]):
-#     # images_list : (tree,man,woman,house) or [(t1,m1,w1,h1),(t2,m2,w2,h2)]
-#     if isinstance(images_list[0], Path):
-#         images_list: List[Tuple[Path]] = [images_list]
-#     containers: Tuple[List[Path]] = tuple(list(r) for r in zip(*images_list))
-#     boxes_list_categorized: Tuple[List[BoundingBoxType]] = get_bounding_boxes(containers)
-#     total_score = FunctionEvaluator.stat_evaluater(boxes_list_categorized)
-#     return total_score
-
-
-def analyzer(images_list: Union[Tuple[Path], List[Tuple[Path]]]):
-    # images_list : (tree,man,woman,house) or [(t1,m1,w1,h1),(t2,m2,w2,h2)]
-    if isinstance(images_list[0], Path):
-        images_list: List[Tuple[Path]] = [images_list]
-    containers: Tuple[List[Path]] = tuple(list(r) for r in zip(*images_list))
-    boxes_list_categorized: Tuple[List[BoundingBoxType]] = get_bounding_boxes(containers)
-    total_score = ModelEvaluator.stat_evaluater(boxes_list_categorized)
-    return total_score
+class FunctionEvaluator:
+    @staticmethod
+    def stat_evaluater(boxes_list_categorized: InputDataType):
+        scores = [stat_evaluater_single(boxes_list) for boxes_list in zip(*boxes_list_categorized)]
+        return scores

@@ -59,19 +59,45 @@ class C_Comment(models.Model):  # 소통게시판의 댓글모델
         return self.cc_content
 
 
+DATA_CATEGORY = ['나무', '남자사람', '여자사람', '집']
+LABELS = {
+    '나무': ['나무전체', '기둥', '수관', '가지', '뿌리', '나뭇잎', '꽃', '열매', '그네', '새', '다람쥐', '구름', '달', '별'],
+    '남자사람': ['사람전체', '머리', '얼굴', '눈', '코', '입', '귀', '머리카락', '목', '상체', '팔', '손', '다리', '발', '단추', '주머니', '운동화',
+             '남자구두'],
+    '여자사람': ['사람전체', '머리', '얼굴', '눈', '코', '입', '귀', '머리카락', '목', '상체', '팔', '손', '다리', '발', '단추', '주머니', '운동화',
+             '여자구두'],
+    '집': ['집전체', '지붕', '집벽', '문', '창문', '굴뚝', '연기', '울타리', '길', '연못', '산', '나무', '꽃', '잔디', '태양']
+}
+
+agreeableness = '우호성'
+conscientiousness = '성실성'
+extraversion = '외향성'
+neuroticism = '신경성'
+openness_to_experience = '경험에 대한 개방성'
+
+STAT_TYPE = (agreeableness, conscientiousness, extraversion, neuroticism, openness_to_experience)
+
+
 # 심리상담모델
 class Mentalstate(models.Model):
     m_article = models.OneToOneField(Article, on_delete=models.CASCADE)
-    aggression = models.IntegerField(null=True)  # 공격성
-    anxiety = models.IntegerField(null=True)  # 불안감
-    dependency = models.IntegerField(null=True)  # 의존성
-    stress = models.IntegerField(null=True)  # 스트레스
-    timidity = models.IntegerField(null=True)  # 소심함
-    sociability = models.IntegerField(null=True)  # 사회성
-    depression = models.IntegerField(null=True)  # 우울감
-    independence = models.IntegerField(null=True)  # 독립성
-    achievement = models.IntegerField(null=True)  # 성취감
-    selfish = models.IntegerField(null=True)  # 이기적인
+    # aggression = models.IntegerField(null=True)  # 공격성
+    # anxiety = models.IntegerField(null=True)  # 불안감
+    # dependency = models.IntegerField(null=True)  # 의존성
+    # stress = models.IntegerField(null=True)  # 스트레스
+    # timidity = models.IntegerField(null=True)  # 소심함
+    # sociability = models.IntegerField(null=True)  # 사회성
+    # depression = models.IntegerField(null=True)  # 우울감
+    # independence = models.IntegerField(null=True)  # 독립성
+    # achievement = models.IntegerField(null=True)  # 성취감
+    # selfish = models.IntegerField(null=True)  # 이기적인
+    agreeableness = models.IntegerField(null=True)  # 우호성
+    conscientiousness = models.IntegerField(null=True)  # 성실성
+    extraversion = models.IntegerField(null=True)  # 외향성
+    neuroticism = models.IntegerField(null=True)  # 신경성
+    openness_to_experience = models.IntegerField(null=True)  # 경험에 대한 개방성
+
+    STAT_TYPE = (agreeableness, conscientiousness, extraversion, neuroticism, openness_to_experience)
 
     def __str__(self):
         value = "\n".join(
